@@ -1,3 +1,3 @@
 export default async function Home() {
-  return <main className=""></main>;
+  return <main className="">HireSpot - in development</main>;
 }
