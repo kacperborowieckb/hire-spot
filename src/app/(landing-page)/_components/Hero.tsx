@@ -29,7 +29,7 @@ export default function Hero() {
               alt=""
               width={260}
               height={30}
-              className="absolute left-1/2 top-full -translate-x-1/2 transform lg:left-0 lg:translate-x-0"
+              className="absolute left-1/2 top-full w-auto  max-w-[260px] -translate-x-1/2 transform lg:left-0 lg:translate-x-0"
             />
           </span>
         </motion.h1>
@@ -56,6 +56,7 @@ export default function Hero() {
       >
         <Image
           src={"/hero.svg"}
+          className="pl-4"
           priority={true}
           alt="Hero image represents hiring process"
           width={448}
