@@ -16,7 +16,7 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center gap-8 sm:mx-4 sm:my-2 md:mx-24 md:my-4">
+    <nav className="mx-6 my-4 flex items-center gap-8 md:mx-24">
       <div className="grow">
         <Logo />
       </div>
