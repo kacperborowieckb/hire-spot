@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${GeistSans.className} bg-main-50 bg-[url('/bg.svg')] bg-cover`}
+        className={`${GeistSans.className} bg-main-50 text-main-950 bg-[url('/bg.svg')] bg-cover`}
       >
         <TRPCReactProvider cookies={cookies().toString()}>
           {children}
