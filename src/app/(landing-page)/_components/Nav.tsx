@@ -34,7 +34,7 @@ export default function Nav() {
   ));
 
   return (
-    <nav className="mx-6 my-4 flex items-center gap-4 sm:gap-8 md:mx-24">
+    <nav className="mx-6 my-4 flex h-[52px] items-center gap-4 sm:gap-8 md:mx-24">
       <div className="grow">
         <Logo />
       </div>

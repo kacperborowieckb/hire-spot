@@ -4,6 +4,9 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 export default {
   content: ["./src/**/*.tsx"],
   theme: {
+    backgroundSize: {
+      "50%": "50%",
+    },
     colors: {
       main: {
         "50": "#eef0ff",

@@ -9,7 +9,7 @@ import { fadeInAnimationVariants } from "~/app/utils/variants";
 
 export default function Hero() {
   return (
-    <div className="m-4 mt-16 flex flex-col items-center justify-center gap-8 sm:m-8 sm:mt-24 md:mt-32 lg:flex-row lg:gap-16">
+    <div className="mx-4 flex h-[calc(100dvh-52px-32px)] flex-col items-center justify-center gap-8  lg:flex-row lg:gap-16">
       <motion.div
         initial="initial"
         animate="animate"
@@ -44,7 +44,7 @@ export default function Hero() {
           <Link href={"/"}>
             <Button variant="default">Try it out!</Button>
           </Link>
-          <Link href={"/"}>
+          <Link href={"/#benefits"}>
             <Button variant="outline">See more</Button>
           </Link>
         </motion.div>
