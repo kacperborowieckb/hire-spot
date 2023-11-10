@@ -9,7 +9,7 @@ import { useToggle } from "~/app/hooks/useToggle";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInAnimationVariants, openNavVariants } from "~/app/utils/variants";
 
-const links: { name: string; href: string }[] = [
+export const links: { name: string; href: string }[] = [
   { name: "Home", href: "/" },
   { name: "Pricing", href: "/pricing" },
   { name: "Contact", href: "/contact" },
