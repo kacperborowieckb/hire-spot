@@ -8,7 +8,7 @@ import NavLinks from "./NavLinks";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col gap-4 p-4 pb-8">
+    <footer className="mt-auto flex flex-col gap-4 p-4 pb-8">
       <div className="flex justify-center gap-4">
         <div className="flex-grow sm:flex-grow-0">
           <Logo classes="sm:w-44 w-32" />

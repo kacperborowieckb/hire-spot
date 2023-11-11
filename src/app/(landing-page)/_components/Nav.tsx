@@ -7,6 +7,7 @@ import { useToggle } from "~/app/hooks/useToggle";
 import { motion, AnimatePresence } from "framer-motion";
 import { openNavVariants } from "~/app/utils/variants";
 import NavLinks from "./NavLinks";
+import IconButton from "~/app/ui/IconButton";
 
 export const links: { name: string; href: string }[] = [
   { name: "Home", href: "/" },
@@ -25,13 +26,7 @@ export default function Nav() {
       <div className="hidden items-center gap-8 text-lg sm:flex">
         <NavLinks />
       </div>
-      <div className="border-main-300 bg-main-100 hover:bg-main-300 hover:border-main-500 active:bg-main-200 active:border-main-400 rounded-lg border sm:hidden">
-        <RiMenu5Fill
-          className="text-main-600 m-1.5 sm:hidden"
-          size={24}
-          onClick={toggleNav}
-        />
-      </div>
+      <IconButton onClick={toggleNav} Icon={RiMenu5Fill} classes="sm:hidden" />
       <AnimatePresence>
         {isNavOpen && (
           <motion.div
@@ -41,12 +36,8 @@ export default function Nav() {
             animate="animate"
             exit="hide"
           >
-            <div className="border-main-300 bg-main-100 hover:bg-main-300 hover:border-main-500 active:bg-main-200 active:border-main-400  absolute right-8 top-8 rounded-lg border">
-              <RiCloseFill
-                className="text-main-600 m-1.5  sm:hidden"
-                size={24}
-                onClick={toggleNav}
-              />
+            <div className="absolute right-6 top-6">
+              <IconButton onClick={toggleNav} Icon={RiCloseFill} />
             </div>
             <motion.div
               initial="initial"
