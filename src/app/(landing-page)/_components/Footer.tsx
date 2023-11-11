@@ -4,21 +4,9 @@ import Link from "next/link";
 import React from "react";
 import Logo from "~/app/ui/Logo";
 import { RiLinkedinFill, RiGithubFill } from "react-icons/ri";
-import { usePathname } from "next/navigation";
-import { links } from "./Nav";
+import NavLinks from "./NavLinks";
 
 export default function Footer() {
-  const pathname = usePathname();
-
-  const linksContent = links.map(({ name, href }) => (
-    <Link
-      href={href}
-      className={`${pathname === href && "text-main-600"} hover:text-main-600`}
-    >
-      {name}
-    </Link>
-  ));
-
   return (
     <footer className="flex flex-col gap-4 p-4 pb-8">
       <div className="flex justify-center gap-4">
@@ -26,7 +14,7 @@ export default function Footer() {
           <Logo classes="sm:w-44 w-32" />
         </div>
         <div className="mx-8 hidden items-center justify-center gap-8 text-lg font-medium sm:flex ">
-          {linksContent}
+          <NavLinks />
         </div>
         <div className="flex items-center gap-2">
           <Link href={"https://github.com/kacperborowieckb"} target="_blank">
@@ -38,7 +26,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="text-medium flex justify-center gap-16 font-medium sm:hidden">
-        {linksContent}
+        <NavLinks />
       </div>
     </footer>
   );

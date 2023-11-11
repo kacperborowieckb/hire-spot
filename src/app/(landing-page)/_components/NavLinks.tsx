@@ -1,4 +1,10 @@
+"use client";
+
+import Link from "next/link";
 import React from "react";
+import { fadeInAnimationVariants } from "~/app/utils/variants";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const links: { name: string; href: string }[] = [
   { name: "Home", href: "/" },
@@ -6,7 +12,8 @@ const links: { name: string; href: string }[] = [
   { name: "Contact", href: "/contact" },
 ];
 
-export default function NavLinks() {
+export default function NavLinks({ toggleNav }: { toggleNav?: () => void }) {
+  const pathname = usePathname();
   const linksContent = links.map(({ name, href }, i) => (
     <motion.div variants={fadeInAnimationVariants} key={i}>
       <Link
@@ -21,5 +28,5 @@ export default function NavLinks() {
     </motion.div>
   ));
 
-  return { linksContent };
+  return linksContent;
 }

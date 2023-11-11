@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Button from "~/app/ui/Button";
 import Logo from "~/app/ui/Logo";
 import { RiMenu5Fill, RiCloseFill } from "react-icons/ri";
 import { useToggle } from "~/app/hooks/useToggle";
 import { motion, AnimatePresence } from "framer-motion";
-import { fadeInAnimationVariants, openNavVariants } from "~/app/utils/variants";
+import { openNavVariants } from "~/app/utils/variants";
+import NavLinks from "./NavLinks";
 
 export const links: { name: string; href: string }[] = [
   { name: "Home", href: "/" },
@@ -17,21 +16,6 @@ export const links: { name: string; href: string }[] = [
 
 export default function Nav() {
   const [isNavOpen, toggleNav] = useToggle();
-  const pathname = usePathname();
-
-  const linksContent = links.map(({ name, href }, i) => (
-    <motion.div variants={fadeInAnimationVariants} key={i}>
-      <Link
-        href={href}
-        onClick={toggleNav}
-        className={`hover:text-main-600 font-normal ${
-          pathname === href && "text-main-600"
-        }`}
-      >
-        {name}
-      </Link>
-    </motion.div>
-  ));
 
   return (
     <nav className="mx-6 my-4 flex h-[52px] items-center gap-4 sm:gap-8 md:mx-24">
@@ -39,7 +23,7 @@ export default function Nav() {
         <Logo />
       </div>
       <div className="hidden items-center gap-8 text-lg sm:flex">
-        {linksContent}
+        <NavLinks />
       </div>
       <div className="border-main-300 bg-main-100 hover:bg-main-300 hover:border-main-500 active:bg-main-200 active:border-main-400 rounded-lg border sm:hidden">
         <RiMenu5Fill
@@ -70,7 +54,7 @@ export default function Nav() {
               transition={{ staggerChildren: 0.15, delayChildren: 0.3 }}
               className="flex h-full flex-col items-center justify-center gap-8 text-2xl font-bold"
             >
-              {linksContent}
+              <NavLinks toggleNav={toggleNav} />
             </motion.div>
           </motion.div>
         )}
