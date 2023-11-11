@@ -17,7 +17,7 @@ export default function Hero() {
         className="flex max-w-full flex-col text-center lg:max-w-md lg:text-left"
       >
         <motion.h1
-          className="mb-4 text-4xl font-bold sm:text-5xl"
+          className="mb-4 mt-8 text-4xl font-bold sm:mt-0 sm:text-5xl"
           variants={fadeInAnimationVariants}
         >
           Revolutionize Your{" "}
