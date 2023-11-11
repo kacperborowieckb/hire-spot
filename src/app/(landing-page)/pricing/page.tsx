@@ -19,7 +19,7 @@ export default function Pricing() {
         variants={fadeInAnimationVariants}
         className="flex gap-3 text-5xl font-bold"
       >
-        It's
+        It&apos;s
         <span className="relative mb-4 flex flex-col">
           Free!
           <Image

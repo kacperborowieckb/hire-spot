@@ -9,8 +9,8 @@ import IconButton from "~/app/ui/IconButton";
 import { toast } from "sonner";
 
 export default function Contact() {
-  const copyMail = () => {
-    navigator.clipboard.writeText("kacperborowiec.kb@gmail.com");
+  const copyMail = async () => {
+    await navigator.clipboard.writeText("kacperborowiec.kb@gmail.com");
     toast.success("Copied to clipboard");
   };
 
