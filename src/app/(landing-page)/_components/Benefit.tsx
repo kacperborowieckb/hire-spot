@@ -22,6 +22,7 @@ export default function Benefit({
 }: BenefitProps) {
   return (
     <div
+      data-testid="benefit"
       className={`m-8 mb-16 mt-0 flex flex-col items-center justify-center gap-16 text-center lg:text-left ${
         reverse ? "lg:flex-row-reverse" : "lg:flex-row"
       }`}

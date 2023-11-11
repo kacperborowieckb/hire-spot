@@ -9,7 +9,10 @@ import { fadeInAnimationVariants } from "~/app/utils/variants";
 
 export default function Hero() {
   return (
-    <div className="mx-4 flex h-[calc(100dvh-52px-32px)] flex-col items-center justify-center gap-8  lg:flex-row lg:gap-16">
+    <div
+      data-testid="hero"
+      className="mx-4 flex h-[calc(100dvh-52px-32px)] flex-col items-center justify-center gap-8  lg:flex-row lg:gap-16"
+    >
       <motion.div
         initial="initial"
         animate="animate"
