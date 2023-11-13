@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeInAnimationVariants } from "~/app/utils/variants";
-import Button from "~/app/ui/Button";
+import Button from "~/app/ui/button/Button";
 import Link from "next/link";
 
 export default function Pricing() {

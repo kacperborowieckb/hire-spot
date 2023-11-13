@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import React from "react";
-import Logo from "~/app/ui/Logo";
+import Logo from "~/app/ui/logo/Logo";
 import { RiLinkedinFill, RiGithubFill } from "react-icons/ri";
-import NavLinks from "./NavLinks";
+import NavLinks from "../nav-links/NavLinks";
 
 export default function Footer() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { IconType } from "react-icons";
-import IconButton from "~/app/ui/IconButton";
+import IconButton from "~/app/ui/icon-button/IconButton";
 import { motion } from "framer-motion";
 import { fadeInAnimationVariants } from "~/app/utils/variants";
 

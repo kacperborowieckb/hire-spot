@@ -3,13 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Button from "~/app/ui/Button";
+import Button from "~/app/ui/button/Button";
 import { motion } from "framer-motion";
 import { fadeInAnimationVariants } from "~/app/utils/variants";
 
 export default function Hero() {
   return (
-    <div className="mx-4 flex h-[calc(100dvh-52px-32px)] flex-col items-center justify-center gap-8  lg:flex-row lg:gap-16">
+    <div
+      data-testid="hero"
+      className="mx-4 flex h-[calc(100dvh-52px-32px)] flex-col items-center justify-center gap-8  lg:flex-row lg:gap-16"
+    >
       <motion.div
         initial="initial"
         animate="animate"
@@ -17,7 +20,7 @@ export default function Hero() {
         className="flex max-w-full flex-col text-center lg:max-w-md lg:text-left"
       >
         <motion.h1
-          className="mb-4 text-4xl font-bold sm:text-5xl"
+          className="mb-4 mt-8 text-4xl font-bold sm:mt-0 sm:text-5xl"
           variants={fadeInAnimationVariants}
         >
           Revolutionize Your{" "}
@@ -55,6 +58,7 @@ export default function Hero() {
         animate="animate"
       >
         <Image
+          data-testid="hero-img"
           src={"/hero.svg"}
           className="pl-4"
           priority={true}
