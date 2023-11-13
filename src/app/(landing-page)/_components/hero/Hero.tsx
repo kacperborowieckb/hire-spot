@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Button from "~/app/ui/Button";
+import Button from "~/app/ui/button/Button";
 import { motion } from "framer-motion";
 import { fadeInAnimationVariants } from "~/app/utils/variants";
 
@@ -58,6 +58,7 @@ export default function Hero() {
         animate="animate"
       >
         <Image
+          data-testid="hero-img"
           src={"/hero.svg"}
           className="pl-4"
           priority={true}
