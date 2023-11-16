@@ -8,9 +8,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { openNavVariants } from "~/app/utils/variants";
 import NavLinks from "../nav-links/NavLinks";
 import IconButton from "~/app/ui/icon-button/IconButton";
+import Link from "next/link";
+import { useUser, UserButton } from "@clerk/nextjs";
 
 export default function Nav() {
   const [isNavOpen, toggleNav] = useToggle(false);
+
+  const { isSignedIn } = useUser();
 
   return (
     <nav className="mx-6 my-4 flex h-[52px] items-center gap-4 sm:gap-8 md:mx-24">
@@ -58,7 +62,19 @@ export default function Nav() {
           </motion.div>
         )}
       </AnimatePresence>
-      <Button variant="default">Sign in</Button>
+      {isSignedIn ? (
+        <UserButton
+          data-testid="user-button"
+          afterSignOutUrl="/"
+          appearance={{
+            elements: { avatarBox: "w-[38px] h-[38px]" },
+          }}
+        />
+      ) : (
+        <Link href={"/sign-in"}>
+          <Button variant="default">Sign in</Button>
+        </Link>
+      )}
     </nav>
   );
 }

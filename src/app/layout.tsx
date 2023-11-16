@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { TRPCReactProvider } from "~/trpc/react";
 import { GeistSans } from "geist/font/sans";
 import { Toaster } from "sonner";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata = {
   title: "Hire Spot",
@@ -16,15 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${GeistSans.className} bg-main-50 text-main-950 bg-50% flex min-h-screen flex-col bg-[url('/bg.svg')]`}
-      >
-        <TRPCReactProvider cookies={cookies().toString()}>
-          {children}
-        </TRPCReactProvider>
-        <Toaster richColors />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className="scroll-smooth">
+        <body
+          className={`${GeistSans.className} bg-main-50 text-main-950 bg-50% flex min-h-screen flex-col bg-[url('/bg.svg')]`}
+        >
+          <TRPCReactProvider cookies={cookies().toString()}>
+            {children}
+          </TRPCReactProvider>
+          <Toaster richColors />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
