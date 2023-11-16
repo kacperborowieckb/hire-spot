@@ -10,11 +10,12 @@ import NavLinks from "../nav-links/NavLinks";
 import IconButton from "~/app/ui/icon-button/IconButton";
 import Link from "next/link";
 import { useUser, UserButton } from "@clerk/nextjs";
+import Spinner from "~/app/ui/Spinner";
 
 export default function Nav() {
   const [isNavOpen, toggleNav] = useToggle(false);
 
-  const { isSignedIn } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
 
   return (
     <nav className="mx-6 my-4 flex h-[52px] items-center gap-4 sm:gap-8 md:mx-24">
@@ -37,7 +38,7 @@ export default function Nav() {
         {isNavOpen && (
           <motion.div
             data-testid="mobile-nav"
-            className="bg-main-50 absolute inset-x-0 inset-y-0 z-50 sm:hidden"
+            className="absolute inset-x-0 inset-y-0 z-50 bg-main-50 sm:hidden"
             variants={openNavVariants}
             initial="initial"
             animate="animate"
@@ -62,7 +63,9 @@ export default function Nav() {
           </motion.div>
         )}
       </AnimatePresence>
-      {isSignedIn ? (
+      {!isLoaded ? (
+        <Spinner className="w-[38px]" />
+      ) : isSignedIn ? (
         <UserButton
           data-testid="user-button"
           afterSignOutUrl="/"
