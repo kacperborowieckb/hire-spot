@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import Button from "~/app/ui/button/Button";
 
 export default function RecruitmentCard() {
   return (
@@ -17,9 +16,6 @@ export default function RecruitmentCard() {
       <p>
         <span className="font-bold text-main-600">26</span> candidates to check
       </p>
-      {/* <div className="flex gap-4">
-        <Button variant="default">Delete recruitment</Button>
-      </div> */}
     </Link>
   );
 }
