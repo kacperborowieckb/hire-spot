@@ -1,8 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import NavLinks from "./NavLinks";
 import { userEvent } from "@testing-library/user-event";
+import { useUser } from "@clerk/nextjs";
 
 const toggleNavMock = jest.fn();
+jest.mock("@clerk/nextjs", () => ({
+  useUser: jest.fn().mockReturnValue({ isSignedIn: false }),
+}));
 
 describe("NavLinks", () => {
   describe("Render", () => {

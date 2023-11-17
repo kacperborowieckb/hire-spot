@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { useUser, UserButton } from "@clerk/nextjs";
 
 jest.mock("@clerk/nextjs", () => ({
-  useUser: jest.fn().mockReturnValue({ isSignedIn: false }),
+  useUser: jest.fn().mockReturnValue({ isSignedIn: false, isLoaded: true }),
   UserButton: () => {
     return <button data-testid="user-button" />;
   },
@@ -61,12 +61,14 @@ describe("Nav", () => {
       expect(userButton).not.toBeInTheDocument();
     });
 
-    it("Should display user button when logged in", () => {
-      (useUser as jest.Mock).mockImplementation(() => ({ isSignedIn: true }));
+    it("Should display user button when logged in", async () => {
+      (useUser as jest.Mock).mockImplementation(() => ({
+        isSignedIn: true,
+        isLoaded: true,
+      }));
       render(<Nav />);
 
-      screen.debug();
-      const userButton = screen.getByTestId("user-button");
+      const userButton = screen.queryByTestId("user-button");
       const signInButton = screen.queryByRole("button", { name: "Sign in" });
 
       expect(userButton).toBeInTheDocument();
