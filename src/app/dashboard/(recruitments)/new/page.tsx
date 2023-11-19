@@ -32,7 +32,7 @@ export default function NewRecruitment() {
   const onSubmit = () => {};
 
   return (
-    <main className="mx-6 my-8 flex h-full flex-1 justify-around gap-8 md:mx-24">
+    <main className="mx-6 my-8 flex h-full flex-1 justify-around gap-8 lg:mx-24">
       <div className="flex max-w-lg flex-grow flex-col gap-4">
         <h1 className="text-2xl font-bold">Create recruitment</h1>
         <form
@@ -57,7 +57,7 @@ export default function NewRecruitment() {
           </Button>
         </form>
       </div>
-      <div className="flex items-center justify-center">
+      <div className="hidden items-center justify-center lg:flex">
         <Image
           data-testid="new-recruitment-img"
           src={"/new-recruitment.svg"}

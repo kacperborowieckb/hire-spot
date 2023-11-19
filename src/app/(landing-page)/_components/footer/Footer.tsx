@@ -10,22 +10,22 @@ export default function Footer() {
   return (
     <footer className="mt-auto flex flex-col gap-4 p-4 pb-8">
       <div className="flex justify-center gap-4">
-        <div className="flex-grow sm:flex-grow-0">
+        <div>
           <Logo classes="sm:w-44 w-32" />
         </div>
-        <div className="mx-8 hidden items-center justify-center gap-8 text-lg font-medium sm:flex ">
+        <div className="mx-8 hidden items-center justify-center gap-6 text-lg font-medium md:flex ">
           <NavLinks />
         </div>
         <div className="flex items-center gap-2">
           <Link href={"https://github.com/kacperborowieckb"} target="_blank">
-            <RiGithubFill className="hover:text-main-600 text-3xl transition-colors duration-300 sm:text-5xl" />
+            <RiGithubFill className="text-3xl transition-colors duration-300 hover:text-main-600 sm:text-5xl" />
           </Link>
           <Link href={"/"}>
-            <RiLinkedinFill className="hover:text-main-600 text-3xl transition-colors duration-300 sm:text-5xl" />
+            <RiLinkedinFill className="text-3xl transition-colors duration-300 hover:text-main-600 sm:text-5xl" />
           </Link>
         </div>
       </div>
-      <div className="text-medium flex justify-center gap-16 font-medium sm:hidden">
+      <div className="text-medium flex justify-center gap-6 font-medium md:hidden">
         <NavLinks />
       </div>
     </footer>
