@@ -17,11 +17,11 @@ export default function IconButton({
     <button
       onClick={onClick}
       {...otherProps}
-      className={`${classes} border-main-300 bg-main-100 hover:bg-main-300 hover:border-main-500 active:bg-main-200 active:border-main-400 rounded-lg border`}
+      className={`${classes} rounded-lg border border-main-300 bg-main-100 hover:border-main-500 hover:bg-main-300 active:border-main-400 active:bg-main-200`}
     >
       <Icon
         data-testid="icon-button-icon"
-        className="text-main-600 m-1.5"
+        className="m-1.5 text-main-600"
         size={size}
       />
     </button>

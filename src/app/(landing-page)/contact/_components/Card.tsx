@@ -23,7 +23,8 @@ export default function Card({
       variants={fadeInAnimationVariants}
       initial="initial"
       animate="animate"
-      className="border-main-400 bg-main-50 flex aspect-square w-64 flex-col gap-2 rounded-lg border-2 p-4 shadow-md"
+      whileHover={{ translateY: "-5px" }}
+      className="flex aspect-square w-64 flex-col gap-2 rounded-lg border-2 border-main-400 bg-main-50 p-4 shadow-md"
     >
       <div className="flex-grow">
         <IconButton Icon={icon}></IconButton>

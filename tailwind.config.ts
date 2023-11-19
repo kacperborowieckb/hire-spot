@@ -25,6 +25,12 @@ export default {
           "900": "#3c2e81",
           "950": "#241b4b",
         },
+        error: {
+          bg: "hsl(359, 100%, 97%)",
+          "border-light": "hsl(359, 100%, 94%)",
+          "border-dark": "hsl(360, 100%, 45%)",
+          text: "hsl(360, 100%, 45%)",
+        },
       },
     },
   },
