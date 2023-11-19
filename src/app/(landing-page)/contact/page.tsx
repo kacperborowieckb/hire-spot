@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Heading from "./_components/Heading";
-import Card from "./_components/Card";
+import Heading from "./_components/heading/Heading";
+import Card from "./_components/card/Card";
 import { RiLinkedinFill, RiMailFill, RiSaveFill } from "react-icons/ri";
 import Link from "next/link";
 import IconButton from "~/app/ui/icon-button/IconButton";
@@ -29,7 +29,7 @@ export default function Contact() {
         </Card>
         <Card title="Mail" content="For anything." icon={RiMailFill}>
           <div className="flex items-center gap-2">
-            <p className="text-main-600 truncate">
+            <p className="truncate text-main-600">
               kacperborowiec.kb@gmail.com
             </p>
             <IconButton Icon={RiSaveFill} onClick={copyMail} size={14} />

@@ -2,6 +2,8 @@ import Link from "next/link";
 import React from "react";
 
 export default function RecruitmentCard() {
+  // TODO: add tests when added endpoint
+
   return (
     <Link
       href={"/dashboard/id"}

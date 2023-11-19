@@ -20,6 +20,7 @@ export default function Card({
 }: ContactCardProps) {
   return (
     <motion.div
+      data-testid="contact-card"
       variants={fadeInAnimationVariants}
       initial="initial"
       animate="animate"

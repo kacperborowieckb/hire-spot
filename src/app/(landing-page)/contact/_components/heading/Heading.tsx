@@ -8,6 +8,7 @@ import { fadeInAnimationVariants } from "~/app/utils/variants";
 export default function Heading() {
   return (
     <motion.div
+      data-testid="contact-heading"
       initial="initial"
       animate="animate"
       transition={{ staggerChildren: 0.15 }}
@@ -31,7 +32,7 @@ export default function Heading() {
         variants={fadeInAnimationVariants}
         className="mx-4 mb-4 text-center text-lg"
       >
-        If you have any question, feel free to ask.
+        If you have any questions, feel free to ask.
       </motion.p>
     </motion.div>
   );
