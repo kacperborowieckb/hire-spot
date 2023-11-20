@@ -49,7 +49,7 @@ export default function Input<T extends FieldValues>({
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={controllerProps?.name} className={`${labelClass}`}>
+      <label htmlFor={controllerProps?.name} className={`${labelClass ?? ""}`}>
         {label}
       </label>
       <ControlledInput controller={controllerProps}>
@@ -59,11 +59,12 @@ export default function Input<T extends FieldValues>({
               <textarea
                 {...field}
                 {...inputRest}
+                id={controllerProps.name}
                 aria-invalid={error !== undefined}
                 onChange={(e) => field.onChange(e.target.value)}
-                className={`mb-3 w-full rounded-lg bg-main-100 p-2 outline-main-600 ${inputClass} ${
-                  error && "outline-error-border-dark"
-                }`}
+                className={`mb-3 w-full rounded-lg bg-main-100 p-2 outline-main-600 ${
+                  inputClass ?? ""
+                } ${error ? "outline-error-border-dark" : ""}`}
               />
               {error && (
                 <span className="text-error-text absolute left-0 top-[calc(100%)] text-sm">
@@ -76,9 +77,10 @@ export default function Input<T extends FieldValues>({
               <input
                 {...field}
                 {...inputRest}
+                id={controllerProps.name}
                 aria-invalid={error !== undefined}
                 className={`mb-3 w-full rounded-lg bg-main-100 p-2 outline-main-600 ${
-                  error && "outline-error-border-dark "
+                  error ? "outline-error-border-dark " : ""
                 }`}
                 onChange={(e) => {
                   let value: string | number = e.target.value;
