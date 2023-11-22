@@ -1,4 +1,4 @@
-import { IconType } from "react-icons";
+import type { IconType } from "react-icons";
 
 type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   Icon: IconType;

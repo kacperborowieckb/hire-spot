@@ -1,13 +1,13 @@
-import { InputHTMLAttributes, LabelHTMLAttributes } from "react";
+import type { InputHTMLAttributes, LabelHTMLAttributes } from "react";
 import {
-  FieldError,
-  FieldValues,
-  Merge,
-  UseControllerProps,
-  UseControllerReturn,
+  type FieldError,
+  type FieldValues,
+  type Merge,
+  type UseControllerProps,
+  type UseControllerReturn,
   useController,
 } from "react-hook-form";
-import { IconType } from "react-icons";
+import type { IconType } from "react-icons";
 
 type InputBaseProps = {
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
@@ -49,7 +49,11 @@ export default function Input<T extends FieldValues>({
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={controllerProps?.name} className={`${labelClass ?? ""}`}>
+      <label
+        htmlFor={controllerProps?.name}
+        {...labelRest}
+        className={`${labelClass ?? ""}`}
+      >
         {label}
       </label>
       <ControlledInput controller={controllerProps}>
@@ -62,7 +66,7 @@ export default function Input<T extends FieldValues>({
                 id={controllerProps.name}
                 aria-invalid={error !== undefined}
                 onChange={(e) => field.onChange(e.target.value)}
-                className={`mb-3 w-full rounded-lg bg-main-100 p-2 outline-main-600 ${
+                className={`mb-3 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 ${
                   inputClass ?? ""
                 } ${error ? "outline-error-border-dark" : ""}`}
               />
@@ -79,7 +83,7 @@ export default function Input<T extends FieldValues>({
                 {...inputRest}
                 id={controllerProps.name}
                 aria-invalid={error !== undefined}
-                className={`mb-3 w-full rounded-lg bg-main-100 p-2 outline-main-600 ${
+                className={`mb-3 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 ${
                   error ? "outline-error-border-dark " : ""
                 }`}
                 onChange={(e) => {

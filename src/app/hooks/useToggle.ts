@@ -1,4 +1,9 @@
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import {
+  type Dispatch,
+  type SetStateAction,
+  useCallback,
+  useState,
+} from "react";
 
 export const useToggle = (
   defaultValue?: boolean,

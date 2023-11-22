@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import Nav from "./Nav";
 import "intersection-observer";
 import userEvent from "@testing-library/user-event";
-import { useUser, UserButton } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 
 jest.mock("@clerk/nextjs", () => ({
   useUser: jest.fn().mockReturnValue({ isSignedIn: false, isLoaded: true }),
@@ -61,7 +61,7 @@ describe("Nav", () => {
       expect(userButton).not.toBeInTheDocument();
     });
 
-    it("Should display user button when logged in", async () => {
+    it("Should display user button when logged in", () => {
       (useUser as jest.Mock).mockImplementation(() => ({
         isSignedIn: true,
         isLoaded: true,

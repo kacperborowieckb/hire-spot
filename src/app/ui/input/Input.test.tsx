@@ -44,17 +44,17 @@ const InputForTests = ({
 describe("Input", () => {
   describe("Render", () => {
     it("Should render input with label", () => {
-      const { getByLabelText } = render(<InputForTests />);
+      render(<InputForTests />);
 
-      const input = getByLabelText(/username/i);
+      const input = screen.getByLabelText(/username/i);
 
       expect(input).toBeInTheDocument();
     });
 
     it("Should render textarea with label", () => {
-      const { getByLabelText } = render(<InputForTests as="textarea" />);
+      render(<InputForTests as="textarea" />);
 
-      const textarea = getByLabelText(/username/i);
+      const textarea = screen.getByLabelText(/username/i);
 
       expect(textarea).toBeInTheDocument();
     });
@@ -94,9 +94,9 @@ describe("Input", () => {
 
   describe("Behavior", () => {
     it("Should have correct value in input", async () => {
-      const { getByLabelText } = render(<InputForTests />);
+      render(<InputForTests />);
 
-      const input = getByLabelText(/username/i) as HTMLInputElement;
+      const input = screen.getByLabelText(/username/i) as HTMLInputElement;
 
       expect(input.value).toBe("");
 
@@ -106,9 +106,11 @@ describe("Input", () => {
     });
 
     it("Should have correct value in textarea", async () => {
-      const { getByLabelText } = render(<InputForTests as="textarea" />);
+      render(<InputForTests as="textarea" />);
 
-      const textarea = getByLabelText(/username/i) as HTMLTextAreaElement;
+      const textarea = screen.getByLabelText(
+        /username/i,
+      ) as HTMLTextAreaElement;
 
       expect(textarea.value).toBe("");
 
