@@ -17,7 +17,7 @@ export default function IconButton({
     <button
       onClick={onClick}
       {...otherProps}
-      className={`${classes} rounded-lg border border-main-300 bg-main-100 hover:border-main-500 hover:bg-main-300 active:border-main-400 active:bg-main-200`}
+      className={`${classes} rounded-lg border border-main-500 bg-main-50 hover:bg-main-100 active:border-main-400 active:bg-main-200`}
     >
       <Icon
         data-testid="icon-button-icon"

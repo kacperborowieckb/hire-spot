@@ -36,13 +36,13 @@ export default function Benefit({
       >
         <motion.h2
           variants={fadeInAnimationVariants}
-          className="text-main-600 text-3xl font-bold sm:text-4xl"
+          className="text-3xl font-bold text-main-600 sm:text-4xl"
         >
           {title}
         </motion.h2>
         <motion.p
           variants={fadeInAnimationVariants}
-          className=" text-main-950 text-base sm:text-lg"
+          className=" text-base text-main-950 sm:text-lg"
         >
           {content}
         </motion.p>
@@ -53,7 +53,7 @@ export default function Benefit({
         whileInView="animate"
         viewport={{ once: true }}
       >
-        <Image src={src} width={448} height={300} alt={alt} />
+        <Image src={src} width={448} height={300} alt={alt} className="p-2" />
       </motion.div>
     </div>
   );
