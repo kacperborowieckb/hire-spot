@@ -6,7 +6,9 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { getAuth } from "@clerk/nextjs/dist/types/server-helpers.server";
+
+import { decodeJwt } from "@clerk/nextjs/server";
+import { clerkClient } from "@clerk/nextjs";
 import { TRPCError, initTRPC } from "@trpc/server";
 import { type NextRequest } from "next/server";
 import superjson from "superjson";
@@ -51,16 +53,19 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = (opts: { req: NextRequest }) => {
+export const createTRPCContext = async (opts: { req: NextRequest }) => {
   // Fetch stuff that depends on the request
-
-  const { req } = opts;
-  const session = getAuth(req);
-  const user = session.userId;
+  const sessionToken = opts.req.cookies.get("__session")?.value ?? "";
+  const decodedJwt = decodeJwt(sessionToken);
+  const session = await clerkClient.sessions.verifySession(
+    decodedJwt.payload.sid,
+    sessionToken,
+  );
+  console.log(session.userId);
 
   return createInnerTRPCContext({
     headers: opts.req.headers,
-    currentUser: user,
+    currentUser: session.userId,
   });
 };
 
@@ -109,7 +114,7 @@ export const createTRPCRouter = t.router;
  */
 export const publicProcedure = t.procedure;
 
-const enforceUserIsSignedIn = t.middleware(async ({ ctx, next }) => {
+const enforceUserIsSignedIn = t.middleware(({ ctx, next }) => {
   if (!ctx.currentUser) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }

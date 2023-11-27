@@ -1,7 +1,6 @@
 import Link from "next/link";
-import React from "react";
 
-export default function RecruitmentCard() {
+export default async function RecruitmentCard() {
   // TODO: add tests when added endpoint
 
   return (
