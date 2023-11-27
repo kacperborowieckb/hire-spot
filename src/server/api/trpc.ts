@@ -113,6 +113,7 @@ const enforceUserIsSignedIn = t.middleware(async ({ ctx, next }) => {
   if (!ctx.currentUser) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
+
   return next({
     ctx: { currentUser: ctx.currentUser },
   });
