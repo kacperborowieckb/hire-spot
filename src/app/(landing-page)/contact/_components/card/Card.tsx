@@ -1,8 +1,6 @@
-"use client";
-
 import type { IconType } from "react-icons";
 import IconButton from "~/app/ui/icon-button/IconButton";
-import { motion } from "framer-motion";
+import { MotionDiv } from "~/app/ui/motion-components/MotionComponents";
 import { fadeInAnimationVariants } from "~/app/utils/variants";
 
 type ContactCardProps = {
@@ -19,7 +17,7 @@ export default function Card({
   children,
 }: ContactCardProps) {
   return (
-    <motion.div
+    <MotionDiv
       data-testid="contact-card"
       variants={fadeInAnimationVariants}
       initial="initial"
@@ -33,6 +31,6 @@ export default function Card({
       <h3 className="text-xl font-bold">{title}</h3>
       <p>{content}</p>
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 }

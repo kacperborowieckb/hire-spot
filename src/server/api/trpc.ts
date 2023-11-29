@@ -55,13 +55,17 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
  */
 export const createTRPCContext = async (opts: { req: NextRequest }) => {
   // Fetch stuff that depends on the request
+
+  // !!! TEMPORARY FIX !!!
+  // Fixing problem of auth() from clerk returning null with trpc
+  // Waiting for clerk team to fix this
+
   const sessionToken = opts.req.cookies.get("__session")?.value ?? "";
   const decodedJwt = decodeJwt(sessionToken);
   const session = await clerkClient.sessions.verifySession(
     decodedJwt.payload.sid,
     sessionToken,
   );
-  console.log(session.userId);
 
   return createInnerTRPCContext({
     headers: opts.req.headers,

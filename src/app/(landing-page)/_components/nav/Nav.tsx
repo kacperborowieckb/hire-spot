@@ -4,13 +4,14 @@ import Button from "~/app/ui/button/Button";
 import Logo from "~/app/ui/logo/Logo";
 import { RiMenu5Fill, RiCloseFill } from "react-icons/ri";
 import { useToggle } from "~/app/hooks/useToggle";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { openNavVariants } from "~/app/utils/variants";
 import NavLinks from "../nav-links/NavLinks";
 import IconButton from "~/app/ui/icon-button/IconButton";
 import Link from "next/link";
 import { useUser, UserButton } from "@clerk/nextjs";
 import Spinner from "~/app/ui/Spinner";
+import { MotionDiv } from "~/app/ui/motion-components/MotionComponents";
 
 export default function Nav() {
   const [isNavOpen, toggleNav] = useToggle(false);
@@ -36,9 +37,9 @@ export default function Nav() {
       />
       <AnimatePresence>
         {isNavOpen && (
-          <motion.div
+          <MotionDiv
             data-testid="mobile-nav"
-            className="absolute inset-x-0 inset-y-0 z-50 bg-main-50 sm:hidden"
+            className="absolute inset-x-0 top-0 z-50 h-screen bg-main-50 sm:hidden"
             variants={openNavVariants}
             initial="initial"
             animate="animate"
@@ -51,16 +52,16 @@ export default function Nav() {
                 Icon={RiCloseFill}
               />
             </div>
-            <motion.div
+            <MotionDiv
               data-testid="nav-links-container"
               initial="initial"
               animate="animate"
               transition={{ staggerChildren: 0.15, delayChildren: 0.3 }}
-              className="flex h-full flex-col items-center justify-center gap-8 text-2xl font-bold"
+              className="flex h-screen flex-col items-center justify-center gap-8 text-2xl font-bold"
             >
               <NavLinks toggleNav={toggleNav} />
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
       </AnimatePresence>
       {!isLoaded ? (

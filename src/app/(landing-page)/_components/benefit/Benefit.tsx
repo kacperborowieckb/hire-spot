@@ -1,9 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import React from "react";
-import { motion } from "framer-motion";
 import { fadeInAnimationVariants } from "~/app/utils/variants";
+import {
+  MotionDiv,
+  MotionH2,
+  MotionP,
+} from "~/app/ui/motion-components/MotionComponents";
 
 type BenefitProps = {
   title: string;
@@ -27,34 +29,34 @@ export default function Benefit({
         reverse ? "lg:flex-row-reverse" : "lg:flex-row"
       }`}
     >
-      <motion.div
+      <MotionDiv
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
         transition={{ staggerChildren: 0.15 }}
         className="flex max-w-md flex-col justify-center gap-4"
       >
-        <motion.h2
+        <MotionH2
           variants={fadeInAnimationVariants}
           className="text-3xl font-bold text-main-600 sm:text-4xl"
         >
           {title}
-        </motion.h2>
-        <motion.p
+        </MotionH2>
+        <MotionP
           variants={fadeInAnimationVariants}
           className=" text-base text-main-950 sm:text-lg"
         >
           {content}
-        </motion.p>
-      </motion.div>
-      <motion.div
+        </MotionP>
+      </MotionDiv>
+      <MotionDiv
         variants={fadeInAnimationVariants}
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
       >
         <Image src={src} width={448} height={300} alt={alt} className="p-2" />
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 }
