@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import Card from "./Card";
 import { RiLinkedinFill, RiMailFill, RiSaveFill } from "react-icons/ri";
 import Link from "next/link";
-import IconButton from "~/app/ui/icon-button/IconButton";
+import IconButton from "~/ui/icon-button/IconButton";
 import userEvent from "@testing-library/user-event";
 
 const copyMail = jest.fn();

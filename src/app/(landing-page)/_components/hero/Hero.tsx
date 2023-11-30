@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Button from "~/app/ui/button/Button";
-import { fadeInAnimationVariants } from "~/app/utils/variants";
+import Button from "~/ui/button/Button";
+import { fadeInAnimationVariants } from "~/utils/variants";
 import {
   MotionDiv,
   MotionH1,
   MotionP,
-} from "~/app/ui/motion-components/MotionComponents";
+} from "~/ui/motion-components/MotionComponents";
 
 export default function Hero() {
   return (

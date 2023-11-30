@@ -5,7 +5,7 @@ import Heading from "./_components/heading/Heading";
 import Card from "./_components/card/Card";
 import { RiLinkedinFill, RiMailFill, RiSaveFill } from "react-icons/ri";
 import Link from "next/link";
-import IconButton from "~/app/ui/icon-button/IconButton";
+import IconButton from "~/ui/icon-button/IconButton";
 import { toast } from "sonner";
 
 export default function Contact() {

@@ -1,13 +1,13 @@
 import Image from "next/image";
 import React from "react";
-import { fadeInAnimationVariants } from "~/app/utils/variants";
-import Button from "~/app/ui/button/Button";
+import { fadeInAnimationVariants } from "~/utils/variants";
+import Button from "~/ui/button/Button";
 import {
   MotionH1,
   MotionLink,
   MotionMain,
   MotionP,
-} from "~/app/ui/motion-components/MotionComponents";
+} from "~/ui/motion-components/MotionComponents";
 
 export default function Pricing() {
   return (

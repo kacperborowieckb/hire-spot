@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React from "react";
-import Logo from "~/app/ui/logo/Logo";
+import Logo from "~/ui/logo/Logo";
 import { RiLinkedinFill, RiGithubFill } from "react-icons/ri";
 import NavLinks from "../nav-links/NavLinks";
 

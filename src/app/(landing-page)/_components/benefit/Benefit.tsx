@@ -1,11 +1,11 @@
 import Image from "next/image";
 import React from "react";
-import { fadeInAnimationVariants } from "~/app/utils/variants";
+import { fadeInAnimationVariants } from "~/utils/variants";
 import {
   MotionDiv,
   MotionH2,
   MotionP,
-} from "~/app/ui/motion-components/MotionComponents";
+} from "~/ui/motion-components/MotionComponents";
 
 type BenefitProps = {
   title: string;

@@ -1,7 +1,7 @@
 import type { IconType } from "react-icons";
-import IconButton from "~/app/ui/icon-button/IconButton";
-import { MotionDiv } from "~/app/ui/motion-components/MotionComponents";
-import { fadeInAnimationVariants } from "~/app/utils/variants";
+import IconButton from "~/ui/icon-button/IconButton";
+import { MotionDiv } from "~/ui/motion-components/MotionComponents";
+import { fadeInAnimationVariants } from "~/utils/variants";
 
 type ContactCardProps = {
   title: string;

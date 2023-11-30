@@ -4,8 +4,8 @@ import {
   MotionDiv,
   MotionH1,
   MotionP,
-} from "~/app/ui/motion-components/MotionComponents";
-import { fadeInAnimationVariants } from "~/app/utils/variants";
+} from "~/ui/motion-components/MotionComponents";
+import { fadeInAnimationVariants } from "~/utils/variants";
 
 export default function Heading() {
   return (

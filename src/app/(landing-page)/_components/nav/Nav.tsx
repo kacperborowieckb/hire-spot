@@ -1,17 +1,17 @@
 "use client";
 
-import Button from "~/app/ui/button/Button";
-import Logo from "~/app/ui/logo/Logo";
+import Button from "~/ui/button/Button";
+import Logo from "~/ui/logo/Logo";
 import { RiMenu5Fill, RiCloseFill } from "react-icons/ri";
-import { useToggle } from "~/app/hooks/useToggle";
+import { useToggle } from "~/hooks/useToggle";
 import { AnimatePresence } from "framer-motion";
-import { openNavVariants } from "~/app/utils/variants";
+import { openNavVariants } from "~/utils/variants";
 import NavLinks from "../nav-links/NavLinks";
-import IconButton from "~/app/ui/icon-button/IconButton";
+import IconButton from "~/ui/icon-button/IconButton";
 import Link from "next/link";
 import { useUser, UserButton } from "@clerk/nextjs";
-import Spinner from "~/app/ui/Spinner";
-import { MotionDiv } from "~/app/ui/motion-components/MotionComponents";
+import Spinner from "~/ui/Spinner";
+import { MotionDiv } from "~/ui/motion-components/MotionComponents";
 
 export default function Nav() {
   const [isNavOpen, toggleNav] = useToggle(false);

@@ -2,8 +2,8 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "~/app/ui/input/Input";
-import Button from "~/app/ui/button/Button";
+import Input from "~/ui/input/Input";
+import Button from "~/ui/button/Button";
 import Image from "next/image";
 import { api } from "~/trpc/react";
 import {
