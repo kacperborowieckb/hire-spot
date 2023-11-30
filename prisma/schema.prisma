@@ -21,10 +21,12 @@ model User {
 }
 
 model Recruitment {
-  id         String      @id @unique @default(cuid())
-  creator    User        @relation(fields: [creatorId], references: [id])
-  creatorId  String
-  candidates Candidate[]
+  id          String      @id @unique @default(cuid())
+  creator     User        @relation(fields: [creatorId], references: [id])
+  creatorId   String
+  position    String
+  description String
+  candidates  Candidate[]
 
   @@index([creatorId])
 }

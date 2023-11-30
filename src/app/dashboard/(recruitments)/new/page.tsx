@@ -1,23 +1,15 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "~/app/ui/input/Input";
 import Button from "~/app/ui/button/Button";
 import Image from "next/image";
-
-const newRecruitmentSchema = z.object({
-  positionTitle: z
-    .string()
-    .min(3, "Position title must be at least 3 characters")
-    .max(32, "Position title must be below 32 characters"),
-  description: z
-    .string()
-    .max(1024, "Description must be below 1024 characters"),
-});
-
-type TNewRecruitmentSchema = z.infer<typeof newRecruitmentSchema>;
+import { api } from "~/trpc/react";
+import {
+  TNewRecruitmentSchema,
+  newRecruitmentSchema,
+} from "~/schemas/newRecruitment";
 
 export default function NewRecruitment() {
   const {
@@ -26,9 +18,19 @@ export default function NewRecruitment() {
     handleSubmit,
   } = useForm<TNewRecruitmentSchema>({
     resolver: zodResolver(newRecruitmentSchema),
+    defaultValues: {
+      description: "",
+      positionTitle: "",
+    },
   });
 
-  const onSubmit = () => {};
+  const { mutate: addRecruitment } =
+    api.recruitment.addRecruitment.useMutation();
+
+  const onSubmit = ({ description, positionTitle }: TNewRecruitmentSchema) => {
+    const recruitmentId = addRecruitment({ description, positionTitle });
+    console.log(recruitmentId);
+  };
 
   return (
     <main className="mx-6 my-8 flex h-full flex-1 justify-around gap-8 lg:mx-24">

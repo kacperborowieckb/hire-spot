@@ -68,10 +68,10 @@ export default function Input<T extends FieldValues>({
                 onChange={(e) => field.onChange(e.target.value)}
                 className={`mb-3 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 ${
                   inputClass ?? ""
-                } ${error ? "outline-error-border-dark" : ""}`}
+                } ${error ? "border-error-border-dark" : ""}`}
               />
               {error && (
-                <span className="text-error-text absolute left-0 top-[calc(100%)] text-sm">
+                <span className="absolute left-0 top-[calc(100%)] text-sm text-error-text">
                   {error.message}
                 </span>
               )}
@@ -84,7 +84,7 @@ export default function Input<T extends FieldValues>({
                 id={controllerProps.name}
                 aria-invalid={error !== undefined}
                 className={`mb-3 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 ${
-                  error ? "outline-error-border-dark " : ""
+                  error ? "border-error-border-dark " : ""
                 }`}
                 onChange={(e) => {
                   let value: string | number = e.target.value;
@@ -97,7 +97,7 @@ export default function Input<T extends FieldValues>({
               />
               {Icon && <Icon />}
               {error && (
-                <span className="text-error-text absolute left-0 top-[calc(100%-12px)] text-sm">
+                <span className="absolute left-0 top-[calc(100%-12px)] text-sm text-error-text">
                   {error.message}
                 </span>
               )}

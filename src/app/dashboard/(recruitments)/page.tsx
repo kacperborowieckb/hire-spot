@@ -9,7 +9,7 @@ export default async function Dashboard() {
     <main className="mx-6 my-4 flex flex-wrap justify-center gap-4 sm:justify-start md:mx-24">
       <AddRecruitment />
       {data.map((recruitment) => (
-        <RecruitmentCard />
+        <RecruitmentCard key={recruitment.id} />
       ))}
     </main>
   );
