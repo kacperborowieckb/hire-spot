@@ -1,4 +1,4 @@
-import { newRecruitmentSchema } from "~/schemas/newRecruitment";
+import { newRecruitmentSchema } from "~/schemas/newRecruitmentSchema";
 import { createTRPCRouter, privateProcedure } from "../trpc";
 
 export const recruitmentRouter = createTRPCRouter({
@@ -9,8 +9,8 @@ export const recruitmentRouter = createTRPCRouter({
   }),
   addRecruitment: privateProcedure
     .input(newRecruitmentSchema)
-    .mutation(({ ctx, input }) => {
-      const recruitment = ctx.db.recruitment.create({
+    .mutation(async ({ ctx, input }) => {
+      const recruitment = await ctx.db.recruitment.create({
         data: {
           position: input.positionTitle,
           description: input.description,
@@ -18,6 +18,6 @@ export const recruitmentRouter = createTRPCRouter({
         },
       });
 
-      return recruitment;
+      return recruitment.id;
     }),
 });

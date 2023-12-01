@@ -9,12 +9,16 @@ import { api } from "~/trpc/react";
 import {
   TNewRecruitmentSchema,
   newRecruitmentSchema,
-} from "~/schemas/newRecruitment";
+} from "~/schemas/newRecruitmentSchema";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function NewRecruitment() {
+  const router = useRouter();
   const {
     formState: { errors },
     control,
+    reset,
     handleSubmit,
   } = useForm<TNewRecruitmentSchema>({
     resolver: zodResolver(newRecruitmentSchema),
@@ -24,12 +28,20 @@ export default function NewRecruitment() {
     },
   });
 
-  const { mutate: addRecruitment } =
-    api.recruitment.addRecruitment.useMutation();
+  const { mutate: addRecruitment, isLoading } =
+    api.recruitment.addRecruitment.useMutation({
+      onError() {
+        reset();
+        toast.error("Failed to create new recruitment");
+      },
+      onSuccess(data) {
+        reset();
+        router.push(`/dashboard/new/${data}`);
+      },
+    });
 
   const onSubmit = ({ description, positionTitle }: TNewRecruitmentSchema) => {
-    const recruitmentId = addRecruitment({ description, positionTitle });
-    console.log(recruitmentId);
+    addRecruitment({ description, positionTitle });
   };
 
   return (
@@ -53,7 +65,7 @@ export default function NewRecruitment() {
             as="textarea"
             inputProps={{ className: "h-full" }}
           />
-          <Button variant="default" className="mt-4">
+          <Button variant="default" className="mt-4" disabled={isLoading}>
             Create
           </Button>
         </form>
