@@ -49,6 +49,7 @@ export default function NewRecruitment() {
       <div className="flex max-w-lg flex-grow flex-col gap-4">
         <h1 className="text-2xl font-bold">Create recruitment</h1>
         <form
+          aria-label="form"
           onSubmit={handleSubmit(onSubmit)}
           autoComplete="off"
           className="flex w-full flex-1 flex-col gap-2 [&>*:nth-child(2)]:h-full"
