@@ -9,7 +9,6 @@ export default async function LinkForRecruitmentPage({
 }: {
   params: { id: string };
 }) {
-  await new Promise((res) => setTimeout(res, 1000));
   const link = `localhost:3000/dashboard/${params.id}`;
 
   const copyLink = async () => {
