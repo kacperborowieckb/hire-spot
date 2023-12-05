@@ -35,8 +35,8 @@ export default function NewRecruitment() {
         toast.error("Failed to create new recruitment");
       },
       onSuccess(data) {
-        reset();
         router.push(`/dashboard/new/${data}`);
+        reset();
       },
     });
 

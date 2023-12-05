@@ -9,7 +9,7 @@ export default async function LinkForRecruitmentPage({
 }: {
   params: { id: string };
 }) {
-  const link = `localhost:3000/dashboard/${params.id}`;
+  const link = `localhost:3000/apply/${params.id}`;
 
   const copyLink = async () => {
     await navigator.clipboard.writeText(link);

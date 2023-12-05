@@ -1,4 +1,6 @@
-export const openNavVariants = {
+import type { Variants } from "framer-motion";
+
+export const openNavVariants: Variants = {
   initial: {
     y: "-100%",
     clipPath: "circle(0%)",
@@ -15,7 +17,7 @@ export const openNavVariants = {
   },
 };
 
-export const fadeInAnimationVariants = {
+export const fadeInAnimationVariants: Variants = {
   initial: {
     opacity: 0,
     y: 25,
@@ -26,5 +28,20 @@ export const fadeInAnimationVariants = {
     transition: {
       duration: 0.4,
     },
+  },
+};
+
+export const extendContentVariants: Variants = {
+  initial: {
+    height: 0,
+    opacity: 0,
+  },
+  animate: {
+    height: "auto",
+    opacity: 1,
+  },
+  exit: {
+    height: 0,
+    opacity: 0,
   },
 };
