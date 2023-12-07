@@ -115,7 +115,7 @@ export default function Input<T extends FieldValues>({
   );
 }
 
-function ControlledInput<T extends FieldValues>({
+export function ControlledInput<T extends FieldValues>({
   controller,
   children,
 }: {
