@@ -23,7 +23,7 @@ export default function ApplyForm() {
       cv: "",
     },
   });
-  console.log(getValues());
+
   const onSubmit = ({ email, name, cv, description }: TApplySchema) => {
     return;
   };
@@ -55,7 +55,7 @@ export default function ApplyForm() {
       <FileInput
         label="CV"
         controllerProps={{ name: "cv", control }}
-        error={errors.description}
+        errorMessage={errors.cv?.message?.toString()}
       />
       <Button variant="default" className="ml-auto">
         Apply

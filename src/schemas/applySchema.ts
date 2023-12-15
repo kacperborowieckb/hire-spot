@@ -14,13 +14,10 @@ export const applySchema = z.object({
   ),
   cv: z
     .any()
-    .refine((files) => files?.length == 1, "Cv is required.")
+    .refine((file) => Boolean(file?.name), "Cv is required.")
+    .refine((file) => file?.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
     .refine(
-      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `Max file size is 5MB.`,
-    )
-    .refine(
-      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       "Only .pdf files are accepted.",
     ),
 });
