@@ -35,12 +35,13 @@ model Candidate {
   id             String         @id @unique @default(cuid())
   recruitment    Recruitment    @relation(fields: [recruitmentId], references: [id])
   recruitmentId  String
-  cvId           String         @unique
+  cvUrl          String         @unique
   rating         Rating         @default(UNCHECKED)
   forInterview   Boolean        @default(false)
   interviewStage InterviewStage @default(NO_REPLY)
   email          String         @unique
   name           String
+  description    String?         
 
   @@index([recruitmentId])
 }
