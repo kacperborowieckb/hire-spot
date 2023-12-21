@@ -5,9 +5,10 @@ import { z } from "zod";
 export const candidateRouter = createTRPCRouter({
   addCandidate: privateProcedure
     .input(
-      applySchema
-        .omit({ cv: true })
-        .extend({ cvUrl: z.string(), recruitmentId: z.string() }),
+      applySchema.omit({ cv: true }).extend({
+        cvUrl: z.string(),
+        recruitmentId: z.string(),
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       await ctx.db.candidate.create({

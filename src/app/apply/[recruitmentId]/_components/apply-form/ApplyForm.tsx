@@ -2,7 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { TApplySchema, applySchema } from "~/schemas/applySchema";
 import { api } from "~/trpc/react";
 import Button from "~/ui/button/Button";
@@ -27,22 +29,39 @@ export default function ApplyForm() {
   });
 
   const params = useParams<{ recruitmentId: string }>();
+  const router = useRouter();
 
-  const { startUpload } = useUploadThing("imageUploader");
-  const { mutate: addCandidate } = api.candidate.addCandidate.useMutation({
-    onSuccess: () => {
-      reset();
+  const { startUpload, isUploading } = useUploadThing("imageUploader", {
+    onUploadError: (e) => {
+      console.error(e.message);
+      toast.error("Failed to apply");
     },
   });
 
+  const { mutate: addCandidate, isLoading } =
+    api.candidate.addCandidate.useMutation({
+      onSuccess: () => {
+        reset();
+        router.push("/apply/success");
+      },
+      onError: (e) => {
+        if (e.message.includes("Unique constraint")) {
+          toast.error("You already applied");
+        } else {
+          toast.error("Failed to apply");
+          console.error(e.message);
+        }
+      },
+    });
+
   const onSubmit = async ({ email, name, cv, description }: TApplySchema) => {
-    const userId = await startUpload([cv]);
-    if (userId && userId[0]) {
+    const fileData = await startUpload([cv]);
+    if (fileData && fileData[0]) {
       addCandidate({
         email,
         name,
         description,
-        cvUrl: userId[0]?.url,
+        cvUrl: fileData[0]?.url,
         recruitmentId: params.recruitmentId,
       });
     }
@@ -71,13 +90,16 @@ export default function ApplyForm() {
         controllerProps={{ name: "description", control }}
         error={errors.description}
       />
-
       <FileInput
         label="CV"
         controllerProps={{ name: "cv", control }}
         errorMessage={errors.cv?.message?.toString()}
       />
-      <Button variant="default" className="ml-auto">
+      <Button
+        variant="default"
+        className="ml-auto"
+        disabled={isLoading || isUploading}
+      >
         Apply
       </Button>
     </form>

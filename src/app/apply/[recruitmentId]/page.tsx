@@ -8,7 +8,7 @@ export default async function Apply({
 }: {
   params: { recruitmentId: string };
 }) {
-  const { creator, position, description, id } =
+  const { creator, position, description } =
     await api.recruitment.getRecruitmentById.query({
       id: params.recruitmentId,
     });
