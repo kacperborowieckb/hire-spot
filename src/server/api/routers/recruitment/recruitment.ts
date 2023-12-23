@@ -1,12 +1,23 @@
 import { newRecruitmentSchema } from "~/schemas/newRecruitmentSchema";
 import { createTRPCRouter, privateProcedure } from "../../trpc";
 import { z } from "zod";
+import { countUncheckedCandidates } from "~/helpers/countUncheckedCandidates";
 
 export const recruitmentRouter = createTRPCRouter({
-  getAllRecruitment: privateProcedure.query(({ ctx }) => {
-    return ctx.db.recruitment.findMany({
+  getAllRecruitmentData: privateProcedure.query(async ({ ctx }) => {
+    const data = await ctx.db.recruitment.findMany({
       where: { creatorId: ctx.currentUser },
+      include: {
+        candidates: { select: { rating: true } },
+      },
     });
+
+    return data.map((recruitment) => ({
+      id: recruitment.id,
+      position: recruitment.position,
+      candidates: recruitment.candidates.length,
+      uncheckedCandidates: countUncheckedCandidates(recruitment.candidates),
+    }));
   }),
   getRecruitmentById: privateProcedure
     .input(z.object({ id: z.string() }))
