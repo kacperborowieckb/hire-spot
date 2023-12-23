@@ -5,6 +5,8 @@ import { api } from "~/trpc/react";
 
 const { mutate } = api.recruitment.addRecruitment.useMutation();
 
+const mutateMock = mutate as jest.Mock;
+
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
@@ -74,7 +76,7 @@ describe("NewRecruitment", () => {
       await userEvent.type(descriptionInput, "desc");
       await userEvent.click(button);
 
-      expect(mutate).toHaveBeenCalledWith({
+      expect(mutateMock).toHaveBeenCalledWith({
         positionTitle: "title",
         description: "desc",
       });
@@ -84,12 +86,11 @@ describe("NewRecruitment", () => {
 
       const button = screen.getByRole("button");
       const positionTitleInput = screen.getByLabelText(/position title/i);
-      const descriptionInput = screen.getByLabelText(/description/i);
 
       await userEvent.type(positionTitleInput, "s");
       await userEvent.click(button);
 
-      expect(mutate).not.toHaveBeenCalled();
+      expect(mutateMock).not.toHaveBeenCalled();
     });
   });
 });

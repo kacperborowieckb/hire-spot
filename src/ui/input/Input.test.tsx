@@ -5,16 +5,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import userEvent from "@testing-library/user-event";
 
-jest.mock("react-hook-form", () => ({
-  ...jest.requireActual("react-hook-form"),
-  Controller: () => <></>,
-  useController: () => ({ field: { onChange: () => {} } }),
-  useForm: () => ({
-    control: () => ({}),
-    handleSubmit: () => jest.fn(),
-  }),
-}));
-
 const TestInputSchema = z.object({
   username: z.string(),
 });
@@ -30,6 +20,7 @@ const InputForTests = ({
 }) => {
   const { control } = useForm<TTestInputSchema>({
     resolver: zodResolver(TestInputSchema),
+    defaultValues: { username: "" },
   });
   return (
     <Input
