@@ -26,6 +26,7 @@ model Recruitment {
   creatorId   String
   position    String
   description String
+  createdAt   DateTime
   candidates  Candidate[]
 
   @@index([creatorId])
