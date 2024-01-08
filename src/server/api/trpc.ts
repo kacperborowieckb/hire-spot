@@ -7,7 +7,7 @@
  * need to use are documented accordingly near the end.
  */
 
-import { decodeJwt } from "@clerk/nextjs/server";
+import { decodeJwt, getAuth } from "@clerk/nextjs/server";
 import { clerkClient } from "@clerk/nextjs";
 import { TRPCError, initTRPC } from "@trpc/server";
 import { type NextRequest } from "next/server";
@@ -23,6 +23,8 @@ import { db } from "~/server/db";
  *
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
+
+type AuthObject = ReturnType<typeof getAuth>;
 
 interface CreateContextOptions {
   headers: Headers;
@@ -53,23 +55,18 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = async (opts: { req: NextRequest }) => {
+export const createTRPCContext = async ({
+  headers,
+  auth,
+}: {
+  headers: Headers;
+  auth: AuthObject;
+}) => {
   // Fetch stuff that depends on the request
 
-  // !!! TEMPORARY FIX !!!
-  // Fixing problem of auth() from clerk returning null with trpc
-  // Waiting for clerk team to fix this
-
-  const sessionToken = opts.req.cookies.get("__session")?.value ?? "";
-  const decodedJwt = decodeJwt(sessionToken);
-  const session = await clerkClient.sessions.verifySession(
-    decodedJwt.payload.sid,
-    sessionToken,
-  );
-
   return createInnerTRPCContext({
-    headers: opts.req.headers,
-    currentUser: session.userId,
+    headers: headers,
+    currentUser: auth.userId,
   });
 };
 
