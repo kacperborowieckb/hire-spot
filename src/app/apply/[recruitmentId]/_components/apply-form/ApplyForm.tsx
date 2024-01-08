@@ -63,6 +63,7 @@ export default function ApplyForm() {
         description,
         cvUrl: fileData[0]?.url,
         recruitmentId: params.recruitmentId,
+        imgKey: fileData[0].key,
       });
     }
   };
