@@ -30,9 +30,7 @@ export default function Description({ desc }: { desc?: string }) {
             exit="exit"
             className="overflow-hidden"
           >
-            {Array(5)
-              .fill(null)
-              .map((_) => desc)}
+            {desc}
           </MotionDiv>
         )}
       </AnimatePresence>

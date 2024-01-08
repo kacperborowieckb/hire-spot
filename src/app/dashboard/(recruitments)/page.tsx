@@ -1,6 +1,7 @@
 import { api } from "~/trpc/server";
 import AddRecruitment from "./_components/add-recruitment/AddRecruitment";
 import RecruitmentCard from "./_components/recruitment-card/RecruitmentCard";
+import dayjs from "dayjs";
 
 export default async function Dashboard() {
   const recruitmentsData = await api.recruitment.getAllRecruitmentData.query();
@@ -13,8 +14,9 @@ export default async function Dashboard() {
           key={recruitment.id}
           position={recruitment.position}
           allCandidates={recruitment.candidates}
-          startedAt=""
+          startedAt={dayjs(recruitment.createdAt).format("DD-MM-YYYY")}
           uncheckedCandidates={recruitment.uncheckedCandidates}
+          recruitmentId={recruitment.id}
         />
       ))}
     </main>

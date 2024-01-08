@@ -16,6 +16,7 @@ export const recruitmentRouter = createTRPCRouter({
       id: recruitment.id,
       position: recruitment.position,
       candidates: recruitment.candidates.length,
+      createdAt: recruitment.createdAt,
       uncheckedCandidates: countUncheckedCandidates(recruitment.candidates),
     }));
   }),
@@ -40,6 +41,7 @@ export const recruitmentRouter = createTRPCRouter({
           position: input.positionTitle,
           description: input.description,
           creatorId: ctx.currentUser,
+          createdAt: new Date(),
         },
       });
 

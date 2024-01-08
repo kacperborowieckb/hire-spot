@@ -5,6 +5,7 @@ type RecruitmentCardProps = {
   allCandidates: number;
   startedAt: string;
   uncheckedCandidates: number;
+  recruitmentId: string;
 };
 
 export default async function RecruitmentCard({
@@ -12,10 +13,11 @@ export default async function RecruitmentCard({
   position,
   startedAt,
   uncheckedCandidates,
+  recruitmentId,
 }: RecruitmentCardProps) {
   return (
     <Link
-      href={"/dashboard/id"}
+      href={`/dashboard/${recruitmentId}`}
       className="flex h-64 w-56 flex-col gap-4 rounded-lg border border-main-200 bg-main-50 p-4 text-center shadow-md transition-transform hover:scale-[1.02]"
     >
       <h3 className="my-2 truncate font-semibold">{position}</h3>

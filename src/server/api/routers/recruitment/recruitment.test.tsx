@@ -25,6 +25,8 @@ describe("Recruitment router", () => {
       headers: new Headers(),
     });
 
+    const createdAtMock = new Date();
+
     const mockOutput: (Recruitment & { candidates: { rating: Rating }[] })[] = [
       {
         id: "mockId",
@@ -37,6 +39,7 @@ describe("Recruitment router", () => {
           { rating: "NO" },
           { rating: "UNCHECKED" },
         ],
+        createdAt: createdAtMock,
       },
     ];
 
@@ -50,6 +53,7 @@ describe("Recruitment router", () => {
         id: "mockId",
         position: "mockPosition",
         uncheckedCandidates: 2,
+        createdAt: createdAtMock,
       },
     ]);
   });
@@ -69,6 +73,7 @@ describe("Recruitment router", () => {
         description: "mockDesc",
         id: "mockInputId",
         position: "mock",
+        createdAt: new Date(),
       };
 
     const input: inferProcedureInput<
@@ -115,6 +120,7 @@ describe("Recruitment router", () => {
       description: "mockDesc",
       id: "mockId",
       position: "mockPosition",
+      createdAt: new Date(),
     };
 
     prismaMock.recruitment.create.mockResolvedValue(output);
