@@ -1,7 +1,9 @@
 import { PrismaClient, Rating, Recruitment } from "@prisma/client";
 import { mockDeep } from "jest-mock-extended";
 import { AppRouter, appRouter } from "../../root";
-import { inferProcedureInput, inferProcedureOutput } from "@trpc/server";
+import { inferProcedureInput } from "@trpc/server";
+
+jest.mock("uploadthing/server");
 
 describe("Recruitment router", () => {
   it("Get recruitment should not work without auth", () => {
