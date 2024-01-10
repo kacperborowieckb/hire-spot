@@ -7,10 +7,8 @@
  * need to use are documented accordingly near the end.
  */
 
-import { decodeJwt, getAuth } from "@clerk/nextjs/server";
-import { clerkClient } from "@clerk/nextjs";
+import { getAuth } from "@clerk/nextjs/server";
 import { TRPCError, initTRPC } from "@trpc/server";
-import { type NextRequest } from "next/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
