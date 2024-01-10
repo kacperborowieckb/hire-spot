@@ -50,7 +50,7 @@ describe("Dashboard", () => {
       {
         candidates: 4,
         createdAt: new Date(),
-        id: "mockId",
+        id: "secondMockId",
         position: "mockPosition",
         uncheckedCandidates: 2,
       },

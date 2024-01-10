@@ -11,7 +11,11 @@ export default function Description({ desc }: { desc?: string }) {
 
   return (
     <>
-      <div className="mt-4 flex cursor-pointer" onClick={toggleDesc}>
+      <div
+        className="mt-4 flex cursor-pointer"
+        onClick={toggleDesc}
+        data-testid="expand-desc"
+      >
         <h4 className="flex-grow font-bold">Desc:</h4>
         <MotionDiv
           animate={{
