@@ -8,7 +8,7 @@ export default function Home() {
       <Hero />
       <h2
         id="benefits"
-        className="p-12 text-center text-4xl font-medium text-main-950 sm:p-16 sm:text-5xl"
+        className="text-text-primary p-12 text-center text-4xl font-medium sm:p-16 sm:text-5xl"
       >
         Explore our{" "}
         <span className="relative font-extrabold text-main-600">

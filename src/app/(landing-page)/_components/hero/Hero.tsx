@@ -38,7 +38,10 @@ export default function Hero() {
             />
           </span>
         </MotionH1>
-        <MotionP className="mb-4 text-lg" variants={fadeInAnimationVariants}>
+        <MotionP
+          className="text-text-secondary mb-4 text-lg"
+          variants={fadeInAnimationVariants}
+        >
           Discover a Smarter Way to Recruit, Streamline Your Hiring, and Build
           Your Dream Team.
         </MotionP>

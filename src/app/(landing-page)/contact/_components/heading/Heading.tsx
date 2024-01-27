@@ -32,7 +32,7 @@ export default function Heading() {
       </MotionH1>
       <MotionP
         variants={fadeInAnimationVariants}
-        className="mx-4 mb-4 text-center text-lg"
+        className="text-text-secondary mx-4 mb-4 text-center text-lg"
       >
         If you have any questions, feel free to ask.
       </MotionP>

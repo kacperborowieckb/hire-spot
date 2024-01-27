@@ -13,7 +13,7 @@ export default function SuccessApply() {
         width={300}
       />
 
-      <p className="text-xl">
+      <p className="text-text-secondary text-xl">
         You just applied for a new job! We hope they will contact you.
       </p>
     </main>

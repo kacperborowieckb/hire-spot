@@ -21,8 +21,10 @@ export default async function LinkForRecruitmentPage({
       <h1 className="font-semi-bold text-4xl text-main-600">
         Congratulations!
       </h1>
-      <p className="text-lg">You have just created a recruitment</p>
-      <p className="text-lg">
+      <p className="text-text-secondary text-lg">
+        You have just created a recruitment
+      </p>
+      <p className="text-text-secondary text-lg">
         All you have to do now is to send this link to your candidates
       </p>
       <div className="mx-auto max-w-xs sm:max-w-xl">
