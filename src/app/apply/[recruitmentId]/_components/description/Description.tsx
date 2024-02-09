@@ -32,7 +32,7 @@ export default function Description({ desc }: { desc?: string }) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="text-text-secondary overflow-hidden"
+            className="text-text-600 overflow-hidden"
           >
             {desc}
           </MotionDiv>

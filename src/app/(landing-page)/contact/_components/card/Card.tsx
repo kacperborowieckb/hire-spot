@@ -29,7 +29,7 @@ export default function Card({
         <IconButton Icon={icon}></IconButton>
       </div>
       <h3 className="text-xl font-bold">{title}</h3>
-      <p className="text-text-secondary">{content}</p>
+      <p className="text-text-600">{content}</p>
       {children}
     </MotionDiv>
   );

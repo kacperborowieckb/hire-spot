@@ -20,7 +20,7 @@ export default async function Apply({
       <h1 className="min-w-full text-center text-2xl md:text-left">
         You are applying for {position}
       </h1>
-      <p className="text-text-secondary mt-2 text-right">
+      <p className="text-text-600 mt-2 text-right">
         Recruitment made by <span className="text-main-600">{creator}</span>
       </p>
       <Description desc={description} />

@@ -35,7 +35,7 @@ export default function Pricing() {
       </MotionH1>
       <MotionP
         variants={fadeInAnimationVariants}
-        className="text-text-secondary mb-2 max-w-lg text-xl"
+        className="text-text-600 mb-2 max-w-lg text-xl"
       >
         Enjoy the full functionality of the app without any cost, it might
         change after some time.

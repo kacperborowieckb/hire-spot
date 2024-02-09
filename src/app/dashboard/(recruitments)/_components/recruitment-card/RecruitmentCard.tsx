@@ -18,7 +18,7 @@ export default function RecruitmentCard({
   return (
     <Link
       href={`/dashboard/${recruitmentId}`}
-      className="flex h-64 w-56 flex-col gap-4 rounded-lg border border-main-200 bg-main-50 p-4 text-center shadow-md transition-transform hover:scale-[1.02]"
+      className="border-border flex h-64 w-56 flex-col gap-4 rounded-lg border bg-main-50 p-4 text-center shadow-md transition-transform hover:scale-[1.02]"
       data-testid="recruitment-card"
     >
       <h3 className="my-2 truncate font-semibold">{position}</h3>

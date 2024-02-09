@@ -25,9 +25,10 @@ export default {
           "900": "#3c2e81",
           "950": "#241B4B",
         },
-        text: {
-          primary: "#313131",
-          secondary: "#515151",
+        border: "#BBBBC3",
+        black: {
+          "600": "#515151",
+          "900": "#313131",
         },
         error: {
           bg: "hsl(359, 100%, 97%)",

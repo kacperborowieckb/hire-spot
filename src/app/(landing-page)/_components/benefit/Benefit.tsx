@@ -44,7 +44,7 @@ export default function Benefit({
         </MotionH2>
         <MotionP
           variants={fadeInAnimationVariants}
-          className=" text-text-secondary text-base sm:text-lg"
+          className=" text-text-600 text-base sm:text-lg"
         >
           {content}
         </MotionP>
