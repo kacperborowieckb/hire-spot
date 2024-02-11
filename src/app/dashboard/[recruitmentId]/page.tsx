@@ -16,7 +16,7 @@ export default async function RecruitmentHome({
   });
 
   return (
-    <main className="mx-6 my-4 flex flex-wrap justify-center gap-4 sm:justify-start md:mx-24">
+    <>
       {/* <InfoCard
         icon={<Ri24HoursFill fill={iconFill} size={iconSize} />}
         percentage={43}
@@ -35,6 +35,6 @@ export default async function RecruitmentHome({
         title="title"
         value={21}
       /> */}
-    </main>
+    </>
   );
 }

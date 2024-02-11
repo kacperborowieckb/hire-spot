@@ -1,7 +1,18 @@
-export default function RecruitmentHomeLayout({
+import SideBar from "./_components/side-bar/SideBar";
+import Header from "./_components/header/Header";
+
+export default async function RecruitmentHomeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <Header />
+      <main className="bg-main-5 flex flex-1 bg-main-100">
+        <SideBar />
+        {children}
+      </main>
+    </>
+  );
 }
