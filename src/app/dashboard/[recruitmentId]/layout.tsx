@@ -9,7 +9,7 @@ export default async function RecruitmentHomeLayout({
   return (
     <>
       <Header />
-      <main className="bg-main-5 flex flex-1 bg-main-100">
+      <main className="bg-main-5 flex flex-1 overflow-x-hidden bg-main-100">
         <SideBar />
         {children}
       </main>
