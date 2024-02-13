@@ -87,7 +87,7 @@ export default function Input<T extends FieldValues>({
                 {...inputRest}
                 id={controllerProps.name}
                 aria-invalid={error !== undefined}
-                className={`mb-3 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 ${
+                className={`mb-3 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 placeholder:text-main-300 ${
                   error
                     ? "border-error-border-dark outline-error-border-dark"
                     : ""
@@ -101,7 +101,11 @@ export default function Input<T extends FieldValues>({
                   field.onChange(value);
                 }}
               />
-              {Icon && <Icon />}
+              {Icon && (
+                <div className="absolute right-3 top-[22px] -translate-y-1/2">
+                  <Icon size={20} className="fill-main-300" />
+                </div>
+              )}
               {error && (
                 <span className="absolute left-0 top-[calc(100%-12px)] text-sm text-error-text">
                   {error.message}
