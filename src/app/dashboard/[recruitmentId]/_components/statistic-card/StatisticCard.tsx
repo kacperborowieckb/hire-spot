@@ -7,6 +7,7 @@ export default function StatisticCard({
   title: string;
   children: JSX.Element;
 }) {
+  // TODO tests
   return (
     <Card className="basis-full">
       <>

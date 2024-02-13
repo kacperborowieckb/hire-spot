@@ -21,7 +21,7 @@ export default function SearchBar() {
     resolver: zodResolver(searchSchema),
     defaultValues: { search: "" },
   });
-
+  // TODO tests
   return (
     <div>
       <Input

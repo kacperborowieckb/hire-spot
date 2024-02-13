@@ -14,6 +14,7 @@ export default function InfoCard({
   value,
   percentage,
 }: InfoCardProps) {
+  // TODO tests
   return (
     <Card className="min-w-[164px] max-w-[354px] basis-full">
       <>

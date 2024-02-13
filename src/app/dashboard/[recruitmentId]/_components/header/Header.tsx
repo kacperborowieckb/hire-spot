@@ -1,6 +1,5 @@
 import { UserButton } from "@clerk/nextjs";
 import React from "react";
-import LogoWithoutText from "~/ui/logo-without-text/LogoWithoutText";
 import Logo from "~/ui/logo/Logo";
 import SearchBar from "../search-bar/SearchBar";
 
