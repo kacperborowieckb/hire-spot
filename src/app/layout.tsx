@@ -20,7 +20,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className="scroll-smooth">
         <body
-          className={`${GeistSans.className} text-text-900 flex min-h-screen flex-col bg-main-50 bg-[url('/bg.svg')] bg-50% backdrop-blur-[2px]`}
+          className={`${GeistSans.className} text-text-900 flex min-h-screen flex-col bg-main-50 bg-[url('/bg.svg')] bg-50%`}
         >
           <TRPCReactProvider cookies={cookies().toString()}>
             {children}
