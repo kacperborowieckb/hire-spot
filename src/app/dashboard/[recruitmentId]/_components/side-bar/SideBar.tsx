@@ -32,7 +32,7 @@ const pages: { icon: IconType; href: string; name: string }[] = [
   },
   {
     icon: RiCalendarTodoLine,
-    href: "schedule",
+    href: "/schedule",
     name: "Schedule interview",
   },
 ];
@@ -41,10 +41,12 @@ export default function SideBar() {
   const pathname = usePathname();
   const params = useParams<{ recruitmentId: string }>();
   // TODO tests
-  const links = pages.map((page) => {
-    let isCurrent = pathname.replaceAll("/", "").includes(page.href);
+  const currentPage =
+    pages.findLast((page) => pathname.endsWith(page.href))?.href || "/";
 
-    if (!isCurrent && page.href === "/") isCurrent = true;
+  const links = pages.map((page) => {
+    const isCurrent = page.href === currentPage;
+
     return (
       <Link
         key={page.name}
