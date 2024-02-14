@@ -5,6 +5,15 @@
 await import("./src/env.mjs");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.node/,
+      use: "raw-loader",
+    });
+
+    return config;
+  },
+};
 
 export default config;

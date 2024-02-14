@@ -32,7 +32,7 @@ const pages: { icon: IconType; href: string; name: string }[] = [
   },
   {
     icon: RiCalendarTodoLine,
-    href: "schedule",
+    href: "/schedule",
     name: "Schedule interview",
   },
 ];
@@ -41,10 +41,12 @@ export default function SideBar() {
   const pathname = usePathname();
   const params = useParams<{ recruitmentId: string }>();
   // TODO tests
-  const links = pages.map((page) => {
-    let isCurrent = pathname.replaceAll("/", "").includes(page.href);
+  const currentPage =
+    pages.findLast((page) => pathname.endsWith(page.href))?.href || "/";
 
-    if (!isCurrent && page.href === "/") isCurrent = true;
+  const links = pages.map((page) => {
+    const isCurrent = page.href === currentPage;
+
     return (
       <Link
         key={page.name}
@@ -71,7 +73,7 @@ export default function SideBar() {
   });
 
   return (
-    <aside className="flex flex-1 border border-t-0 border-border bg-main-50 pt-2 sm:min-w-[64px] xl:min-w-[224px]">
+    <aside className="z-50 flex flex-1 border border-t-0 border-border bg-main-50 pt-2 sm:min-w-[64px] xl:min-w-[224px]">
       <div className="fixed bottom-4 left-1/2 flex -translate-x-1/2 gap-8 rounded-lg border border-border bg-main-100 p-2 shadow-lg sm:static sm:mt-4 sm:w-full sm:translate-x-0 sm:flex-col sm:border-none sm:bg-main-50 sm:p-0 sm:shadow-none xl:p-4 xl:pr-0">
         {links}
       </div>

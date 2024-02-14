@@ -3,7 +3,8 @@ const variants = {
     "text-main-50 bg-main-500 hover:bg-main-600 active:bg-main-700 disabled:bg-main-200 disabled:text-main-300",
   outline:
     "border bg-main-50 text-main-700 border-main-700 hover:bg-main-100 active:bg-main-200 disabled:bg-transparent disabled:border-main-300 disabled:text-main-300",
-  gradient: "",
+  error:
+    "text-main-50 bg-red-500 hover:bg-red-600 active:bg-red-700 disabled:bg-red-300 disabled:text-main-50",
 };
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
