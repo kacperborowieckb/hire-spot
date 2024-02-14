@@ -1,5 +1,16 @@
+"use client";
+
 import { BsThreeDots } from "react-icons/bs";
+import { RiAB } from "react-icons/ri";
 import Card from "~/ui/card/Card";
+import {
+  Dropdown,
+  DropdownBreak,
+  DropdownContent,
+  DropdownItem,
+  DropdownItemIcon,
+  DropdownTrigger,
+} from "~/ui/dropdown/Dropdown";
 
 type CandidateCardProps = {
   name: string;
@@ -20,8 +31,27 @@ export default function CandidateCard({
     <Card className="gap-1 !p-2">
       <section className="flex gap-2">
         <h3 className="flex-grow text-lg text-black-900">{name}</h3>
-        <div className="flex -translate-y-1 transform cursor-pointer items-center justify-center transition-transform hover:scale-105">
-          <BsThreeDots size={22} className="fill-black-900" />
+        <div className="-mt-2 flex cursor-pointer items-center justify-center transition-transform">
+          <Dropdown>
+            <DropdownTrigger>
+              <BsThreeDots size={22} className="fill-black-900" />
+            </DropdownTrigger>
+            <DropdownContent>
+              <DropdownItem>Social</DropdownItem>
+              <DropdownItem>Social</DropdownItem>
+              <DropdownItem>Social</DropdownItem>
+              <DropdownBreak />
+              <DropdownItem>Social</DropdownItem>
+              <DropdownItem>Social</DropdownItem>
+              <DropdownItem>Social</DropdownItem>
+              <DropdownItem>
+                Social
+                <DropdownItemIcon>
+                  <RiAB />
+                </DropdownItemIcon>
+              </DropdownItem>
+            </DropdownContent>
+          </Dropdown>
         </div>
       </section>
       <p className="line-clamp-2 text-black-600">{desc}</p>
