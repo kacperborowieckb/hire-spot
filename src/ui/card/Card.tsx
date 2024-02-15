@@ -1,8 +1,7 @@
-import { ClassAttributes } from "react";
 import { cn } from "~/utils/cn";
 
 type CardProps = React.HTMLAttributes<HTMLDivElement> & {
-  children: JSX.Element;
+  children: React.ReactNode;
 };
 
 export default function Card({
@@ -13,7 +12,7 @@ export default function Card({
   return (
     <div
       className={cn(
-        "flex min-h-[154px] flex-col rounded-lg border border-border bg-main-50 p-4 shadow-md",
+        "flex min-h-[126px] flex-col rounded-lg border border-border bg-main-50 p-4 shadow-md",
         className,
       )}
       {...otherProps}

@@ -5,15 +5,13 @@ export default function StatisticCard({
   children,
 }: {
   title: string;
-  children: JSX.Element;
+  children: React.ReactNode;
 }) {
   // TODO tests
   return (
     <Card className="basis-full">
-      <>
-        <h4 className="text-black-900">{title}</h4>
-        {children}
-      </>
+      <h4 className="text-black-900">{title}</h4>
+      {children}
     </Card>
   );
 }
