@@ -17,6 +17,23 @@ export const openNavVariants: Variants = {
   },
 };
 
+export const dropdownVariants: Variants = {
+  initial: {
+    scale: 0.9,
+    opacity: 0,
+  },
+  hide: {
+    transition: { duration: 0.15 },
+    scale: 0.9,
+    opacity: 0,
+  },
+  show: {
+    scale: 1,
+    transition: { duration: 0.15 },
+    opacity: 1,
+  },
+};
+
 export const fadeInAnimationVariants: Variants = {
   initial: {
     opacity: 0,
