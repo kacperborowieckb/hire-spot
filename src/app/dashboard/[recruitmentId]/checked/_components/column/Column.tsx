@@ -14,7 +14,7 @@ export default function Column({
   return (
     <section
       className={
-        "flex min-w-[300px] max-w-[300px] flex-col gap-4 rounded-md border border-border bg-main-50 p-4 shadow-lg"
+        "flex min-h-[368px] min-w-[300px] max-w-[300px] flex-col gap-4 rounded-md border border-border bg-main-50 p-4 shadow-lg"
       }
     >
       <div>
