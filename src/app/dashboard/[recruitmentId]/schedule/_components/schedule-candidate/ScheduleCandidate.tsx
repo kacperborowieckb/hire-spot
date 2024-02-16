@@ -43,7 +43,7 @@ export default function ScheduleCandidate({
       <h2 className="text-2xl text-black-900">Pick a candidate</h2>
       <div
         className={cn(
-          "h-[130px] w-[266px] rounded-lg border-2 border-dashed border-main-400",
+          "mx-auto h-[130px] w-[266px] justify-center rounded-lg border-2 border-dashed border-main-400",
         )}
       >
         {/* <CandidateCard
