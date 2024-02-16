@@ -4,19 +4,32 @@ import { RiArrowLeftDoubleLine, RiArrowRightDoubleLine } from "react-icons/ri";
 import { cn } from "~/utils/cn";
 
 type CalendarProps = {
-  value?: Dayjs;
-  onChange: () => void;
+  selectedValue?: Dayjs;
+  onChange: (date: Dayjs) => void;
 };
 
-export default function Calendar({ value = dayjs(), onChange }: CalendarProps) {
-  const [currentDate, setCurrentDate] = useState<Dayjs>(value);
+export default function Calendar({
+  selectedValue = dayjs(),
+  onChange,
+}: CalendarProps) {
+  const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
 
   const currentYear = currentDate.year();
   const currentMonth = currentDate.month();
   const monthLength = currentDate.daysInMonth();
   const previousMonthLength = currentDate.month(currentMonth - 1).daysInMonth();
-  const startingIndex = currentDate.day();
-  const endingIndex = currentDate.endOf("month").day();
+  const startingIndex =
+    currentDate.startOf("month").day() === 0
+      ? 6
+      : currentDate.startOf("month").day() - 1;
+  const endingIndex =
+    currentDate.endOf("month").day() === 0
+      ? 6
+      : currentDate.endOf("month").day() - 1;
+
+  const isInCurrentMonthAndYear =
+    selectedValue.year() === currentYear &&
+    selectedValue.month() === currentMonth;
 
   const handlePreviousMonth = () => {
     if (currentMonth === 0) {
@@ -24,12 +37,15 @@ export default function Calendar({ value = dayjs(), onChange }: CalendarProps) {
     }
     setCurrentDate(dayjs(currentDate).month(currentMonth - 1));
   };
+
   const handleNextMonth = () => {
     if (currentMonth === 11) {
       setCurrentDate(dayjs(currentDate).year(currentYear + 1));
     }
     setCurrentDate(dayjs(currentDate).month(currentMonth + 1));
   };
+
+  const handleChange = (date: Dayjs) => onChange(date);
 
   return (
     <div>
@@ -60,9 +76,14 @@ export default function Calendar({ value = dayjs(), onChange }: CalendarProps) {
         ))}
         {Array.from({ length: monthLength }).map((_, i) => (
           <CalendarItem
+            className={cn(
+              selectedValue.date() === i + 1 &&
+                isInCurrentMonthAndYear &&
+                "bg-main-300 hover:bg-main-300",
+            )}
             key={i + startingIndex}
             day={i + 1}
-            onChange={onChange}
+            onChange={() => handleChange(currentDate.date(i + 1))}
           />
         ))}
         {Array.from({ length: 6 - endingIndex }).map((_, i) => (
@@ -78,7 +99,7 @@ export default function Calendar({ value = dayjs(), onChange }: CalendarProps) {
 }
 
 type CalendarItemProps = React.HTMLAttributes<HTMLSpanElement> & {
-  onChange?: () => void;
+  onChange?: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
   day: number;
 };
 
@@ -94,6 +115,7 @@ function CalendarItem({
         "flex aspect-square w-[32px] cursor-pointer items-center justify-center rounded-full hover:bg-main-200",
         className,
       )}
+      onClick={onChange}
       {...otherProps}
     >
       {day}

@@ -47,7 +47,7 @@ function DropdownTrigger({ children }: { children: React.ReactNode }) {
 
 function DropdownContainer({ children }: { children: React.ReactNode }) {
   // this additional component reduce amount of listeners => from all of closed dropdowns to only one open
-  const { isOpen, setIsOpen } = useContext(DropDownContext);
+  const { setIsOpen } = useContext(DropDownContext);
   const ref = useRef<HTMLDivElement>(null);
 
   useClickOutside(ref, () => setIsOpen(false));
