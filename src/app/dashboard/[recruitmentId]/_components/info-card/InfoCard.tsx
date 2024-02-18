@@ -5,7 +5,7 @@ type InfoCardProps = {
   icon: JSX.Element;
   title: string;
   value: number;
-  percentage: number;
+  percentage?: number;
 };
 
 export default function InfoCard({
@@ -30,9 +30,11 @@ export default function InfoCard({
           <p className="text-3xl font-bold leading-none text-main-600">
             {value}
           </p>
-          <span className="mt-auto flex h-min items-center justify-center rounded-md bg-main-200 px-2 text-sm text-black-900">
-            {percentage}%
-          </span>
+          {typeof percentage !== "undefined" && (
+            <span className="mt-auto flex h-min items-center justify-center rounded-md bg-main-200 px-2 text-sm text-black-900">
+              {percentage}%
+            </span>
+          )}
         </div>
       </div>
     </Card>

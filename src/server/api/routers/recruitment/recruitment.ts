@@ -1,7 +1,7 @@
 import { newRecruitmentSchema } from "~/schemas/newRecruitmentSchema";
 import { createTRPCRouter, privateProcedure } from "../../trpc";
 import { z } from "zod";
-import { countUncheckedCandidates } from "~/helpers/countUncheckedCandidates";
+import { countCandidates } from "~/helpers/countCandidates";
 
 export const recruitmentRouter = createTRPCRouter({
   getAllRecruitmentData: privateProcedure.query(async ({ ctx }) => {
@@ -17,7 +17,7 @@ export const recruitmentRouter = createTRPCRouter({
       position: recruitment.position,
       candidates: recruitment.candidates.length,
       createdAt: recruitment.createdAt,
-      uncheckedCandidates: countUncheckedCandidates(recruitment.candidates),
+      uncheckedCandidates: countCandidates(recruitment.candidates, "UNCHECKED"),
     }));
   }),
   getRecruitmentById: privateProcedure
