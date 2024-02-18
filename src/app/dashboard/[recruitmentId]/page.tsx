@@ -12,9 +12,9 @@ export default async function RecruitmentHome({
   params: { recruitmentId: string };
 }) {
   //TODO tests
-  const candidates = await api.recruitment.getRecruitmentCandidates.query({
-    id: params.recruitmentId,
-  });
+  // const candidates = await api.recruitment.getRecruitmentCandidates.query({
+  //   id: params.recruitmentId,
+  // });
 
   return (
     <section className="flex w-full flex-col gap-4 p-4 lg:gap-8 lg:p-8">
@@ -49,6 +49,7 @@ export default async function RecruitmentHome({
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8">
         <StatisticCard title="Latest candidate">
+          {/* TODO add tests when content added */}
           <p></p>
         </StatisticCard>
         <StatisticCard title="Closest schedule interview">

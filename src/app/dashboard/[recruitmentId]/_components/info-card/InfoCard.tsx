@@ -14,9 +14,11 @@ export default function InfoCard({
   value,
   percentage,
 }: InfoCardProps) {
-  // TODO tests
   return (
-    <Card className="min-w-[164px] max-w-[354px] basis-full">
+    <Card
+      className="min-w-[164px] max-w-[354px] basis-full"
+      data-testid="info-card"
+    >
       <div className="flex-grow">
         <div className="flex h-9 w-9 items-center justify-center rounded-md bg-main-600">
           {icon}
