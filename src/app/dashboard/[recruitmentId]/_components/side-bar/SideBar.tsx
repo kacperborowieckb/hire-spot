@@ -40,7 +40,7 @@ const pages: { icon: IconType; href: string; name: string }[] = [
 export default function SideBar() {
   const pathname = usePathname();
   const params = useParams<{ recruitmentId: string }>();
-  // TODO tests
+
   const currentPage =
     pages.findLast((page) => pathname.endsWith(page.href))?.href || "/";
 
@@ -49,6 +49,7 @@ export default function SideBar() {
 
     return (
       <Link
+        data-testid="sidebar-link"
         key={page.name}
         href={`/dashboard/${params.recruitmentId}${page.href}`}
         className={`text-black-90 group relative flex items-center hover:text-main-600 xl:gap-2 ${
