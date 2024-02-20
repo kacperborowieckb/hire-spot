@@ -7,8 +7,9 @@ import {
   RiUserFollowFill,
 } from "react-icons/ri";
 import StatisticCard from "./_components/statistic-card/StatisticCard";
-import { countCandidates } from "~/helpers/countCandidates";
+import { countCandidatesByRating } from "~/helpers/countCandidatesByRating";
 import { calculatePercentage } from "~/helpers/calculatePercentage";
+import { countCandidatesByInterviewStage } from "~/helpers/countCandidateByInterviewStage";
 
 const iconFill = "rgb(224 227 255)";
 const iconSize = 20;
@@ -24,9 +25,19 @@ export default async function RecruitmentHome({
   });
 
   const length = candidates.length;
-  const uncheckedCandidates = countCandidates(candidates, "UNCHECKED");
-  const scheduledCandidates = countCandidates(candidates, "SCHEDULED");
-  const acceptedCandidates = countCandidates(candidates, "COMPLETED");
+  const checkedCandidates = countCandidatesByRating(candidates, [
+    "STRONG_YES",
+    "YES",
+    "NO",
+  ]);
+  const scheduledCandidates = countCandidatesByInterviewStage(
+    candidates,
+    "SCHEDULED",
+  );
+  const acceptedCandidates = countCandidatesByInterviewStage(
+    candidates,
+    "COMPLETED",
+  );
 
   return (
     <section className="flex w-full flex-col gap-4 p-4 lg:gap-8 lg:p-8">
@@ -43,20 +54,20 @@ export default async function RecruitmentHome({
             />
             <InfoCard
               icon={<RiCheckboxCircleFill fill={iconFill} size={iconSize} />}
-              percentage={calculatePercentage(length, uncheckedCandidates)}
+              percentage={calculatePercentage(checkedCandidates, length)}
               title="Checked"
-              value={uncheckedCandidates}
+              value={checkedCandidates}
             />
             <InfoCard
               icon={<RiCalendar2Fill fill={iconFill} size={iconSize} />}
-              percentage={calculatePercentage(length, scheduledCandidates)}
-              title="title"
+              percentage={calculatePercentage(scheduledCandidates, length)}
+              title="Scheduled"
               value={scheduledCandidates}
             />
             <InfoCard
               icon={<RiUserFollowFill fill={iconFill} size={iconSize} />}
-              percentage={calculatePercentage(length, acceptedCandidates)}
-              title="title"
+              percentage={calculatePercentage(acceptedCandidates, length)}
+              title="Accepted"
               value={acceptedCandidates}
             />
           </div>
