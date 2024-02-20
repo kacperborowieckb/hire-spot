@@ -76,7 +76,7 @@ export default function CheckPage({
         <NoCandidateFound />
       ) : (
         <>
-          <div className="flex flex-col gap-4">
+          <div className="flex h-full flex-col gap-4">
             <PDFView pdf={currentCandidate.cvUrl} />
             <RateButtons
               candidateId={currentCandidate.id}

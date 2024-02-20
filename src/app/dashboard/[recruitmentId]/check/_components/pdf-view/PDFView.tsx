@@ -35,18 +35,12 @@ export default function PDFView({ pdf }: { pdf: string }) {
     setPage(1);
   }, [pdf]);
 
-  const correctWidth = (calculatedWidth() || 612).toString();
-
   return (
-    <div className="flex h-full flex-col gap-4">
+    <div className="flex flex-col gap-4">
       <Document
-        loading={
-          <div
-            className={`aspect-[1/1.4] w-[${correctWidth}px] animate-pulse rounded-lg bg-main-50 shadow-md`}
-          />
-        }
         file={pdf}
-        className={"relative mx-auto w-min overflow-hidden rounded-lg"}
+        loading={""}
+        className={`relative mx-auto flex aspect-[153/198] w-full min-w-min max-w-[612px] grow basis-full items-center justify-center overflow-hidden rounded-lg bg-main-50 lg:min-w-[612px]`}
         onLoadSuccess={onDocumentLoadSuccess}
       >
         <Page pageNumber={page} width={calculatedWidth()} />
