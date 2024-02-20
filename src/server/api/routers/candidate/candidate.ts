@@ -33,4 +33,12 @@ export const candidateRouter = createTRPCRouter({
         }
       }
     }),
+  getCandidatesByRecruitmentId: privateProcedure
+    .input(z.object({ recruitmentId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const data = await ctx.db.candidate.findMany({
+        where: { recruitmentId: input.recruitmentId },
+      });
+      return data;
+    }),
 });

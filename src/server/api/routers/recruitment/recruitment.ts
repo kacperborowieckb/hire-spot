@@ -47,16 +47,4 @@ export const recruitmentRouter = createTRPCRouter({
 
       return recruitment.id;
     }),
-  getRecruitmentCandidates: privateProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const data = await ctx.db.recruitment.findUnique({
-        where: { id: input.id },
-        include: {
-          candidates: true,
-        },
-      });
-      //TODO tests
-      return data;
-    }),
 });

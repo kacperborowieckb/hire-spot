@@ -19,11 +19,11 @@ export default async function RecruitmentHome({
   params: { recruitmentId: string };
 }) {
   //TODO tests
-  const data = await api.recruitment.getRecruitmentCandidates.query({
-    id: params.recruitmentId,
+  const candidates = await api.candidate.getCandidatesByRecruitmentId.query({
+    recruitmentId: params.recruitmentId,
   });
-  const candidates = data?.candidates ?? [];
-  const length = data?.candidates.length;
+
+  const length = candidates.length;
   const uncheckedCandidates = countCandidates(candidates, "UNCHECKED");
   const scheduledCandidates = countCandidates(candidates, "SCHEDULED");
   const acceptedCandidates = countCandidates(candidates, "COMPLETED");

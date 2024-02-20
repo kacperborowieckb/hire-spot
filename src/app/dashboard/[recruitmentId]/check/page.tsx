@@ -1,7 +1,16 @@
 import Button from "~/ui/button/Button";
 import PDFView from "./_components/pdf-view/PDFView";
+import { api } from "~/trpc/server";
 
-export default function CheckPage() {
+export default async function CheckPage({
+  params,
+}: {
+  params: { recruitmentId: string };
+}) {
+  const candidates = await api.candidate.getCandidatesByRecruitmentId.query({
+    recruitmentId: params.recruitmentId,
+  });
+
   return (
     <section className="flex w-full flex-col gap-8 p-4 lg:flex-row lg:p-8">
       <div className="flex flex-col gap-4">
