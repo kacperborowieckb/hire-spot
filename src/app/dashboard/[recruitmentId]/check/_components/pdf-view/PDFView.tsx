@@ -16,6 +16,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 export default function PDFView({ pdf }: { pdf: string }) {
   const [pages, setPages] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
+  const [loadingPDF, setLoadingPDF] = useState<boolean>(false);
   const { width = 0 } = useWindowSize();
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }): void => {
@@ -35,11 +36,13 @@ export default function PDFView({ pdf }: { pdf: string }) {
     setPage(1);
   }, [pdf]);
 
-  const correctWidth = (calculatedWidth() ?? 612).toString();
+  const correctWidth = (calculatedWidth() || 612).toString();
 
   return (
     <div className="flex h-full flex-col gap-4">
       <Document
+        onLoadStart={() => setLoadingPDF(!loadingPDF)}
+        onLoad={() => setLoadingPDF(!loadingPDF)}
         loading={
           <div
             className={`aspect-[1/1.4] w-[${correctWidth}px] animate-pulse rounded-lg bg-main-50 shadow-md`}

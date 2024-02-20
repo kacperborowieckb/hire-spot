@@ -91,13 +91,15 @@ export default function CheckPage({
             <p className="text-base text-black-600">
               {currentCandidate.description}
             </p>
-            <Button
-              variant="outline"
-              className="mb-16 w-fit"
-              onClick={skipResume}
-            >
-              Skip this resume
-            </Button>
+            {candidates.length > 1 && (
+              <Button
+                variant="outline"
+                className="mb-16 w-fit"
+                onClick={skipResume}
+              >
+                Skip this resume
+              </Button>
+            )}
           </div>
         </>
       )}
