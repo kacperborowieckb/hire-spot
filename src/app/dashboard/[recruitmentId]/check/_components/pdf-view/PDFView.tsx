@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import { useWindowSize } from "~/hooks/useWindowSize";
 import PDFPagesController from "../pdf-pages-controller/PDFPagesController";
-import { cn } from "~/utils/cn";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -32,15 +31,18 @@ export default function PDFView({ pdf }: { pdf: string }) {
     return undefined;
   };
 
+  useEffect(() => {
+    setPage(1);
+  }, [pdf]);
+
+  const correctWidth = (calculatedWidth() ?? 612).toString();
+
   return (
     <div className="flex h-full flex-col gap-4">
       <Document
         loading={
           <div
-            className={cn(
-              "aspect-[1/1.4] animate-pulse rounded-lg bg-main-50 p-4 shadow-md",
-              `!w-[${calculatedWidth() ?? 612}px]`,
-            )}
+            className={`aspect-[1/1.4] w-[${correctWidth}px] animate-pulse rounded-lg bg-main-50 shadow-md`}
           />
         }
         file={pdf}
