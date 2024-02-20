@@ -1,3 +1,4 @@
+import { Candidate } from "@prisma/client";
 import { BsThreeDots } from "react-icons/bs";
 import {
   RiArticleLine,
@@ -15,34 +16,32 @@ import {
   DropdownTrigger,
 } from "~/ui/dropdown/Dropdown";
 
-type CandidateCardProps = {
-  name: string;
-  desc: string;
-  applied: string;
-  interviewStage?: string;
-  candidateId: string;
-};
-
 export default function CandidateCard({
-  name,
-  desc,
-  applied,
-  interviewStage,
-  candidateId,
-}: CandidateCardProps) {
+  candidate: { name, description, interviewStage, id: candidateId },
+}: {
+  candidate: Candidate;
+}) {
   return (
     <Card className="gap-1 !p-2">
       <section className="flex gap-2">
         <h3 className="flex-grow text-lg text-black-900">{name}</h3>
         <CandidateCardDropdown />
       </section>
-      <p className="line-clamp-2 text-black-600">{desc}</p>
+      <p className="line-clamp-2 text-black-600">{description}</p>
       <section className="mt-1 flex">
         <p className="flex-grow text-sm text-black-900">
-          Applied: <span className="text-sm text-black-600">{applied}</span>
+          Applied: <span className="text-sm text-black-600">14-02-2024</span>
         </p>
         {interviewStage && (
-          <p className="text-sm text-black-600">{interviewStage}</p>
+          <p className="text-sm text-black-600">
+            {interviewStage
+              .split("_")
+              .map(
+                (word) =>
+                  word.charAt(0).toUpperCase() + word.toLowerCase().slice(1),
+              )
+              .join(" ")}
+          </p>
         )}
       </section>
     </Card>

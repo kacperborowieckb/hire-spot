@@ -13,6 +13,8 @@ import { MotionDiv } from "../motion-components/MotionComponents";
 import { dropdownVariants } from "~/utils/variants";
 import useClickOutside from "~/hooks/useClickOutside";
 
+//TODO make it accesible
+
 type TDropDownContext = {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
