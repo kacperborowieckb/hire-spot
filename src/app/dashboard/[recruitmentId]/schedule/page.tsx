@@ -8,12 +8,16 @@ import ScheduleCandidate from "./_components/schedule-candidate/ScheduleCandidat
 import Tabs from "./_components/tabs/Tabs";
 import { filterCandidateByRating } from "~/helpers/filterCandidatesByRating";
 import { api } from "~/trpc/react";
+import { useRouter } from "next/navigation";
 
 export default function SchedulePage({
   params: { recruitmentId },
+  searchParams: { candidate: candidateId },
 }: {
   params: { recruitmentId: string };
+  searchParams: { candidate: string };
 }) {
+  const router = useRouter();
   const { data: candidates = [], isLoading } =
     api.candidate.getCandidatesByRecruitmentId.useQuery({
       recruitmentId: recruitmentId,
@@ -23,6 +27,15 @@ export default function SchedulePage({
 
   const yesCandidates = filterCandidateByRating(candidates, "YES");
   const strongYesCandidates = filterCandidateByRating(candidates, "STRONG_YES");
+
+  const pickedCandidate = candidates.find(
+    (candidate) => candidate.id === candidateId,
+  );
+
+  const pickCandidate = (candidateId: string) => {
+    const newSearchParams = new URLSearchParams({ candidate: candidateId });
+    router.push(`/dashboard/${recruitmentId}/schedule?${newSearchParams}`);
+  };
 
   return (
     <section className="mb-14 flex w-full flex-grow flex-col items-center gap-4 p-4 sm:mb-0 sm:gap-8 md:flex-row md:items-stretch lg:p-8">
@@ -37,7 +50,12 @@ export default function SchedulePage({
             <Column title="Yes" titleColor="text-main-400">
               {yesCandidates.length > 0 ? (
                 yesCandidates.map((candidate, i) => (
-                  <CandidateCard key={i} candidate={candidate} />
+                  <CandidateCard
+                    key={i}
+                    candidate={candidate}
+                    onClick={() => pickCandidate(candidate.id)}
+                    className="cursor-pointer"
+                  />
                 ))
               ) : (
                 <p className="text-center text-black-600">No candidates</p>
@@ -48,7 +66,12 @@ export default function SchedulePage({
             <Column title="Strong yes" titleColor="text-main-600">
               {strongYesCandidates.length > 0 ? (
                 strongYesCandidates.map((candidate, i) => (
-                  <CandidateCard key={i} candidate={candidate} />
+                  <CandidateCard
+                    key={i}
+                    candidate={candidate}
+                    onClick={() => pickCandidate(candidate.id)}
+                    className="cursor-pointer"
+                  />
                 ))
               ) : (
                 <p className="text-center text-black-600">No candidates</p>
@@ -57,7 +80,7 @@ export default function SchedulePage({
           )}
         </div>
       </div>
-      <ScheduleCandidate />
+      <ScheduleCandidate pickedCandidate={pickedCandidate} />
     </section>
   );
 }

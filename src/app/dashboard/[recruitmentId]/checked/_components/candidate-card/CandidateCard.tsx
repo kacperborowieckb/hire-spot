@@ -24,12 +24,18 @@ import { api } from "~/trpc/react";
 import Modal from "~/ui/modal/Modal";
 import Button from "~/ui/button/Button";
 import { AnimatePresence } from "framer-motion";
+import { cn } from "~/utils/cn";
+
+type CandidateCardProps = React.HTMLAttributes<HTMLDivElement> & {
+  candidate: Candidate;
+};
 
 export default function CandidateCard({
   candidate: { name, description, interviewStage, id: candidateId, cvUrl },
-}: {
-  candidate: Candidate;
-}) {
+  onClick,
+  className,
+  ...otherProps
+}: CandidateCardProps) {
   const { mutate: deleteCandidate, isLoading } =
     api.candidate.deleteCandidate.useMutation({
       onSuccess: () => closeConfirmationModal(),
@@ -81,7 +87,11 @@ export default function CandidateCard({
           </Modal>
         )}
       </AnimatePresence>
-      <Card className="gap-1 !p-2">
+      <Card
+        className={cn("gap-1 !p-2", className)}
+        onClick={onClick}
+        {...otherProps}
+      >
         <section className="flex gap-2">
           <h3 className="flex-grow text-lg text-black-900">{name}</h3>
           <CandidateCardDropdown
