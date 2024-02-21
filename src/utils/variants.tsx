@@ -34,6 +34,41 @@ export const dropdownVariants: Variants = {
   },
 };
 
+export const bgVariants: Variants = {
+  initial: {
+    backgroundColor: "rgb(31 31 31 / 0)",
+  },
+  hide: {
+    transition: { duration: 0.15 },
+    backgroundColor: "rgb(31 31 31 / 0)",
+  },
+  show: {
+    transition: { duration: 0.15 },
+    backgroundColor: "rgb(31 31 31 / 0.65)",
+  },
+};
+
+export const modalVariants: Variants = {
+  initial: {
+    translateX: "-50%",
+    translateY: "-40%",
+    scale: 0.9,
+    opacity: 0,
+  },
+  hide: {
+    translateY: "-40%",
+    transition: { duration: 0.15, ease: "easeOut" },
+    scale: 0.9,
+    opacity: 0,
+  },
+  show: {
+    translateY: "-50%",
+    scale: 1,
+    transition: { duration: 0.15, ease: "easeOut" },
+    opacity: 1,
+  },
+};
+
 export const fadeInAnimationVariants: Variants = {
   initial: {
     opacity: 0,

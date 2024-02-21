@@ -19,11 +19,11 @@ import {
   DropdownTrigger,
 } from "~/ui/dropdown/Dropdown";
 import CvModal from "../cv-modal/CvModal";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
 import Modal from "~/ui/modal/Modal";
 import Button from "~/ui/button/Button";
+import { AnimatePresence } from "framer-motion";
 
 export default function CandidateCard({
   candidate: { name, description, interviewStage, id: candidateId, cvUrl },
@@ -47,36 +47,40 @@ export default function CandidateCard({
 
   return (
     <>
-      {showModal && <CvModal cvUrl={cvUrl} closeModal={closeModal} />}
-      {showConfirmationModal && (
-        <Modal
-          closeModal={closeConfirmationModal}
-          className="max-w-[320px] text-lg text-black-900"
-        >
-          <h2>Are you sure you want remove this candidate from recruitment?</h2>
-          <p className="mt-2 text-base text-black-600">
-            All data and the resume will be permanently deleted.
-          </p>
-          <div className="mt-4 flex justify-center gap-4">
-            <Button
-              disabled={isLoading}
-              variant="outline"
-              className="z-50 min-w-[76px]"
-              onClick={closeConfirmationModal}
-            >
-              No
-            </Button>
-            <Button
-              disabled={isLoading}
-              variant="default"
-              className="z-50 min-w-[76px]"
-              onClick={removeCandidate}
-            >
-              Yes
-            </Button>
-          </div>
-        </Modal>
-      )}
+      <AnimatePresence>
+        {showModal && <CvModal cvUrl={cvUrl} closeModal={closeModal} />}
+        {showConfirmationModal && (
+          <Modal
+            closeModal={closeConfirmationModal}
+            className="max-w-[320px] text-lg text-black-900"
+          >
+            <h2>
+              Are you sure you want remove this candidate from recruitment?
+            </h2>
+            <p className="mt-2 text-base text-black-600">
+              All data and the resume will be permanently deleted.
+            </p>
+            <div className="mt-4 flex justify-center gap-4">
+              <Button
+                disabled={isLoading}
+                variant="outline"
+                className="z-50 min-w-[76px]"
+                onClick={closeConfirmationModal}
+              >
+                No
+              </Button>
+              <Button
+                disabled={isLoading}
+                variant="default"
+                className="z-50 min-w-[76px]"
+                onClick={removeCandidate}
+              >
+                Yes
+              </Button>
+            </div>
+          </Modal>
+        )}
+      </AnimatePresence>
       <Card className="gap-1 !p-2">
         <section className="flex gap-2">
           <h3 className="flex-grow text-lg text-black-900">{name}</h3>

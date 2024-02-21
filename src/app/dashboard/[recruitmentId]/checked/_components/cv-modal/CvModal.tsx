@@ -10,7 +10,7 @@ type CvModalProps = {
 
 export default function CvModal({ closeModal, cvUrl }: CvModalProps) {
   return (
-    <Modal className="p-0" closeModal={closeModal}>
+    <Modal className="!p-1" closeModal={closeModal}>
       <PDFView pdf={cvUrl} />
       <Button
         variant="outline"
