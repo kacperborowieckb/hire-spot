@@ -113,6 +113,8 @@ export const createTRPCRouter = t.router;
  */
 export const publicProcedure = t.procedure;
 
+//TODO enforce user is creator of current recruitment
+
 const enforceUserIsSignedIn = t.middleware(({ ctx, next }) => {
   if (!ctx.currentUser) {
     throw new TRPCError({ code: "UNAUTHORIZED" });

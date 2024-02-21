@@ -61,4 +61,22 @@ export const candidateRouter = createTRPCRouter({
         data: { rating: rating },
       });
     }),
+  //TODO invalidatePath
+  deleteCandidate: privateProcedure
+    .input(z.object({ candidateId: z.string(), cvUrl: z.string() }))
+    .mutation(async ({ ctx, input: { candidateId, cvUrl } }) => {
+      await ctx.db.candidate.delete({ where: { id: candidateId } });
+
+      const fileName = cvUrl.split("/").pop();
+      const fileKey = fileName?.split(".")[0];
+
+      if (fileKey) {
+        await utapi.deleteFiles(fileName);
+      } else {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Resume key not found",
+        });
+      }
+    }),
 });
