@@ -19,6 +19,8 @@ import {
   DropdownTrigger,
 } from "~/ui/dropdown/Dropdown";
 import CvModal from "../cv-modal/CvModal";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 
 export default function CandidateCard({
   candidate: { name, description, interviewStage, id: candidateId, cvUrl },
@@ -72,9 +74,14 @@ function CandidateCardDropdown({
   candidateId,
   openModal,
 }: CandidateCardDropdownProps) {
+  const { recruitmentId } = useParams<{ recruitmentId: string }>();
+  const router = useRouter();
+  const searchParams = new URLSearchParams({ candidate: candidateId });
+
   const showResume = () => openModal();
 
-  const scheduleCandidate = () => {};
+  const scheduleCandidate = () =>
+    router.push(`/dashboard/${recruitmentId}/schedule?${searchParams}`);
 
   const sendEmailToCandidate = () => {};
 
