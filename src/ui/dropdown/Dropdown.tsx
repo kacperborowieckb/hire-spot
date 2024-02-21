@@ -84,14 +84,24 @@ function DropdownBreak() {
   return <hr className="border-border" />;
 }
 
-function DropdownItem({ children }: { children: React.ReactNode }) {
+type DropdownItemProps = React.HTMLAttributes<HTMLLIElement> & {
+  children: React.ReactNode;
+};
+
+function DropdownItem({ children, onClick, ...otherProps }: DropdownItemProps) {
   const { setIsOpen } = useContext(DropDownContext);
   const closeDropdown = () => setIsOpen(false);
+
+  const handleClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    if (onClick) onClick(e);
+    closeDropdown();
+  };
 
   return (
     <li
       className="flex min-w-max gap-2 rounded-md px-2 py-[2px] text-black-600 hover:bg-main-100"
-      onClick={closeDropdown}
+      onClick={(e) => handleClick(e)}
+      {...otherProps}
     >
       {children}
     </li>
