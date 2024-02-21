@@ -1,34 +1,35 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import { useForm } from "react-hook-form";
 import { RiSearch2Line } from "react-icons/ri";
-import { z } from "zod";
-import Input from "~/ui/input/Input";
-
-const searchCandidateSchema = z.object({
-  candidateName: z.string(),
-});
-
-export type TSearchCandidateSchema = z.infer<typeof searchCandidateSchema>;
+import ClearInput from "~/ui/clear-input/ClearInput";
 
 export default function SearchCandidate() {
-  const {
-    formState: { errors },
-    control,
-  } = useForm<TSearchCandidateSchema>({
-    resolver: zodResolver(searchCandidateSchema),
-    defaultValues: { candidateName: "" },
-  });
-  // TODO tests
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleSearch = (search: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (search) {
+      params.set("search", search);
+    } else {
+      params.delete("search");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <div>
-      <Input
-        inputProps={{ placeholder: "Search for candidate" }}
-        controllerProps={{ name: "candidateName", control }}
-        label=""
+      <ClearInput
+        label="search"
+        labelClasses="sr-only"
+        placeholder="Search for candidate"
+        name="searchCandidate"
         Icon={RiSearch2Line}
+        onChange={(e) => handleSearch(e.target.value)}
+        defaultValue={searchParams.get("query")?.toString()}
       />
     </div>
   );

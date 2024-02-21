@@ -8,16 +8,18 @@ import ScheduleCandidate from "./_components/schedule-candidate/ScheduleCandidat
 import Tabs from "./_components/tabs/Tabs";
 import { filterCandidateByRating } from "~/helpers/filterCandidatesByRating";
 import { api } from "~/trpc/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function SchedulePage({
   params: { recruitmentId },
-  searchParams: { candidate: candidateId },
+  searchParams,
 }: {
   params: { recruitmentId: string };
-  searchParams: { candidate: string };
+  searchParams: { candidate?: string; search?: string };
 }) {
+  const { candidate: candidateId, search } = searchParams;
   const router = useRouter();
+  const pathname = usePathname();
   const { data: candidates = [], isLoading } =
     api.candidate.getCandidatesByRecruitmentId.useQuery({
       recruitmentId: recruitmentId,
@@ -33,8 +35,9 @@ export default function SchedulePage({
   );
 
   const pickCandidate = (candidateId: string) => {
-    const newSearchParams = new URLSearchParams({ candidate: candidateId });
-    router.push(`/dashboard/${recruitmentId}/schedule?${newSearchParams}`);
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("candidate", candidateId);
+    router.replace(`${pathname}?${newSearchParams}`);
   };
 
   return (
@@ -49,14 +52,25 @@ export default function SchedulePage({
           {(tab === "yes" || tab === "both") && (
             <Column title="Yes" titleColor="text-main-400">
               {yesCandidates.length > 0 ? (
-                yesCandidates.map((candidate, i) => (
-                  <CandidateCard
-                    key={i}
-                    candidate={candidate}
-                    onClick={() => pickCandidate(candidate.id)}
-                    className="cursor-pointer"
-                  />
-                ))
+                yesCandidates
+                  .filter((candidate) =>
+                    search
+                      ? candidate.name
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        candidate.description
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase())
+                      : true,
+                  )
+                  .map((candidate, i) => (
+                    <CandidateCard
+                      key={i}
+                      candidate={candidate}
+                      onClick={() => pickCandidate(candidate.id)}
+                      className="cursor-pointer"
+                    />
+                  ))
               ) : (
                 <p className="text-center text-black-600">No candidates</p>
               )}
@@ -65,14 +79,25 @@ export default function SchedulePage({
           {(tab === "strongYes" || tab === "both") && (
             <Column title="Strong yes" titleColor="text-main-600">
               {strongYesCandidates.length > 0 ? (
-                strongYesCandidates.map((candidate, i) => (
-                  <CandidateCard
-                    key={i}
-                    candidate={candidate}
-                    onClick={() => pickCandidate(candidate.id)}
-                    className="cursor-pointer"
-                  />
-                ))
+                strongYesCandidates
+                  .filter((candidate) =>
+                    search
+                      ? candidate.name
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        candidate.description
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase())
+                      : true,
+                  )
+                  .map((candidate, i) => (
+                    <CandidateCard
+                      key={i}
+                      candidate={candidate}
+                      onClick={() => pickCandidate(candidate.id)}
+                      className="cursor-pointer"
+                    />
+                  ))
               ) : (
                 <p className="text-center text-black-600">No candidates</p>
               )}

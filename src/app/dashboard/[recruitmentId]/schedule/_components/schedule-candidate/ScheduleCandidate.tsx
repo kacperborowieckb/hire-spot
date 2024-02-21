@@ -8,7 +8,7 @@ import Calendar from "../calendar/Calendar";
 import dayjs, { Dayjs } from "dayjs";
 import ScheduleFieldSet from "../schedule-field-set/ScheduleFieldSet";
 import { Candidate } from "@prisma/client";
-import { useParams, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function ScheduleCandidate({
   pickedCandidate,
@@ -21,7 +21,8 @@ export default function ScheduleCandidate({
     hour: number;
     minute: number;
   }>({ hour: selectedDate.hour(), minute: selectedDate.minute() });
-  const params = useParams<{ recruitmentId: string }>();
+  const params = useSearchParams();
+  const pathname = usePathname();
   const router = useRouter();
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,8 +37,11 @@ export default function ScheduleCandidate({
   const handleDateChange = (date: Dayjs) =>
     setSelectedDate(date.hour(selectedTime.hour).minute(selectedTime.minute));
 
-  const removeSearchParams = () =>
-    router.push(`/dashboard/${params.recruitmentId}/schedule`);
+  const removeSearchParams = () => {
+    const searchParams = new URLSearchParams(params);
+    searchParams.delete("candidate");
+    router.replace(`${pathname}?${searchParams}`);
+  };
 
   useEffect(() => {
     setSelectedDate(

@@ -19,7 +19,12 @@ import {
   DropdownTrigger,
 } from "~/ui/dropdown/Dropdown";
 import CvModal from "../cv-modal/CvModal";
-import { useParams, useRouter } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { api } from "~/trpc/react";
 import Modal from "~/ui/modal/Modal";
 import Button from "~/ui/button/Button";
@@ -133,14 +138,17 @@ function CandidateCardDropdown({
   openModal,
   openConfirmationModal,
 }: CandidateCardDropdownProps) {
-  const { recruitmentId } = useParams<{ recruitmentId: string }>();
+  const params = useSearchParams();
+  const pathname = usePathname();
   const router = useRouter();
-  const searchParams = new URLSearchParams({ candidate: candidateId });
 
   const showResume = () => openModal();
 
-  const scheduleCandidate = () =>
-    router.push(`/dashboard/${recruitmentId}/schedule?${searchParams}`);
+  const scheduleCandidate = () => {
+    const searchParams = new URLSearchParams(params);
+    searchParams.set("candidate", candidateId);
+    router.push(`${pathname}?${searchParams}`);
+  };
 
   //TODO navigate to email management page
   const sendEmailToCandidate = () => {};
