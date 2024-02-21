@@ -34,12 +34,17 @@ function Dropdown({ children }: { children: React.ReactNode }) {
 
 function DropdownTrigger({ children }: { children: React.ReactNode }) {
   const { isOpen, setIsOpen } = useContext(DropDownContext);
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const toggleDropdown = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
 
   return (
     <button
       className="cursor-pointer hover:scale-105 disabled:pointer-events-none"
-      onClick={toggleDropdown}
+      onClick={(e) => toggleDropdown(e)}
       disabled={isOpen}
     >
       {children}
@@ -63,7 +68,10 @@ function DropdownContainer({ children }: { children: React.ReactNode }) {
       exit="hide"
       className="relative"
     >
-      <ul className="absolute right-0 top-2 flex min-w-40 flex-col gap-1 rounded-md border border-border bg-main-50 p-[6px] shadow-md">
+      <ul
+        onClick={(e) => e.stopPropagation()}
+        className="absolute right-0 top-2 flex min-w-40 flex-col gap-1 rounded-md border border-border bg-main-50 p-[6px] shadow-md"
+      >
         {children}
       </ul>
     </MotionDiv>
