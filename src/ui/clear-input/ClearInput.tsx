@@ -30,11 +30,11 @@ export default function ClearInput({
           {...otherProps}
           placeholder={placeholder}
           id={name}
-          className={`mb-3 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 placeholder:text-main-300`}
+          className={`my-1 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 placeholder:text-main-300`}
           onChange={onChange}
         />
         {Icon && (
-          <div className="absolute right-3 top-[22px] -translate-y-1/2">
+          <div className="absolute right-3 top-1/2 -translate-y-1/2">
             <Icon size={20} className="fill-main-300" />
           </div>
         )}

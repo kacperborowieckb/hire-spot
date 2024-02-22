@@ -138,9 +138,6 @@ function CandidateCardDropdown({
     router.push(`/dashboard/${recruitmentId}/schedule?${searchParams}`);
   };
 
-  //TODO navigate to email management page
-  const sendEmailToCandidate = () => {};
-
   const removeCandidate = () => openConfirmationModal();
 
   return (
@@ -160,12 +157,6 @@ function CandidateCardDropdown({
             Schedule
             <DropdownItemIcon>
               <RiCalendar2Line />
-            </DropdownItemIcon>
-          </DropdownItem>
-          <DropdownItem onClick={sendEmailToCandidate}>
-            Send e-mail
-            <DropdownItemIcon>
-              <RiMailAddLine />
             </DropdownItemIcon>
           </DropdownItem>
           <DropdownBreak />

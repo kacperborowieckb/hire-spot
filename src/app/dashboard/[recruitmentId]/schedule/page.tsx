@@ -41,11 +41,11 @@ export default function SchedulePage({
   };
 
   return (
-    <section className="mb-14 flex w-full flex-grow flex-col items-center gap-4 p-4 sm:mb-0 sm:gap-8 md:flex-row md:items-stretch lg:p-8">
+    <section className="mb-14 flex w-full flex-grow flex-col items-center gap-2 p-4 sm:mb-0 sm:gap-8 md:flex-row md:items-stretch lg:p-8">
       <h1 className="block text-center text-lg font-semibold text-black-900 sm:hidden">
         Junior software developer
       </h1>
-      <div className="flex w-min flex-col">
+      <div className="flex w-min flex-col gap-2">
         <SearchCandidate />
         <Tabs tab={tab} setTab={setTab} />
         <div className="flex flex-grow gap-4">

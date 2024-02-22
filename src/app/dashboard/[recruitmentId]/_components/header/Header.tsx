@@ -20,7 +20,7 @@ export default async function Header({
           <Logo />
         </div>
       </div>
-      <div className="flex w-full items-center gap-4 border border-l-0 border-border p-2 lg:p-4">
+      <div className="flex w-full items-center gap-4 border border-l-0 border-border px-2 py-1 sm:px-4 sm:py-2">
         <h1 className="hidden flex-grow text-lg font-medium sm:block">
           {position}
         </h1>
