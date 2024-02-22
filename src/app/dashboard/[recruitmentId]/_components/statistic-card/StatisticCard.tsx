@@ -10,7 +10,7 @@ export default function StatisticCard({
   // TODO tests
   return (
     <Card className="basis-full">
-      <h4 className="text-black-900">{title}</h4>
+      <h4 className="text-lg text-black-900">{title}</h4>
       {children}
     </Card>
   );

@@ -10,6 +10,8 @@ import StatisticCard from "./_components/statistic-card/StatisticCard";
 import { countCandidatesByRating } from "~/helpers/countCandidatesByRating";
 import { calculatePercentage } from "~/helpers/calculatePercentage";
 import { countCandidatesByInterviewStage } from "~/helpers/countCandidateByInterviewStage";
+import CandidateCard from "./checked/_components/candidate-card/CandidateCard";
+import { findClosestInterview } from "~/helpers/findClosestInterview";
 
 const iconFill = "rgb(224 227 255)";
 const iconSize = 20;
@@ -38,6 +40,10 @@ export default async function RecruitmentHome({
     candidates,
     "COMPLETED",
   );
+
+  const randomCandidate = candidates[Math.floor(Math.random() * length)];
+
+  const closestInterviewCandidate = findClosestInterview(candidates);
 
   return (
     <section className="flex w-full flex-col gap-4 p-4 lg:gap-8 lg:p-8">
@@ -72,12 +78,28 @@ export default async function RecruitmentHome({
             />
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8">
-            <StatisticCard title="Latest candidate">
+            <StatisticCard title="Random candidate">
               {/* TODO add tests when content added */}
-              <p></p>
+              {randomCandidate ? (
+                <div className="mt-2">
+                  <CandidateCard candidate={randomCandidate} />
+                </div>
+              ) : (
+                <div className="flex h-full items-center justify-center">
+                  <p className="text-black-600">No candidates.</p>
+                </div>
+              )}
             </StatisticCard>
-            <StatisticCard title="Closest schedule interview">
-              <p></p>
+            <StatisticCard title="Closest interview candidate">
+              {closestInterviewCandidate ? (
+                <div className="mt-2">
+                  <CandidateCard candidate={closestInterviewCandidate} />
+                </div>
+              ) : (
+                <div className="flex h-full items-center justify-center">
+                  <p className="text-black-600">No candidates.</p>
+                </div>
+              )}
             </StatisticCard>
           </div>
         </>

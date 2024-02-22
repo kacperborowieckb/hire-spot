@@ -1,6 +1,6 @@
-import { InterviewStage, Rating } from "@prisma/client";
+import { Candidate, InterviewStage } from "@prisma/client";
 
-type TCandidatesArray = Required<{ interviewStage?: string }[]>;
+type TCandidatesArray = Candidate[];
 
 export const countCandidatesByInterviewStage = (
   candidates: TCandidatesArray,
