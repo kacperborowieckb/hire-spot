@@ -24,6 +24,7 @@ import { api } from "~/trpc/react";
 import { AnimatePresence } from "framer-motion";
 import { cn } from "~/utils/cn";
 import ConfirmationModal from "../confirmation-modal/ConfirmationModal";
+import dayjs from "dayjs";
 
 type CandidateCardProps = React.HTMLAttributes<HTMLDivElement> & {
   candidate: Candidate;
@@ -37,6 +38,7 @@ export default function CandidateCard({
     id: candidateId,
     cvUrl,
     forInterview,
+    scheduledFor,
   },
   onClick,
   className,
@@ -84,11 +86,15 @@ export default function CandidateCard({
         </section>
         <p className="line-clamp-2 flex-1 text-black-600">{description}</p>
         <section className="mt-1 flex">
+          {/* TODO add appliedDate */}
           <p className="flex-grow text-sm text-black-900">
-            Applied: <span className="text-sm text-black-600">14-02-2024</span>
+            Applied:{" "}
+            <span className="whitespace-nowrap text-sm text-black-600">
+              14-02-2024
+            </span>
           </p>
           {forInterview ? (
-            <p className="text-sm text-black-600">
+            <p className="text-sm text-black-900">
               {interviewStage
                 .split("_")
                 .map(
@@ -96,6 +102,14 @@ export default function CandidateCard({
                     word.charAt(0).toUpperCase() + word.toLowerCase().slice(1),
                 )
                 .join(" ")}
+              {interviewStage === "SCHEDULED" && (
+                <>
+                  {": "}
+                  <span className="whitespace-nowrap text-sm text-black-600">
+                    {dayjs(scheduledFor).format("MM/DD/YYYY h:mm A")}
+                  </span>
+                </>
+              )}
             </p>
           ) : (
             <p className="text-sm text-black-600">No interview</p>

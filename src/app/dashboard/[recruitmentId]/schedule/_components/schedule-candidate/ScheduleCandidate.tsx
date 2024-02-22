@@ -9,6 +9,7 @@ import dayjs, { Dayjs } from "dayjs";
 import ScheduleFieldSet from "../schedule-field-set/ScheduleFieldSet";
 import { Candidate } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { api } from "~/trpc/react";
 
 export default function ScheduleCandidate({
   pickedCandidate,
@@ -24,6 +25,9 @@ export default function ScheduleCandidate({
   const params = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+
+  const { mutate: scheduleCandidate } =
+    api.candidate.scheduleCandidate.useMutation();
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const [hour, minute]: number[] = e.target.value
@@ -41,6 +45,18 @@ export default function ScheduleCandidate({
     const searchParams = new URLSearchParams(params);
     searchParams.delete("candidate");
     router.replace(`${pathname}?${searchParams}`);
+  };
+
+  const canSchedule = selectedDate && pickedCandidate;
+
+  const handleSchedule = () => {
+    if (!canSchedule) return;
+    const dateTime = selectedDate.toDate();
+    scheduleCandidate({
+      candidateId: pickedCandidate.id,
+      dateTime,
+      sendConfirmation,
+    });
   };
 
   useEffect(() => {
@@ -81,7 +97,9 @@ export default function ScheduleCandidate({
           {selectedDate.format("dddd, MMMM D, YYYY h:mm A")}
         </p>
       )}
-      <Button variant="default">Schedule</Button>
+      <Button variant="default" onClick={handleSchedule}>
+        Schedule
+      </Button>
     </div>
   );
 }
