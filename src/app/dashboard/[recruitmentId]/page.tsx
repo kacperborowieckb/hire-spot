@@ -25,6 +25,9 @@ export default async function RecruitmentHome({
   const candidates = await api.candidate.getCandidatesByRecruitmentId.query({
     recruitmentId: params.recruitmentId,
   });
+  const recruitment = await api.recruitment.getRecruitmentById.query({
+    id: params.recruitmentId,
+  });
 
   const length = candidates.length;
   const checkedCandidates = countCandidatesByRating(candidates, [
@@ -46,9 +49,9 @@ export default async function RecruitmentHome({
   const closestInterviewCandidate = findClosestInterview(candidates);
 
   return (
-    <section className="flex w-full flex-col gap-4 p-4 lg:gap-8 lg:p-8">
+    <section className="mb-14 flex w-full flex-col gap-4 p-4 lg:gap-8 lg:p-8">
       <h1 className="block text-center text-lg font-semibold text-black-900 sm:hidden">
-        Junior software developer
+        {recruitment.position}
       </h1>
       {length ? (
         <>

@@ -17,7 +17,7 @@ export default function NoMoreCandidates() {
       <p className="mt-4 text-lg font-semibold text-black-900">
         No more candidates
       </p>
-      <p className="text-body text-center text-base text-black-600">
+      <p className="text-body mx-2 text-center text-base text-black-600">
         All candidates for this position have been checked
       </p>
     </div>
