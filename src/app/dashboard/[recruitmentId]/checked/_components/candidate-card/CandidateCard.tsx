@@ -95,20 +95,15 @@ export default function CandidateCard({
           </p>
           {forInterview ? (
             <p className="text-sm text-black-900">
-              {interviewStage
-                .split("_")
-                .map(
-                  (word) =>
-                    word.charAt(0).toUpperCase() + word.toLowerCase().slice(1),
-                )
-                .join(" ")}
-              {interviewStage === "SCHEDULED" && (
+              {interviewStage === "SCHEDULED" ? (
                 <>
-                  {": "}
+                  Scheduled:{" "}
                   <span className="whitespace-nowrap text-sm text-black-600">
                     {dayjs(scheduledFor).format("MM/DD/YYYY h:mm A")}
                   </span>
                 </>
+              ) : (
+                "Completed"
               )}
             </p>
           ) : (

@@ -84,23 +84,16 @@ export const candidateRouter = createTRPCRouter({
       z.object({
         candidateId: z.string(),
         dateTime: z.date(),
-        sendConfirmation: z.boolean(),
       }),
     )
-    .mutation(
-      async ({ ctx, input: { candidateId, dateTime, sendConfirmation } }) => {
-        if (sendConfirmation) {
-          //TODO resend email
-        } else {
-          await ctx.db.candidate.update({
-            where: { id: candidateId },
-            data: {
-              scheduledFor: dateTime,
-              forInterview: true,
-              interviewStage: "SCHEDULED",
-            },
-          });
-        }
-      },
-    ),
+    .mutation(async ({ ctx, input: { candidateId, dateTime } }) => {
+      await ctx.db.candidate.update({
+        where: { id: candidateId },
+        data: {
+          scheduledFor: dateTime,
+          forInterview: true,
+          interviewStage: "SCHEDULED",
+        },
+      });
+    }),
 });

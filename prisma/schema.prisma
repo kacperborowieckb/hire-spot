@@ -39,7 +39,7 @@ model Candidate {
   cvUrl          String         @unique
   rating         Rating         @default(UNCHECKED)
   forInterview   Boolean        @default(false)
-  interviewStage InterviewStage @default(NO_REPLY)
+  interviewStage InterviewStage?
   email          String         @unique
   name           String
   description    String?       
@@ -57,7 +57,6 @@ enum Rating {
 }
 
 enum InterviewStage {
-  NO_REPLY
   SCHEDULED
   COMPLETED
 }

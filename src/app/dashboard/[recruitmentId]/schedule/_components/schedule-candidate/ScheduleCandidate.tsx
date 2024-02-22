@@ -16,7 +16,6 @@ export default function ScheduleCandidate({
 }: {
   pickedCandidate?: Candidate;
 }) {
-  const [sendConfirmation, setSendConfirmation] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
   const [selectedTime, setSelectedTime] = useState<{
     hour: number;
@@ -55,7 +54,6 @@ export default function ScheduleCandidate({
     scheduleCandidate({
       candidateId: pickedCandidate.id,
       dateTime,
-      sendConfirmation,
     });
   };
 
@@ -83,14 +81,7 @@ export default function ScheduleCandidate({
         )}
       </div>
       <Calendar selectedValue={selectedDate} onChange={handleDateChange} />
-      <ScheduleFieldSet
-        handleTimeChange={handleTimeChange}
-        sendConfirmation={sendConfirmation}
-        setSendConfirmation={setSendConfirmation}
-      />
-      <p className="-mt-4 text-center text-sm text-black-600">
-        (Candidate have to confirm this date before interview will be scheduled)
-      </p>
+      <ScheduleFieldSet handleTimeChange={handleTimeChange} />
       {pickedCandidate && (
         <p className="text-black-900">
           Schedule {pickedCandidate.name} for{" "}
