@@ -42,7 +42,9 @@ model Candidate {
   interviewStage InterviewStage @default(NO_REPLY)
   email          String         @unique
   name           String
-  description    String?         
+  description    String?       
+  scheduledFor   DateTime?  
+  summary        String?    
 
   @@index([recruitmentId])
 }
