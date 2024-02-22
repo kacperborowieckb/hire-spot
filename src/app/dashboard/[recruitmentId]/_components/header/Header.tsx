@@ -1,8 +1,8 @@
 import { UserButton } from "@clerk/nextjs";
 import React from "react";
 import Logo from "~/ui/logo/Logo";
-import SearchBar from "../search-bar/SearchBar";
 import { api } from "~/trpc/server";
+import SearchBar from "../search-bar/SearchBar";
 
 export default async function Header({
   recruitmentId,
@@ -21,10 +21,10 @@ export default async function Header({
         </div>
       </div>
       <div className="flex w-full items-center gap-4 border border-l-0 border-border px-2 py-1 sm:px-4 sm:py-2">
-        <h1 className="hidden flex-grow text-lg font-medium sm:block">
+        <h1 className="hidden w-full text-lg font-medium sm:block">
           {position}
         </h1>
-        <div className="ml-auto pl-2">
+        <div className="w-full pl-2">
           <SearchBar />
         </div>
         <UserButton />

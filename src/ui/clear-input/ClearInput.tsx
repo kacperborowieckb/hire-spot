@@ -14,12 +14,13 @@ export default function ClearInput({
   name,
   labelClasses,
   label,
+  className,
   onChange,
   Icon,
   ...otherProps
 }: ClearInputProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-full flex-col gap-2">
       {label && (
         <label htmlFor={name} className={cn(labelClasses)}>
           {label}
@@ -30,7 +31,10 @@ export default function ClearInput({
           {...otherProps}
           placeholder={placeholder}
           id={name}
-          className={`my-1 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 placeholder:text-main-300`}
+          className={cn(
+            `my-1 w-full rounded-lg border-2 border-main-200 bg-main-100 p-2 shadow-md outline-main-600 placeholder:text-main-300`,
+            className,
+          )}
           onChange={onChange}
         />
         {Icon && (

@@ -14,7 +14,7 @@ import {
 const iconSize = 22;
 const iconFill = "rgb(49 49 49)";
 
-const pages: { icon: IconType; href: string; name: string }[] = [
+export const pages: { icon: IconType; href: string; name: string }[] = [
   {
     icon: RiHome3Line,
     href: "/",
