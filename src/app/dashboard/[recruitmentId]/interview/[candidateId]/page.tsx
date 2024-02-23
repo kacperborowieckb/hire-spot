@@ -12,6 +12,7 @@ import Input from "~/ui/input/Input";
 import { RiArrowLeftLine } from "react-icons/ri";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const InterviewSummarySchema = z.object({
   summary: z.string(),
@@ -72,10 +73,15 @@ export default function CandidateInterview({
             inputProps={{ className: "bg-main-50 min-h-[250px]" }}
           />
           <div className="flex justify-between">
-            <Button className="flex w-max items-center gap-2" variant="outline">
-              <RiArrowLeftLine />
-              Go back
-            </Button>
+            <Link href={`/dashboard/${recruitmentId}/interview`}>
+              <Button
+                className="flex w-max items-center gap-2"
+                variant="outline"
+              >
+                <RiArrowLeftLine />
+                Go back
+              </Button>
+            </Link>
             <Button variant="default">Mark as completed</Button>
           </div>
         </form>

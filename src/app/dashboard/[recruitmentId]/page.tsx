@@ -76,7 +76,7 @@ export default async function RecruitmentHome({
             <InfoCard
               icon={<RiUserFollowFill fill={iconFill} size={iconSize} />}
               percentage={calculatePercentage(acceptedCandidates, length)}
-              title="Accepted"
+              title="Completed"
               value={acceptedCandidates}
             />
           </div>

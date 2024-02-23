@@ -5,6 +5,7 @@ import { useParams, usePathname } from "next/navigation";
 import React from "react";
 import { IconType } from "react-icons";
 import {
+  RiAccountPinBoxLine,
   RiCalendarTodoLine,
   RiCheckboxCircleLine,
   RiDiscussLine,
@@ -40,6 +41,11 @@ export const pages: { icon: IconType; href: string; name: string }[] = [
     icon: RiDiscussLine,
     href: "/interview",
     name: "Interviews",
+  },
+  {
+    icon: RiAccountPinBoxLine,
+    href: "/summary",
+    name: "Candidate summary",
   },
 ];
 

@@ -10,7 +10,8 @@ export const findClosestInterview = (
   for (let currentCandidate of candidates) {
     if (
       dayjs(currentCandidate.scheduledFor).isBefore(candidate?.scheduledFor) &&
-      dayjs(currentCandidate.scheduledFor).isAfter(now)
+      dayjs(currentCandidate.scheduledFor).isAfter(now) &&
+      currentCandidate.forInterview
     ) {
       candidate = currentCandidate;
     }
