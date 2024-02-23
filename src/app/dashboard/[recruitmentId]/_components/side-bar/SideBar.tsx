@@ -48,7 +48,7 @@ export default function SideBar() {
   const params = useParams<{ recruitmentId: string }>();
 
   const currentPage =
-    pages.findLast((page) => pathname.endsWith(page.href))?.href || "/";
+    pages.findLast((page) => pathname.includes(page.href))?.href || "/";
 
   const links = pages.map((page) => {
     const isCurrent = page.href === currentPage;

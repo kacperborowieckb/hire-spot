@@ -8,6 +8,11 @@ import { Rating } from "@prisma/client";
 const utapi = new UTApi();
 
 export const candidateRouter = createTRPCRouter({
+  getCandidateById: privateProcedure
+    .input(z.object({ candidateId: z.string() }))
+    .query(async ({ ctx, input: { candidateId } }) => {
+      return await ctx.db.candidate.findUnique({ where: { id: candidateId } });
+    }),
   addCandidate: privateProcedure
     .input(
       applySchema.omit({ cv: true }).extend({
@@ -93,6 +98,23 @@ export const candidateRouter = createTRPCRouter({
           scheduledFor: dateTime,
           forInterview: true,
           interviewStage: "SCHEDULED",
+        },
+      });
+    }),
+  completeInterview: privateProcedure
+    .input(
+      z.object({
+        candidateId: z.string(),
+        summary: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input: { candidateId, summary } }) => {
+      await ctx.db.candidate.update({
+        where: { id: candidateId },
+        data: {
+          interviewStage: "COMPLETED",
+          summary: summary,
+          forInterview: false,
         },
       });
     }),

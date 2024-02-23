@@ -7,7 +7,6 @@ import {
   RiArticleLine,
   RiCalendar2Line,
   RiCloseCircleLine,
-  RiMailAddLine,
 } from "react-icons/ri";
 import Card from "~/ui/card/Card";
 import {
@@ -97,7 +96,7 @@ export default function CandidateCard({
               14-02-2024
             </span>
           </p>
-          {forInterview ? (
+          {scheduledFor ? (
             <p className="text-sm text-black-900">
               {interviewStage === "SCHEDULED" ? (
                 <>

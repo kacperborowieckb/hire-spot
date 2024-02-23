@@ -21,19 +21,24 @@ export default function Interview({
     api.candidate.getCandidatesByRecruitmentId.useQuery({ recruitmentId });
 
   const today = dayjs();
+  const candidatesForInterview = candidates.filter(
+    (candidate) => candidate.forInterview,
+  );
 
   //TODO loading state for candidate card
 
   const handleDateChange = (date: Dayjs) => setSelectedDate(date);
 
-  const candidatesForToday = candidates.filter((candidate) =>
+  const candidatesForToday = candidatesForInterview.filter((candidate) =>
     today.isSame(dayjs(candidate.scheduledFor), "day"),
   );
-  const candidatesForSelectedDay = candidates.filter((candidate) =>
+  const candidatesForSelectedDay = candidatesForInterview.filter((candidate) =>
     selectedDate.isSame(dayjs(candidate.scheduledFor), "day"),
   );
 
-  const events = candidates.map((candidate) => dayjs(candidate.scheduledFor));
+  const events = candidatesForInterview.map((candidate) =>
+    dayjs(candidate.scheduledFor),
+  );
 
   return (
     <section className="mb-14 flex w-full flex-grow gap-6 p-4 sm:mb-0 lg:p-8">

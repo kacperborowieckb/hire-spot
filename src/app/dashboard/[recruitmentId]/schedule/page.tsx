@@ -30,10 +30,20 @@ export default function SchedulePage({
 
   const [tab, setTab] = useState<"yes" | "strongYes" | "both">("both");
 
-  const yesCandidates = filterCandidateByRating(candidates, "YES");
-  const strongYesCandidates = filterCandidateByRating(candidates, "STRONG_YES");
+  const candidatesWithoutInterview = candidates.filter(
+    (candidate) => candidate.interviewStage !== "COMPLETED",
+  );
 
-  const pickedCandidate = candidates.find(
+  const yesCandidates = filterCandidateByRating(
+    candidatesWithoutInterview,
+    "YES",
+  );
+  const strongYesCandidates = filterCandidateByRating(
+    candidatesWithoutInterview,
+    "STRONG_YES",
+  );
+
+  const pickedCandidate = candidatesWithoutInterview.find(
     (candidate) => candidate.id === candidateId,
   );
 
