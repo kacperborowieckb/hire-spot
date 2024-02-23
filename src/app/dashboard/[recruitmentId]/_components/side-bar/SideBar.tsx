@@ -7,6 +7,7 @@ import { IconType } from "react-icons";
 import {
   RiCalendarTodoLine,
   RiCheckboxCircleLine,
+  RiDiscussLine,
   RiHome3Line,
   RiSearch2Line,
 } from "react-icons/ri";
@@ -34,6 +35,11 @@ export const pages: { icon: IconType; href: string; name: string }[] = [
     icon: RiCalendarTodoLine,
     href: "/schedule",
     name: "Schedule interview",
+  },
+  {
+    icon: RiDiscussLine,
+    href: "/interview",
+    name: "Interviews",
   },
 ];
 
