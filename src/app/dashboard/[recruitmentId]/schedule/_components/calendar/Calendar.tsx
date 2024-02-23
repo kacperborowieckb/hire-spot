@@ -6,11 +6,13 @@ import { cn } from "~/utils/cn";
 type CalendarProps = {
   selectedValue?: Dayjs;
   onChange: (date: Dayjs) => void;
+  events?: Dayjs[];
 };
 
 export default function Calendar({
   selectedValue = dayjs(),
   onChange,
+  events = [],
 }: CalendarProps) {
   const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
 
@@ -47,6 +49,18 @@ export default function Calendar({
 
   const handleChange = (date: Dayjs) => onChange(date);
 
+  const shouldHaveAccent = (i: number): boolean =>
+    selectedValue.date() === i && isInCurrentMonthAndYear;
+
+  const isInEvents = (i: number): boolean => {
+    return events.some((event) => {
+      return event.isSame(
+        dayjs().year(currentYear).month(currentMonth).date(i),
+        "day",
+      );
+    });
+  };
+
   return (
     <div>
       <div className="flex items-center px-4 py-2">
@@ -66,7 +80,7 @@ export default function Calendar({
           />
         </div>
       </div>
-      <div className="grid w-[300px] grid-cols-7 place-items-center">
+      <div className="grid w-[300px] grid-cols-7 place-items-center gap-y-[2px]">
         {Array.from({ length: startingIndex }).map((_, i) => (
           <CalendarItem
             key={i}
@@ -77,9 +91,8 @@ export default function Calendar({
         {Array.from({ length: monthLength }).map((_, i) => (
           <CalendarItem
             className={cn(
-              selectedValue.date() === i + 1 &&
-                isInCurrentMonthAndYear &&
-                "bg-main-300 hover:bg-main-300",
+              shouldHaveAccent(i + 1) && "bg-main-300 hover:bg-main-300",
+              isInEvents(i + 1) && "bg-main-200 hover:bg-main-200",
             )}
             key={i + startingIndex}
             day={i + 1}

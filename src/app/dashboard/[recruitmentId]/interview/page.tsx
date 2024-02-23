@@ -33,6 +33,8 @@ export default function Interview({
     selectedDate.isSame(dayjs(candidate.scheduledFor), "day"),
   );
 
+  const events = candidates.map((candidate) => dayjs(candidate.scheduledFor));
+
   return (
     <section className="mb-14 flex w-full flex-grow gap-6 p-4 sm:mb-0 lg:p-8">
       <div className="flex w-min flex-col">
@@ -49,6 +51,7 @@ export default function Interview({
                 <CandidateCard
                   candidate={candidate}
                   className="max-w-[350px]"
+                  withDropdown={false}
                 />
               </Link>
             ))
@@ -58,7 +61,11 @@ export default function Interview({
         </Column>
       </div>
       <div className="flex flex-col gap-8">
-        <Calendar selectedValue={selectedDate} onChange={handleDateChange} />
+        <Calendar
+          selectedValue={selectedDate}
+          onChange={handleDateChange}
+          events={events}
+        />
         <Column
           title={`Interviews for ${selectedDate.format("DD-MM-YYYY")}`}
           className="flex-grow"
@@ -68,7 +75,7 @@ export default function Interview({
               <Link
                 href={`/dashboard/${recruitmentId}/interview/${candidate.id}`}
               >
-                <CandidateCard candidate={candidate} />
+                <CandidateCard candidate={candidate} withDropdown={false} />
               </Link>
             ))
           ) : (

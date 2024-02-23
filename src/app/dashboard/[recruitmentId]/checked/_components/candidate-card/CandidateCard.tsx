@@ -28,6 +28,7 @@ import dayjs from "dayjs";
 
 type CandidateCardProps = React.HTMLAttributes<HTMLDivElement> & {
   candidate: Candidate;
+  withDropdown?: boolean;
 };
 
 export default function CandidateCard({
@@ -40,6 +41,7 @@ export default function CandidateCard({
     forInterview,
     scheduledFor,
   },
+  withDropdown = true,
   onClick,
   className,
   ...otherProps
@@ -78,11 +80,13 @@ export default function CandidateCard({
       >
         <section className="flex gap-2">
           <h3 className="flex-grow text-lg text-black-900">{name}</h3>
-          <CandidateCardDropdown
-            candidateId={candidateId}
-            openModal={openModal}
-            openConfirmationModal={openConfirmationModal}
-          />
+          {withDropdown && (
+            <CandidateCardDropdown
+              candidateId={candidateId}
+              openModal={openModal}
+              openConfirmationModal={openConfirmationModal}
+            />
+          )}
         </section>
         <p className="line-clamp-2 flex-1 text-black-600">{description}</p>
         <section className="mt-1 flex">
