@@ -1,0 +1,34 @@
+"use client";
+
+import React from "react";
+import Column from "../../../checked/_components/column/Column";
+import CandidateCard from "../../../checked/_components/candidate-card/CandidateCard";
+import { Candidate } from "@prisma/client";
+import { usePathname, useRouter } from "next/navigation";
+
+export default function PickCandidateForSummary({
+  interviewedCandidates,
+}: {
+  interviewedCandidates: Candidate[];
+}) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const setSearchParams = (candidateId: string) => {
+    const params = new URLSearchParams();
+    params.set("candidate", candidateId);
+    router.replace(`${pathname}?${params}`);
+  };
+
+  return (
+    <Column title="Interviewed candidates" className="flex-grow">
+      {interviewedCandidates.map((candidate) => (
+        <CandidateCard
+          className="cursor-pointer"
+          candidate={candidate}
+          onClick={() => setSearchParams(candidate.id)}
+        />
+      ))}
+    </Column>
+  );
+}
