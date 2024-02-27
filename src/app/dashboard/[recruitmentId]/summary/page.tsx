@@ -34,7 +34,6 @@ export default async function Summary({
           interviewedCandidates={interviewedCandidates}
         />
       </div>
-
       <CandidateSummary candidate={candidateForSummary} />
     </section>
   );

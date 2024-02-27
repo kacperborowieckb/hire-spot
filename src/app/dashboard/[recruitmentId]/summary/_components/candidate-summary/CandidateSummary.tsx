@@ -9,7 +9,7 @@ export default function CandidateSummary({
   candidate?: Candidate;
 }) {
   return (
-    <div className="flex w-full flex-col gap-8 px-2 sm:px-4 md:px-8 lg:px-0">
+    <div className="flex w-full flex-col gap-8 sm:px-4 md:px-8 lg:px-0">
       {candidate ? (
         <div>
           <h2 className="text-xl font-semibold text-black-900">

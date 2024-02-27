@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { RiSearch2Line, RiUser3Fill } from "react-icons/ri";
 import ClearInput from "~/ui/clear-input/ClearInput";
 import { pages } from "../side-bar/SideBar";
@@ -18,7 +18,9 @@ export default function SearchBar() {
 
   const searchItems = [
     ...pages
-      .filter((page) => page.name.toLowerCase().includes(search.toLowerCase()))
+      .filter((page) =>
+        page.name.toLowerCase().includes(search.toLowerCase().trim()),
+      )
       .map((page, i) => (
         <Link
           key={i}
@@ -30,8 +32,11 @@ export default function SearchBar() {
         </Link>
       )),
     ...candidates
+      .filter((candidate) => candidate.interviewStage !== "COMPLETED")
       .filter((candidate) =>
-        candidate.name.toLowerCase().includes(search.toLowerCase()),
+        `Schedule: ${candidate.name}`
+          .toLowerCase()
+          .includes(search.toLowerCase().trim()),
       )
       .map((candidate) => {
         const params = new URLSearchParams({ candidate: candidate.id });
@@ -48,7 +53,49 @@ export default function SearchBar() {
           </Link>
         );
       }),
-  ];
+    ...candidates
+      .filter((candidate) => candidate.interviewStage === "SCHEDULED")
+      .filter((candidate) =>
+        `Interview: ${candidate.name}`
+          .toLowerCase()
+          .includes(search.toLowerCase().trim()),
+      )
+      .map((candidate) => {
+        return (
+          <Link
+            key={candidate.id}
+            className="flex w-full items-center gap-1 rounded-md border-border bg-main-50 p-2 hover:bg-main-100"
+            href={`/dashboard/${recruitmentId}/interview/${candidate.id}`}
+          >
+            <RiUser3Fill className="mr-2 min-w-max fill-black-900" />
+            <span className="text-black-600">Interview:</span>{" "}
+            <p className="truncate text-black-900">{candidate.name}</p>
+          </Link>
+        );
+      }),
+    ...candidates
+      .filter((candidate) => candidate.interviewStage === "COMPLETED")
+      .filter((candidate) =>
+        `Summary: ${candidate.name}`
+          .toLowerCase()
+          .includes(search.toLowerCase().trim()),
+      )
+      .map((candidate) => {
+        const params = new URLSearchParams({ candidate: candidate.id });
+
+        return (
+          <Link
+            key={candidate.id}
+            className="flex w-full items-center gap-1 rounded-md border-border bg-main-50 p-2 hover:bg-main-100"
+            href={`/dashboard/${recruitmentId}/summary?${params}`}
+          >
+            <RiUser3Fill className="mr-2 min-w-max fill-black-900" />
+            <span className="text-black-600">Summary:</span>{" "}
+            <p className="truncate text-black-900">{candidate.name}</p>
+          </Link>
+        );
+      }),
+  ].slice(0, 5);
 
   return (
     <div className="group relative ml-auto w-full max-w-none sm:max-w-[360px]">
