@@ -41,7 +41,7 @@ export default function Interview({
   );
 
   return (
-    <section className="mb-14 flex w-full flex-grow gap-6 p-4 sm:mb-0 lg:p-8">
+    <section className="mb-14 flex w-full flex-grow flex-col items-center gap-6 p-4 sm:mb-0 md:flex-row md:items-stretch lg:p-8">
       <div className="flex w-min flex-col">
         <h2 className="text-lg font-semibold">Select interview</h2>
         <p className="mb-2 text-base text-black-600">
