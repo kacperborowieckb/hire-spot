@@ -1,5 +1,10 @@
 import { applySchema } from "~/schemas/applySchema";
-import { createTRPCRouter, privateProcedure } from "../../trpc";
+import {
+  createTRPCRouter,
+  creatorProcedure,
+  privateProcedure,
+  publicProcedure,
+} from "../../trpc";
 import { z } from "zod";
 import { UTApi } from "uploadthing/server";
 import { TRPCError } from "@trpc/server";
@@ -8,12 +13,13 @@ import { Rating } from "@prisma/client";
 const utapi = new UTApi();
 
 export const candidateRouter = createTRPCRouter({
+  //Another middleware for checking if user have right to this data?
   getCandidateById: privateProcedure
     .input(z.object({ candidateId: z.string() }))
     .query(async ({ ctx, input: { candidateId } }) => {
       return await ctx.db.candidate.findUnique({ where: { id: candidateId } });
     }),
-  addCandidate: privateProcedure
+  addCandidate: publicProcedure
     .input(
       applySchema.omit({ cv: true }).extend({
         cvUrl: z.string(),
@@ -39,7 +45,7 @@ export const candidateRouter = createTRPCRouter({
         }
       }
     }),
-  getCandidatesByRecruitmentId: privateProcedure
+  getCandidatesByRecruitmentId: creatorProcedure
     .input(z.object({ recruitmentId: z.string() }))
     .query(async ({ ctx, input }) => {
       const data = await ctx.db.candidate.findMany({
@@ -48,7 +54,7 @@ export const candidateRouter = createTRPCRouter({
       //TODO tests
       return data;
     }),
-  getUncheckedCandidatesByRecruitmentId: privateProcedure
+  getUncheckedCandidatesByRecruitmentId: creatorProcedure
     .input(z.object({ recruitmentId: z.string() }))
     .query(async ({ ctx, input }) => {
       const data = await ctx.db.candidate.findMany({

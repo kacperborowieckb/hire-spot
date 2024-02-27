@@ -1,10 +1,15 @@
 import { newRecruitmentSchema } from "~/schemas/newRecruitmentSchema";
-import { createTRPCRouter, privateProcedure } from "../../trpc";
+import {
+  createTRPCRouter,
+  creatorProcedure,
+  privateProcedure,
+  publicProcedure,
+} from "../../trpc";
 import { z } from "zod";
 import { countCandidatesByRating } from "~/helpers/countCandidatesByRating";
 
 export const recruitmentRouter = createTRPCRouter({
-  getAllRecruitmentData: privateProcedure.query(async ({ ctx }) => {
+  getAllRecruitmentData: creatorProcedure.query(async ({ ctx }) => {
     const data = await ctx.db.recruitment.findMany({
       where: { creatorId: ctx.currentUser },
       include: {
@@ -23,7 +28,7 @@ export const recruitmentRouter = createTRPCRouter({
       ),
     }));
   }),
-  getRecruitmentById: privateProcedure
+  getRecruitmentById: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const recruitmentData = await ctx.db.recruitment.findUnique({

@@ -125,4 +125,29 @@ const enforceUserIsSignedIn = t.middleware(({ ctx, next }) => {
   });
 });
 
+const enforceUserIsCreatorOfRecruitment = t.middleware(
+  async ({ ctx, next, rawInput }) => {
+    if (!ctx.currentUser) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    const recruitmentId = (rawInput as { recruitmentId: string }).recruitmentId;
+    const recruitmentData = await ctx.db.recruitment.findUnique({
+      where: { id: recruitmentId },
+      include: { creator: true },
+    });
+
+    if (recruitmentData?.creator.id !== ctx.currentUser) {
+      throw new TRPCError({ code: "CONFLICT" });
+    }
+
+    return next({
+      ctx: { currentUser: ctx.currentUser },
+    });
+  },
+);
+
 export const privateProcedure = t.procedure.use(enforceUserIsSignedIn);
+export const creatorProcedure = t.procedure.use(
+  enforceUserIsCreatorOfRecruitment,
+);
