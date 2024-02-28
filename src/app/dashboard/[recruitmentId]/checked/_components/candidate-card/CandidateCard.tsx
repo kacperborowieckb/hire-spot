@@ -4,9 +4,11 @@ import { Candidate } from "@prisma/client";
 import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import {
+  RiAccountPinBoxLine,
   RiArticleLine,
   RiCalendar2Line,
   RiCloseCircleLine,
+  RiDiscussLine,
 } from "react-icons/ri";
 import Card from "~/ui/card/Card";
 import {
@@ -84,6 +86,11 @@ export default function CandidateCard({
               candidateId={candidateId}
               openModal={openModal}
               openConfirmationModal={openConfirmationModal}
+              showScheduleOption={interviewStage !== "COMPLETED"}
+              showGoToInterviewOption={
+                forInterview && interviewStage === "SCHEDULED"
+              }
+              showGoToSummaryOption={interviewStage === "COMPLETED"}
             />
           )}
         </section>
@@ -122,12 +129,18 @@ type CandidateCardDropdownProps = {
   candidateId: string;
   openModal: () => void;
   openConfirmationModal: () => void;
+  showScheduleOption: boolean;
+  showGoToInterviewOption: boolean;
+  showGoToSummaryOption: boolean;
 };
 
 function CandidateCardDropdown({
   candidateId,
   openModal,
   openConfirmationModal,
+  showGoToInterviewOption,
+  showGoToSummaryOption,
+  showScheduleOption,
 }: CandidateCardDropdownProps) {
   const params = useSearchParams();
   const { recruitmentId } = useParams<{ recruitmentId: string }>();
@@ -139,6 +152,15 @@ function CandidateCardDropdown({
     const searchParams = new URLSearchParams(params);
     searchParams.set("candidate", candidateId);
     router.push(`/dashboard/${recruitmentId}/schedule?${searchParams}`);
+  };
+
+  const goToInterview = () =>
+    router.push(`/dashboard/${recruitmentId}/interview/${candidateId}`);
+
+  const goToSummary = () => {
+    const searchParams = new URLSearchParams(params);
+    searchParams.set("candidate", candidateId);
+    router.push(`/dashboard/${recruitmentId}/summary?${searchParams}`);
   };
 
   const removeCandidate = () => openConfirmationModal();
@@ -156,12 +178,30 @@ function CandidateCardDropdown({
               <RiArticleLine />
             </DropdownItemIcon>
           </DropdownItem>
-          <DropdownItem onClick={scheduleCandidate}>
-            Schedule
-            <DropdownItemIcon>
-              <RiCalendar2Line />
-            </DropdownItemIcon>
-          </DropdownItem>
+          {showScheduleOption && (
+            <DropdownItem onClick={scheduleCandidate}>
+              Schedule
+              <DropdownItemIcon>
+                <RiCalendar2Line />
+              </DropdownItemIcon>
+            </DropdownItem>
+          )}
+          {showGoToInterviewOption && (
+            <DropdownItem onClick={goToInterview}>
+              Interview
+              <DropdownItemIcon>
+                <RiDiscussLine />
+              </DropdownItemIcon>
+            </DropdownItem>
+          )}
+          {showGoToSummaryOption && (
+            <DropdownItem onClick={goToSummary}>
+              Summary
+              <DropdownItemIcon>
+                <RiAccountPinBoxLine />
+              </DropdownItemIcon>
+            </DropdownItem>
+          )}
           <DropdownBreak />
           <DropdownItem onClick={removeCandidate}>
             Remove
