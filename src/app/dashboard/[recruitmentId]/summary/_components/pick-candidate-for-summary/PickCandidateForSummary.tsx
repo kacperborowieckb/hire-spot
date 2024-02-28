@@ -22,13 +22,17 @@ export default function PickCandidateForSummary({
 
   return (
     <Column title="Interviewed candidates" className="flex-grow">
-      {interviewedCandidates.map((candidate) => (
-        <CandidateCard
-          className="cursor-pointer"
-          candidate={candidate}
-          onClick={() => setSearchParams(candidate.id)}
-        />
-      ))}
+      {interviewedCandidates.length > 0 ? (
+        interviewedCandidates.map((candidate) => (
+          <CandidateCard
+            className="cursor-pointer"
+            candidate={candidate}
+            onClick={() => setSearchParams(candidate.id)}
+          />
+        ))
+      ) : (
+        <p className="text-center text-black-600">No candidates</p>
+      )}
     </Column>
   );
 }

@@ -1,7 +1,6 @@
 import { newRecruitmentSchema } from "~/schemas/newRecruitmentSchema";
 import {
   createTRPCRouter,
-  creatorProcedure,
   privateProcedure,
   publicProcedure,
 } from "../../trpc";
@@ -9,7 +8,7 @@ import { z } from "zod";
 import { countCandidatesByRating } from "~/helpers/countCandidatesByRating";
 
 export const recruitmentRouter = createTRPCRouter({
-  getAllRecruitmentData: creatorProcedure.query(async ({ ctx }) => {
+  getAllRecruitmentData: privateProcedure.query(async ({ ctx }) => {
     const data = await ctx.db.recruitment.findMany({
       where: { creatorId: ctx.currentUser },
       include: {

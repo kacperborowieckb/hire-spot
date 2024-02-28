@@ -1,8 +1,8 @@
 import { applySchema } from "~/schemas/applySchema";
 import {
+  candidateAccessProcedure,
   createTRPCRouter,
   creatorProcedure,
-  privateProcedure,
   publicProcedure,
 } from "../../trpc";
 import { z } from "zod";
@@ -14,7 +14,7 @@ const utapi = new UTApi();
 
 export const candidateRouter = createTRPCRouter({
   //Another middleware for checking if user have right to this data?
-  getCandidateById: privateProcedure
+  getCandidateById: candidateAccessProcedure
     .input(z.object({ candidateId: z.string() }))
     .query(async ({ ctx, input: { candidateId } }) => {
       return await ctx.db.candidate.findUnique({ where: { id: candidateId } });
@@ -64,7 +64,7 @@ export const candidateRouter = createTRPCRouter({
       return data;
     }),
 
-  rateCandidate: privateProcedure
+  rateCandidate: candidateAccessProcedure
     .input(z.object({ rating: z.nativeEnum(Rating), candidateId: z.string() }))
     .mutation(async ({ ctx, input: { candidateId, rating } }) => {
       await ctx.db.candidate.update({
@@ -73,7 +73,7 @@ export const candidateRouter = createTRPCRouter({
       });
     }),
   //TODO invalidatePath
-  deleteCandidate: privateProcedure
+  deleteCandidate: candidateAccessProcedure
     .input(z.object({ candidateId: z.string(), cvUrl: z.string() }))
     .mutation(async ({ ctx, input: { candidateId, cvUrl } }) => {
       await ctx.db.candidate.delete({ where: { id: candidateId } });
@@ -90,7 +90,7 @@ export const candidateRouter = createTRPCRouter({
         });
       }
     }),
-  scheduleCandidate: privateProcedure
+  scheduleCandidate: candidateAccessProcedure
     .input(
       z.object({
         candidateId: z.string(),
@@ -107,7 +107,7 @@ export const candidateRouter = createTRPCRouter({
         },
       });
     }),
-  completeInterview: privateProcedure
+  completeInterview: candidateAccessProcedure
     .input(
       z.object({
         candidateId: z.string(),

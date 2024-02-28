@@ -130,7 +130,7 @@ const enforceUserIsCreatorOfRecruitment = t.middleware(
     if (!ctx.currentUser) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
-
+    console.log(rawInput);
     const recruitmentId = (rawInput as { recruitmentId: string }).recruitmentId;
     const recruitmentData = await ctx.db.recruitment.findUnique({
       where: { id: recruitmentId },
@@ -147,7 +147,30 @@ const enforceUserIsCreatorOfRecruitment = t.middleware(
   },
 );
 
+const enforceUserHaveAccessToCandidateDate = t.middleware(
+  async ({ ctx, next, rawInput }) => {
+    if (!ctx.currentUser) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    const candidateId = (rawInput as { candidateId: string }).candidateId;
+    const candidate = await ctx.db.candidate.findUnique({
+      where: { id: candidateId },
+      include: { recruitment: true },
+    });
+
+    if (candidate?.recruitment.creatorId !== ctx.currentUser) {
+      throw new TRPCError({ code: "CONFLICT" });
+    }
+
+    return next({ ctx: { currentUser: ctx.currentUser } });
+  },
+);
+
 export const privateProcedure = t.procedure.use(enforceUserIsSignedIn);
 export const creatorProcedure = t.procedure.use(
   enforceUserIsCreatorOfRecruitment,
+);
+export const candidateAccessProcedure = t.procedure.use(
+  enforceUserHaveAccessToCandidateDate,
 );
