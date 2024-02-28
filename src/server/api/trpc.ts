@@ -130,7 +130,7 @@ const enforceUserIsCreatorOfRecruitment = t.middleware(
     if (!ctx.currentUser) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
-    console.log(rawInput);
+
     const recruitmentId = (rawInput as { recruitmentId: string }).recruitmentId;
     const recruitmentData = await ctx.db.recruitment.findUnique({
       where: { id: recruitmentId },
