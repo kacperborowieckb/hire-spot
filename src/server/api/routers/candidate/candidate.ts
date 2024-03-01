@@ -36,6 +36,7 @@ export const candidateRouter = createTRPCRouter({
             email: input.email,
             description: input.description,
             recruitmentId: input.recruitmentId,
+            appliedDate: new Date(),
           },
         });
       } catch (err) {

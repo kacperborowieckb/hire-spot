@@ -44,7 +44,8 @@ model Candidate {
   name           String
   description    String?       
   scheduledFor   DateTime?  
-  summary        String?    
+  summary        String?   
+  appliedDate    DateTime    
 
   @@index([recruitmentId])
 }

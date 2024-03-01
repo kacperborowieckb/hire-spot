@@ -42,6 +42,7 @@ export default function CandidateCard({
     cvUrl,
     forInterview,
     scheduledFor,
+    appliedDate,
   },
   withDropdown = true,
   onClick,
@@ -116,7 +117,7 @@ export default function CandidateCard({
           <p className="flex-grow text-sm text-black-900">
             Applied:{" "}
             <span className="whitespace-nowrap text-sm text-black-600">
-              14-02-2024
+              {dayjs(appliedDate).format("MM/DD/YYYY h:mm A")}
             </span>
           </p>
           {scheduledFor ? (

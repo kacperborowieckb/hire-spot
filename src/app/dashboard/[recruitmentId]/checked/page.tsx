@@ -45,7 +45,7 @@ export default async function CheckedPage({
             <CandidateCard key={i} candidate={candidate} />
           ))
         ) : (
-          <p className="text-center text-black-600">No candidates</p>
+          <p className="text-center text-black-600">No candidates.</p>
         )}
       </Column>
     </section>
