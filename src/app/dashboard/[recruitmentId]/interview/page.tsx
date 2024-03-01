@@ -3,13 +3,12 @@
 import React, { useState } from "react";
 import Calendar from "../schedule/_components/calendar/Calendar";
 import dayjs, { Dayjs } from "dayjs";
-import Card from "~/ui/card/Card";
 import { api } from "~/trpc/react";
 import CandidateCard from "../checked/_components/candidate-card/CandidateCard";
-import Image from "next/image";
 import NoInterviews from "./_components/NoInterviews";
 import Column from "../checked/_components/column/Column";
 import Link from "next/link";
+import InterviewLoadingState from "./_components/interview-loading-state/InterviewLoadingState";
 
 export default function Interview({
   params: { recruitmentId },
@@ -17,7 +16,7 @@ export default function Interview({
   params: { recruitmentId: string };
 }) {
   const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
-  const { data: candidates = [] } =
+  const { data: candidates = [], isLoading } =
     api.candidate.getCandidatesByRecruitmentId.useQuery({ recruitmentId });
 
   const today = dayjs();
@@ -39,6 +38,8 @@ export default function Interview({
   const events = candidatesForInterview.map((candidate) =>
     dayjs(candidate.scheduledFor),
   );
+
+  if (isLoading) return <InterviewLoadingState />;
 
   return (
     <section className="mb-14 flex w-full flex-grow flex-col items-center gap-6 p-4 sm:mb-0 md:flex-row md:items-stretch lg:p-8">
