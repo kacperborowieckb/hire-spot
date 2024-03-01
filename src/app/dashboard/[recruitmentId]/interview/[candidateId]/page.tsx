@@ -13,6 +13,7 @@ import { RiArrowLeftLine } from "react-icons/ri";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import CandidateInterviewLoadingState from "./_components/candidate-interview-loading-state/CandidateInterviewLoadingState";
 
 const InterviewSummarySchema = z.object({
   summary: z.string(),
@@ -27,9 +28,10 @@ export default function CandidateInterview({
 }) {
   const router = useRouter();
   const utils = api.useUtils();
-  const { data: candidate } = api.candidate.getCandidateById.useQuery({
-    candidateId,
-  });
+  const { data: candidate, isLoading } =
+    api.candidate.getCandidateById.useQuery({
+      candidateId,
+    });
   const { mutate: completeInterview } =
     api.candidate.completeInterview.useMutation({
       onSuccess: () => {
@@ -54,6 +56,8 @@ export default function CandidateInterview({
 
   const onSubmit = ({ summary }: TInterviewSummarySchema) =>
     completeInterview({ candidateId, summary });
+
+  if (isLoading) return <CandidateInterviewLoadingState />;
 
   if (!candidate || !candidate.forInterview)
     return (

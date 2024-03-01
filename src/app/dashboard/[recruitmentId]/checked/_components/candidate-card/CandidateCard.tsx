@@ -117,7 +117,7 @@ export default function CandidateCard({
           <p className="flex-grow text-sm text-black-900">
             Applied:{" "}
             <span className="whitespace-nowrap text-sm text-black-600">
-              {dayjs(appliedDate).format("MM/DD/YYYY h:mm A")}
+              {dayjs(appliedDate).format("MM-DD-YYYY")}
             </span>
           </p>
           {scheduledFor ? (
@@ -126,7 +126,7 @@ export default function CandidateCard({
                 <>
                   Scheduled:{" "}
                   <span className="whitespace-nowrap text-sm text-black-600">
-                    {dayjs(scheduledFor).format("MM/DD/YYYY h:mm A")}
+                    {dayjs(scheduledFor).format("MM-DD-YYYY h:mm A")}
                   </span>
                 </>
               ) : (
