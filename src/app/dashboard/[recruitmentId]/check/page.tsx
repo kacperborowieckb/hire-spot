@@ -9,6 +9,7 @@ import Spinner from "~/ui/Spinner";
 import NoCandidateFound from "./_components/no-candidate-found/NoCandidateFound";
 import NoMoreCandidates from "./_components/no-more-candidates/NoMoreCandidates";
 import { usePathname, useRouter } from "next/navigation";
+import CheckLoadingState from "./_components/check-loading-state/CheckLoadingState";
 
 export default function CheckPage({
   params,
@@ -55,13 +56,7 @@ export default function CheckPage({
     replace(`${pathname}?${params}`);
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex w-full items-center justify-center">
-        <Spinner />
-      </div>
-    );
-  }
+  if (isLoading) return <CheckLoadingState />;
 
   if (candidates.length === 0)
     return (

@@ -48,8 +48,6 @@ export default async function RecruitmentHome({
 
   const closestInterviewCandidate = findClosestInterview(candidates);
 
-  await new Promise((res) => setTimeout(res, 2000));
-
   return (
     <section className="mb-14 flex w-full flex-col gap-4 p-4 lg:gap-8 lg:p-8">
       <h1 className="block text-center text-lg font-semibold text-black-900 sm:hidden">
