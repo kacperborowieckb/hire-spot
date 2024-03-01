@@ -22,8 +22,6 @@ export default async function Summary({
     (candidate) => candidate.id === candidateId,
   );
 
-  await new Promise((res) => setTimeout(res, 1000));
-
   return (
     <section className="mb-14 flex w-full flex-grow flex-col items-center justify-center gap-6 p-4 sm:mb-0 lg:flex-row lg:items-stretch lg:justify-start lg:p-8">
       <div className="flex w-full max-w-[380px] flex-col items-center lg:w-min lg:max-w-none lg:items-stretch">
