@@ -9,6 +9,7 @@ import Tabs from "./_components/tabs/Tabs";
 import { filterCandidateByRating } from "~/helpers/filterCandidatesByRating";
 import { api } from "~/trpc/react";
 import { usePathname, useRouter } from "next/navigation";
+import ScheduleLoadingState from "./_components/schedule-loading-state/ScheduleLoadingState";
 
 export default function SchedulePage({
   params: { recruitmentId },
@@ -20,13 +21,14 @@ export default function SchedulePage({
   const { candidate: candidateId, search } = searchParams;
   const router = useRouter();
   const pathname = usePathname();
-  const { data: candidates = [], isLoading } =
+  const { data: candidates = [], isLoading: isLoadingCandidates } =
     api.candidate.getCandidatesByRecruitmentId.useQuery({
       recruitmentId: recruitmentId,
     });
-  const { data: recruitment } = api.recruitment.getRecruitmentById.useQuery({
-    id: recruitmentId,
-  });
+  const { data: recruitment, isLoading: isLoadingRecruitment } =
+    api.recruitment.getRecruitmentById.useQuery({
+      id: recruitmentId,
+    });
 
   const [tab, setTab] = useState<"yes" | "strongYes" | "both">("both");
 
@@ -52,6 +54,9 @@ export default function SchedulePage({
     newSearchParams.set("candidate", candidateId);
     router.replace(`${pathname}?${newSearchParams}`);
   };
+
+  if (isLoadingCandidates || isLoadingRecruitment)
+    return <ScheduleLoadingState />;
 
   return (
     <section className="mb-14 flex w-full flex-grow flex-col items-center gap-2 p-4 sm:mb-0 sm:gap-8 md:flex-row md:items-stretch lg:p-8">
