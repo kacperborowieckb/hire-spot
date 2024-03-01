@@ -26,12 +26,17 @@ export default function CandidateInterview({
   params: { candidateId: string; recruitmentId: string };
 }) {
   const router = useRouter();
+  const utils = api.useUtils();
   const { data: candidate } = api.candidate.getCandidateById.useQuery({
     candidateId,
   });
   const { mutate: completeInterview } =
     api.candidate.completeInterview.useMutation({
       onSuccess: () => {
+        utils.candidate.getCandidateById.invalidate({ candidateId });
+        utils.candidate.getCandidatesByRecruitmentId.invalidate({
+          recruitmentId,
+        });
         toast.success("Interview completed");
         reset();
         router.replace(`/dashboard/${recruitmentId}/interview`);

@@ -26,6 +26,7 @@ import { AnimatePresence } from "framer-motion";
 import { cn } from "~/utils/cn";
 import ConfirmationModal from "../confirmation-modal/ConfirmationModal";
 import dayjs from "dayjs";
+import { toast } from "sonner";
 
 type CandidateCardProps = React.HTMLAttributes<HTMLDivElement> & {
   candidate: Candidate;
@@ -47,13 +48,28 @@ export default function CandidateCard({
   className,
   ...otherProps
 }: CandidateCardProps) {
-  const { mutate: deleteCandidate, isLoading } =
-    api.candidate.deleteCandidate.useMutation({
-      onSuccess: () => closeConfirmationModal(),
-    });
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showConfirmationModal, setShowConfirmationModal] =
     useState<boolean>(false);
+  const { recruitmentId } = useParams<{ recruitmentId: string }>();
+
+  const utils = api.useUtils();
+
+  const { mutate: deleteCandidate, isLoading } =
+    api.candidate.deleteCandidate.useMutation({
+      onSuccess: () => {
+        utils.candidate.getCandidateById.invalidate({ candidateId });
+        utils.candidate.getCandidatesByRecruitmentId.invalidate({
+          recruitmentId,
+        });
+        utils.candidate.getUncheckedCandidatesByRecruitmentId.invalidate({
+          recruitmentId,
+        });
+        utils.recruitment.getAllRecruitmentData.invalidate();
+        toast.success("Candidate deleted");
+        closeConfirmationModal();
+      },
+    });
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);

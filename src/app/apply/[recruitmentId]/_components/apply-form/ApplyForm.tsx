@@ -30,6 +30,7 @@ export default function ApplyForm() {
 
   const params = useParams<{ recruitmentId: string }>();
   const router = useRouter();
+  const utils = api.useUtils();
 
   const { startUpload, isUploading } = useUploadThing("imageUploader", {
     onUploadError: (e) => {
@@ -41,8 +42,11 @@ export default function ApplyForm() {
   const { mutate: addCandidate, isLoading } =
     api.candidate.addCandidate.useMutation({
       onSuccess: () => {
+        utils.candidate.invalidate();
+        utils.recruitment.getAllRecruitmentData.invalidate();
         reset();
         router.push("/apply/success");
+        toast.success("Applied successfully");
       },
       onError: (e) => {
         if (e.message.includes("Unique constraint")) {

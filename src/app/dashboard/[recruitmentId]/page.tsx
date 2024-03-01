@@ -53,62 +53,56 @@ export default async function RecruitmentHome({
       <h1 className="block text-center text-lg font-semibold text-black-900 sm:hidden">
         {recruitment.position}
       </h1>
-      {length ? (
-        <>
-          <div className="grid h-min grid-cols-2 gap-4 accent-main-600 md:grid-cols-4 lg:gap-8">
-            <InfoCard
-              icon={<RiClipboardFill fill={iconFill} size={iconSize} />}
-              title="Total"
-              value={length}
-            />
-            <InfoCard
-              icon={<RiCheckboxCircleFill fill={iconFill} size={iconSize} />}
-              percentage={calculatePercentage(checkedCandidates, length)}
-              title="Checked"
-              value={checkedCandidates}
-            />
-            <InfoCard
-              icon={<RiCalendar2Fill fill={iconFill} size={iconSize} />}
-              percentage={calculatePercentage(scheduledCandidates, length)}
-              title="Scheduled"
-              value={scheduledCandidates}
-            />
-            <InfoCard
-              icon={<RiUserFollowFill fill={iconFill} size={iconSize} />}
-              percentage={calculatePercentage(acceptedCandidates, length)}
-              title="Completed"
-              value={acceptedCandidates}
-            />
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8">
-            <StatisticCard title="Random candidate">
-              {/* TODO add tests when content added */}
-              {randomCandidate ? (
-                <div className="mt-2">
-                  <CandidateCard candidate={randomCandidate} />
-                </div>
-              ) : (
-                <div className="flex h-full items-center justify-center">
-                  <p className="text-black-600">No candidates.</p>
-                </div>
-              )}
-            </StatisticCard>
-            <StatisticCard title="Closest interview candidate">
-              {closestInterviewCandidate ? (
-                <div className="mt-2">
-                  <CandidateCard candidate={closestInterviewCandidate} />
-                </div>
-              ) : (
-                <div className="flex h-full items-center justify-center">
-                  <p className="text-black-600">No candidates.</p>
-                </div>
-              )}
-            </StatisticCard>
-          </div>
-        </>
-      ) : (
-        <div>No candidates</div>
-      )}
+      <div className="grid h-min grid-cols-2 gap-4 accent-main-600 md:grid-cols-4 lg:gap-8">
+        <InfoCard
+          icon={<RiClipboardFill fill={iconFill} size={iconSize} />}
+          title="Total"
+          value={length}
+        />
+        <InfoCard
+          icon={<RiCheckboxCircleFill fill={iconFill} size={iconSize} />}
+          percentage={calculatePercentage(checkedCandidates, length)}
+          title="Checked"
+          value={checkedCandidates}
+        />
+        <InfoCard
+          icon={<RiCalendar2Fill fill={iconFill} size={iconSize} />}
+          percentage={calculatePercentage(scheduledCandidates, length)}
+          title="Scheduled"
+          value={scheduledCandidates}
+        />
+        <InfoCard
+          icon={<RiUserFollowFill fill={iconFill} size={iconSize} />}
+          percentage={calculatePercentage(acceptedCandidates, length)}
+          title="Completed"
+          value={acceptedCandidates}
+        />
+      </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8">
+        <StatisticCard title="Random candidate">
+          {/* TODO add tests when content added */}
+          {randomCandidate ? (
+            <div className="mt-2">
+              <CandidateCard candidate={randomCandidate} />
+            </div>
+          ) : (
+            <div className="flex h-full items-center justify-center">
+              <p className="text-black-600">No candidates.</p>
+            </div>
+          )}
+        </StatisticCard>
+        <StatisticCard title="Closest interview candidate">
+          {closestInterviewCandidate ? (
+            <div className="mt-2">
+              <CandidateCard candidate={closestInterviewCandidate} />
+            </div>
+          ) : (
+            <div className="flex h-full items-center justify-center">
+              <p className="text-black-600">No candidates.</p>
+            </div>
+          )}
+        </StatisticCard>
+      </div>
     </section>
   );
 }

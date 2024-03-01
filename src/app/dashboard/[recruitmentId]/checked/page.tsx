@@ -17,6 +17,8 @@ export default async function CheckedPage({
   const yesCandidates = filterCandidateByRating(candidates, "YES");
   const strongYesCandidates = filterCandidateByRating(candidates, "STRONG_YES");
 
+  //TODO possibility of changing rating
+
   return (
     <section className="mb-14 flex w-full flex-grow gap-8 overflow-x-scroll p-4 sm:mb-0 lg:p-8 min-[1090px]:overflow-x-hidden">
       <Column title="No" titleColor="text-red-400">

@@ -8,8 +8,14 @@ import Calendar from "../calendar/Calendar";
 import dayjs, { Dayjs } from "dayjs";
 import ScheduleFieldSet from "../schedule-field-set/ScheduleFieldSet";
 import { Candidate } from "@prisma/client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { api } from "~/trpc/react";
+import { toast } from "sonner";
 
 export default function ScheduleCandidate({
   pickedCandidate,
@@ -24,9 +30,21 @@ export default function ScheduleCandidate({
   const params = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+  const { recruitmentId } = useParams<{ recruitmentId: string }>();
+  const utils = api.useUtils();
 
   const { mutate: scheduleCandidate } =
-    api.candidate.scheduleCandidate.useMutation();
+    api.candidate.scheduleCandidate.useMutation({
+      onSuccess: () => {
+        toast.success("Candidate scheduled");
+        utils.candidate.getCandidateById.invalidate({
+          candidateId: pickedCandidate?.id,
+        });
+        utils.candidate.getCandidatesByRecruitmentId.invalidate({
+          recruitmentId,
+        });
+      },
+    });
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const [hour, minute]: number[] = e.target.value
