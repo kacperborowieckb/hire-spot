@@ -1,6 +1,6 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { WebhookEvent } from "@clerk/nextjs/server";
+import type { WebhookEvent } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
 
 export async function POST(req: Request) {
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     });
   }
 
-  const payload = await req.json();
+  const payload: Promise<any> = await req.json();
   const body = JSON.stringify(payload);
 
   const wh = new Webhook(WEBHOOK_SECRET);
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       data: {
         id,
         username: first_name,
-        email: email_addresses[0]?.email_address as string,
+        email: email_addresses[0]?.email_address! as string,
         joined: new Date(created_at),
         imgUrl: image_url,
       },

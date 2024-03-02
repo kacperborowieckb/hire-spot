@@ -1,7 +1,7 @@
 import SideBar from "./_components/side-bar/SideBar";
 import Header from "./_components/header/Header";
 
-export default async function RecruitmentHomeLayout({
+export default function RecruitmentHomeLayout({
   children,
   params,
 }: {

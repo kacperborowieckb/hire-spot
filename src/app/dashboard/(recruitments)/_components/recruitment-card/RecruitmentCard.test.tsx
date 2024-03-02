@@ -53,6 +53,6 @@ describe("RecruitmentCard", () => {
       recruitmentCardData.uncheckedCandidates,
     );
 
-    expect(uncheckedCandidates).toBeInTheDocument;
+    expect(uncheckedCandidates).toBeInTheDocument();
   });
 });

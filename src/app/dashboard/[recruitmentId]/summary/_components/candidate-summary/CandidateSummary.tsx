@@ -1,4 +1,4 @@
-import { Candidate } from "@prisma/client";
+import type { Candidate } from "@prisma/client";
 import React from "react";
 import PDFView from "../../../check/_components/pdf-view/PDFView";
 import Image from "next/image";

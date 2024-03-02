@@ -112,7 +112,7 @@ describe("Apply Form", () => {
       await userEvent.click(button);
 
       expect(startUploadMock).toHaveBeenCalled();
-      waitFor(() => expect(mutateMock).toHaveBeenCalled());
+      await waitFor(() => expect(mutateMock).toHaveBeenCalled());
     });
   });
 });

@@ -1,4 +1,4 @@
-import { Candidate, Rating } from "@prisma/client";
+import type { Candidate, Rating } from "@prisma/client";
 
 export const filterCandidateByRating = (
   candidates: Candidate[],

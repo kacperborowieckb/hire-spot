@@ -1,8 +1,7 @@
 "use client";
 
-import { Rating } from "@prisma/client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import type { Rating } from "@prisma/client";
+import React, { type Dispatch, type SetStateAction, useEffect } from "react";
 import { api } from "~/trpc/react";
 import Button from "~/ui/button/Button";
 

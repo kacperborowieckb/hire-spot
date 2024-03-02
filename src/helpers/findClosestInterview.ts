@@ -1,4 +1,4 @@
-import { Candidate } from "@prisma/client";
+import type { Candidate } from "@prisma/client";
 import dayjs from "dayjs";
 
 export const findClosestInterview = (
@@ -7,7 +7,7 @@ export const findClosestInterview = (
   let candidate;
   const now = dayjs();
 
-  for (let currentCandidate of candidates) {
+  for (const currentCandidate of candidates) {
     if (
       dayjs(currentCandidate.scheduledFor).isBefore(candidate?.scheduledFor) &&
       dayjs(currentCandidate.scheduledFor).isAfter(now) &&

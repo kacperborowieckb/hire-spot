@@ -4,7 +4,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import Button from "~/ui/button/Button";
 
-export default async function LinkForRecruitmentPage({
+export default function LinkForRecruitmentPage({
   params,
 }: {
   params: { id: string };

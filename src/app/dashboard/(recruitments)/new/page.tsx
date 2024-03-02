@@ -7,7 +7,7 @@ import Button from "~/ui/button/Button";
 import Image from "next/image";
 import { api } from "~/trpc/react";
 import {
-  TNewRecruitmentSchema,
+  type TNewRecruitmentSchema,
   newRecruitmentSchema,
 } from "~/schemas/newRecruitmentSchema";
 import { toast } from "sonner";
@@ -37,7 +37,7 @@ export default function NewRecruitment() {
         toast.error("Failed to create new recruitment");
       },
       onSuccess(data) {
-        utils.recruitment.getAllRecruitmentData.invalidate();
+        void utils.recruitment.getAllRecruitmentData.invalidate();
         router.push(`/dashboard/new/${data}`);
         toast.success("New recruitment created");
         reset();

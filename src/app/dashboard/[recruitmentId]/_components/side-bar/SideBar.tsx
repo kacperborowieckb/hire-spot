@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import React from "react";
-import { IconType } from "react-icons";
+import type { IconType } from "react-icons";
 import {
   RiAccountPinBoxLine,
   RiCalendarTodoLine,
@@ -54,7 +54,7 @@ export default function SideBar() {
   const params = useParams<{ recruitmentId: string }>();
 
   const currentPage =
-    pages.findLast((page) => pathname.includes(page.href))?.href || "/";
+    pages.findLast((page) => pathname.includes(page.href))?.href ?? "/";
 
   const links = pages.map((page) => {
     const isCurrent = page.href === currentPage;

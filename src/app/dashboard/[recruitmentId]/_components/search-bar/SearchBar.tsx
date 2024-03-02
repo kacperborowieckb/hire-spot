@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { RiSearch2Line, RiUser3Fill } from "react-icons/ri";
 import ClearInput from "~/ui/clear-input/ClearInput";
 import { pages } from "../side-bar/SideBar";
@@ -45,7 +45,7 @@ export default function SearchBar() {
           <Link
             key={candidate.id}
             className="flex w-full items-center gap-1 rounded-md border-border bg-main-50 p-2 hover:bg-main-100"
-            href={`/dashboard/${recruitmentId}/schedule?${params}`}
+            href={`/dashboard/${recruitmentId}/schedule?${params.toString()}`}
           >
             <RiUser3Fill className="mr-2 min-w-max fill-black-900" />
             <span className="text-black-600">Schedule:</span>{" "}
@@ -87,7 +87,7 @@ export default function SearchBar() {
           <Link
             key={candidate.id}
             className="flex w-full items-center gap-1 rounded-md border-border bg-main-50 p-2 hover:bg-main-100"
-            href={`/dashboard/${recruitmentId}/summary?${params}`}
+            href={`/dashboard/${recruitmentId}/summary?${params.toString()}`}
           >
             <RiUser3Fill className="mr-2 min-w-max fill-black-900" />
             <span className="text-black-600">Summary:</span>{" "}

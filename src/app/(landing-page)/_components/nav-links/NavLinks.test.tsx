@@ -9,7 +9,7 @@ jest.mock("@clerk/nextjs", () => ({
 
 describe("NavLinks", () => {
   describe("Render", () => {
-    it("Should render correct links", async () => {
+    it("Should render correct links", () => {
       render(<NavLinks />);
 
       const homeLink = screen.getByText("Home");

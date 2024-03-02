@@ -5,9 +5,9 @@ import CandidateCard from "../../../checked/_components/candidate-card/Candidate
 import { cn } from "~/utils/cn";
 import Button from "~/ui/button/Button";
 import Calendar from "../calendar/Calendar";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs, { type Dayjs } from "dayjs";
 import ScheduleFieldSet from "../schedule-field-set/ScheduleFieldSet";
-import { Candidate } from "@prisma/client";
+import type { Candidate } from "@prisma/client";
 import {
   useParams,
   usePathname,
@@ -37,10 +37,10 @@ export default function ScheduleCandidate({
     api.candidate.scheduleCandidate.useMutation({
       onSuccess: () => {
         toast.success("Candidate scheduled");
-        utils.candidate.getCandidateById.invalidate({
+        void utils.candidate.getCandidateById.invalidate({
           candidateId: pickedCandidate?.id,
         });
-        utils.candidate.getCandidatesByRecruitmentId.invalidate({
+        void utils.candidate.getCandidatesByRecruitmentId.invalidate({
           recruitmentId,
         });
       },
@@ -61,7 +61,7 @@ export default function ScheduleCandidate({
   const removeSearchParams = () => {
     const searchParams = new URLSearchParams(params);
     searchParams.delete("candidate");
-    router.replace(`${pathname}?${searchParams}`);
+    router.replace(`${pathname}?${searchParams.toString()}`);
   };
 
   const canSchedule = selectedDate && pickedCandidate;

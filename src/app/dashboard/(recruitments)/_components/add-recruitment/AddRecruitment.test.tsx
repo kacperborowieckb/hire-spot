@@ -5,7 +5,7 @@ describe("AddRecruitment", () => {
   it("Should render card with correct link", () => {
     render(<AddRecruitment />);
 
-    const card = screen.getByRole("link") as HTMLLinkElement;
+    const card: HTMLLinkElement = screen.getByRole("link");
 
     expect(card.href).toContain("/dashboard/new");
     expect(card).toBeInTheDocument();

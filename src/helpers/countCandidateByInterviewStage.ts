@@ -1,4 +1,4 @@
-import { Candidate, InterviewStage } from "@prisma/client";
+import type { Candidate, InterviewStage } from "@prisma/client";
 
 type TCandidatesArray = Candidate[];
 

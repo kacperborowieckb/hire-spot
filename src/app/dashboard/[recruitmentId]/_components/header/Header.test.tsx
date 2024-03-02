@@ -39,7 +39,7 @@ describe("Header", () => {
   it("Should render logo", async () => {
     await renderHeader();
 
-    const logo = screen.getByRole("img") as HTMLImageElement;
+    const logo: HTMLImageElement = screen.getByRole("img");
 
     expect(logo).toBeInTheDocument();
     expect(logo.src).toContain("/logo.svg");

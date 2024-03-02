@@ -5,7 +5,6 @@ import PDFView from "./_components/pdf-view/PDFView";
 import RateButtons from "./_components/rate-buttons/RateButtons";
 import { api } from "~/trpc/react";
 import { useState } from "react";
-import Spinner from "~/ui/Spinner";
 import NoCandidateFound from "./_components/no-candidate-found/NoCandidateFound";
 import NoMoreCandidates from "./_components/no-more-candidates/NoMoreCandidates";
 import { usePathname, useRouter } from "next/navigation";
@@ -23,7 +22,7 @@ export default function CheckPage({
 }) {
   const [index, setIndex] = useState<number>(0);
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const router = useRouter();
 
   const { data: candidates = [], isLoading } =
     api.candidate.getUncheckedCandidatesByRecruitmentId.useQuery({
@@ -53,7 +52,7 @@ export default function CheckPage({
       ? params.set("candidateId", candidateId)
       : params.delete("candidateId");
 
-    replace(`${pathname}?${params}`);
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   if (isLoading) return <CheckLoadingState />;

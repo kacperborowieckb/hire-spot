@@ -52,7 +52,7 @@ export default function SchedulePage({
   const pickCandidate = (candidateId: string) => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("candidate", candidateId);
-    router.replace(`${pathname}?${newSearchParams}`);
+    router.replace(`${pathname}?${newSearchParams.toString()}`);
   };
 
   if (isLoadingCandidates || isLoadingRecruitment)

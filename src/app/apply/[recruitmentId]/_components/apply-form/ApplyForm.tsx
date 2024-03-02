@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { TApplySchema, applySchema } from "~/schemas/applySchema";
+import { type TApplySchema, applySchema } from "~/schemas/applySchema";
 import { api } from "~/trpc/react";
 import Button from "~/ui/button/Button";
 import FileInput from "~/ui/file-input/FileInput";
@@ -42,8 +42,8 @@ export default function ApplyForm() {
   const { mutate: addCandidate, isLoading } =
     api.candidate.addCandidate.useMutation({
       onSuccess: () => {
-        utils.candidate.invalidate();
-        utils.recruitment.getAllRecruitmentData.invalidate();
+        void utils.candidate.invalidate();
+        void utils.recruitment.getAllRecruitmentData.invalidate();
         reset();
         router.push("/apply/success");
         toast.success("Applied successfully");
@@ -59,7 +59,7 @@ export default function ApplyForm() {
     });
 
   const onSubmit = async ({ email, name, cv, description }: TApplySchema) => {
-    const fileData = await startUpload([cv]);
+    const fileData = await startUpload([cv as File]);
     if (fileData && fileData[0]) {
       addCandidate({
         email,

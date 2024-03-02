@@ -1,4 +1,4 @@
-import { Rating } from "@prisma/client";
+import type { Rating } from "@prisma/client";
 
 type TCandidatesArray = Required<{ rating?: string }[]>;
 

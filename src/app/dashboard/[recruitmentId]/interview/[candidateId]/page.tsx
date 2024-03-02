@@ -35,8 +35,8 @@ export default function CandidateInterview({
   const { mutate: completeInterview } =
     api.candidate.completeInterview.useMutation({
       onSuccess: () => {
-        utils.candidate.getCandidateById.invalidate({ candidateId });
-        utils.candidate.getCandidatesByRecruitmentId.invalidate({
+        void utils.candidate.getCandidateById.invalidate({ candidateId });
+        void utils.candidate.getCandidatesByRecruitmentId.invalidate({
           recruitmentId,
         });
         toast.success("Interview completed");

@@ -15,7 +15,7 @@ describe("Hero", () => {
   it("Should render correct image", () => {
     render(<Hero />);
 
-    const img = screen.getByTestId("hero-img") as HTMLImageElement;
+    const img: HTMLImageElement = screen.getByTestId("hero-img");
 
     expect(img).toBeInTheDocument();
     expect(img.src).toContain("hero.svg");

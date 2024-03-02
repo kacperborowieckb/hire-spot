@@ -6,7 +6,6 @@ import Footer from "./(landing-page)/_components/footer/Footer";
 import Image from "next/image";
 
 export default function GlobalError({
-  error,
   reset,
 }: {
   error: Error & { digest?: string };

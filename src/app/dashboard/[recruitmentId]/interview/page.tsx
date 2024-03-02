@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Calendar from "../schedule/_components/calendar/Calendar";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs, { type Dayjs } from "dayjs";
 import { api } from "~/trpc/react";
 import CandidateCard from "../checked/_components/candidate-card/CandidateCard";
 import NoInterviews from "./_components/NoInterviews";
@@ -48,8 +48,9 @@ export default function Interview({
         </p>
         <Column title={"Today's interviews"} className="flex-grow">
           {candidatesForToday.length > 0 ? (
-            candidatesForToday.map((candidate) => (
+            candidatesForToday.map((candidate, i) => (
               <Link
+                key={i}
                 href={`/dashboard/${recruitmentId}/interview/${candidate.id}`}
               >
                 <CandidateCard
@@ -75,8 +76,9 @@ export default function Interview({
           className="flex-grow"
         >
           {candidatesForSelectedDay.length > 0 ? (
-            candidatesForSelectedDay.map((candidate) => (
+            candidatesForSelectedDay.map((candidate, i) => (
               <Link
+                key={i}
                 href={`/dashboard/${recruitmentId}/interview/${candidate.id}`}
               >
                 <CandidateCard candidate={candidate} withDropdown={false} />

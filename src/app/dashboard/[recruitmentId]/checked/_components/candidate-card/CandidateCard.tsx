@@ -1,6 +1,6 @@
 "use client";
 
-import { Candidate } from "@prisma/client";
+import type { Candidate } from "@prisma/client";
 import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import {
@@ -59,14 +59,14 @@ export default function CandidateCard({
   const { mutate: deleteCandidate, isLoading } =
     api.candidate.deleteCandidate.useMutation({
       onSuccess: () => {
-        utils.candidate.getCandidateById.invalidate({ candidateId });
-        utils.candidate.getCandidatesByRecruitmentId.invalidate({
+        void utils.candidate.getCandidateById.invalidate({ candidateId });
+        void utils.candidate.getCandidatesByRecruitmentId.invalidate({
           recruitmentId,
         });
-        utils.candidate.getUncheckedCandidatesByRecruitmentId.invalidate({
+        void utils.candidate.getUncheckedCandidatesByRecruitmentId.invalidate({
           recruitmentId,
         });
-        utils.recruitment.getAllRecruitmentData.invalidate();
+        void utils.recruitment.getAllRecruitmentData.invalidate();
         toast.success("Candidate deleted");
         closeConfirmationModal();
       },
@@ -167,7 +167,9 @@ function CandidateCardDropdown({
   const scheduleCandidate = () => {
     const searchParams = new URLSearchParams(params);
     searchParams.set("candidate", candidateId);
-    router.push(`/dashboard/${recruitmentId}/schedule?${searchParams}`);
+    router.push(
+      `/dashboard/${recruitmentId}/schedule?${searchParams.toString()}`,
+    );
   };
 
   const goToInterview = () =>
@@ -176,7 +178,9 @@ function CandidateCardDropdown({
   const goToSummary = () => {
     const searchParams = new URLSearchParams(params);
     searchParams.set("candidate", candidateId);
-    router.push(`/dashboard/${recruitmentId}/summary?${searchParams}`);
+    router.push(
+      `/dashboard/${recruitmentId}/summary?${searchParams.toString()}`,
+    );
   };
 
   const removeCandidate = () => openConfirmationModal();
