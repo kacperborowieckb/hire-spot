@@ -8,17 +8,17 @@ export default function Home() {
       <Hero />
       <h2
         id="benefits"
-        className="text-main-950 p-12 text-center text-4xl font-medium sm:p-16 sm:text-5xl"
+        className="text-text-900 p-12 text-center text-4xl font-medium sm:p-16 sm:text-5xl"
       >
         Explore our{" "}
-        <span className="text-main-600 relative font-extrabold">
+        <span className="relative font-extrabold text-main-600">
           features
           <Image
             src={"/underline.svg"}
             alt=""
             width={260}
             height={30}
-            className="absolute left-1/2 top-full w-full  max-w-[260px] -translate-x-1/2 transform lg:left-0 lg:translate-x-0"
+            className="absolute left-1/2 top-full w-full max-w-[260px] -translate-x-1/2 transform p-1 lg:left-0 lg:translate-x-0"
           />
         </span>
       </h2>

@@ -6,8 +6,9 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { initTRPC } from "@trpc/server";
-import { type NextRequest } from "next/server";
+// eslint-disable-next-line
+import { getAuth } from "@clerk/nextjs/server";
+import { TRPCError, initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
@@ -21,8 +22,11 @@ import { db } from "~/server/db";
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
 
+type AuthObject = ReturnType<typeof getAuth>;
+
 interface CreateContextOptions {
   headers: Headers;
+  currentUser: string | null;
 }
 
 /**
@@ -38,6 +42,7 @@ interface CreateContextOptions {
 export const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     headers: opts.headers,
+    currentUser: opts.currentUser,
     db,
   };
 };
@@ -48,11 +53,19 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = (opts: { req: NextRequest }) => {
+export const createTRPCContext = async ({
+  headers,
+  auth,
+}: {
+  headers: Headers;
+  auth: AuthObject;
+  // eslint-disable-next-line
+}) => {
   // Fetch stuff that depends on the request
 
   return createInnerTRPCContext({
-    headers: opts.req.headers,
+    headers: headers,
+    currentUser: auth.userId,
   });
 };
 
@@ -100,3 +113,63 @@ export const createTRPCRouter = t.router;
  * are logged in.
  */
 export const publicProcedure = t.procedure;
+
+const enforceUserIsSignedIn = t.middleware(({ ctx, next }) => {
+  if (!ctx.currentUser) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  return next({
+    ctx: { currentUser: ctx.currentUser },
+  });
+});
+
+const enforceUserIsCreatorOfRecruitment = t.middleware(
+  async ({ ctx, next, rawInput }) => {
+    if (!ctx.currentUser) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    const recruitmentId = (rawInput as { recruitmentId: string }).recruitmentId;
+    const recruitmentData = await ctx.db.recruitment.findUnique({
+      where: { id: recruitmentId },
+      include: { creator: true },
+    });
+
+    if (recruitmentData?.creator.id !== ctx.currentUser) {
+      throw new TRPCError({ code: "CONFLICT" });
+    }
+
+    return next({
+      ctx: { currentUser: ctx.currentUser },
+    });
+  },
+);
+
+const enforceUserHaveAccessToCandidateDate = t.middleware(
+  async ({ ctx, next, rawInput }) => {
+    if (!ctx.currentUser) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    const candidateId = (rawInput as { candidateId: string }).candidateId;
+    const candidate = await ctx.db.candidate.findUnique({
+      where: { id: candidateId },
+      include: { recruitment: true },
+    });
+
+    if (candidate?.recruitment.creatorId !== ctx.currentUser) {
+      throw new TRPCError({ code: "CONFLICT" });
+    }
+
+    return next({ ctx: { currentUser: ctx.currentUser } });
+  },
+);
+
+export const privateProcedure = t.procedure.use(enforceUserIsSignedIn);
+export const creatorProcedure = t.procedure.use(
+  enforceUserIsCreatorOfRecruitment,
+);
+export const candidateAccessProcedure = t.procedure.use(
+  enforceUserHaveAccessToCandidateDate,
+);

@@ -43,7 +43,7 @@ describe("Benefit", () => {
   it("Image contain correct properties", () => {
     render(BenefitWithProps);
 
-    const img = screen.getByRole("img") as HTMLImageElement;
+    const img: HTMLImageElement = screen.getByRole("img");
 
     expect(img.src).toContain(mockBenefit.src);
     expect(img.alt).toEqual(mockBenefit.alt);

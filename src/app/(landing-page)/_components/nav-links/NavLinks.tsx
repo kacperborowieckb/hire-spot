@@ -1,10 +1,9 @@
-"use client";
-
 import Link from "next/link";
 import React from "react";
-import { fadeInAnimationVariants } from "~/app/utils/variants";
-import { motion } from "framer-motion";
+import { fadeInAnimationVariants } from "~/utils/variants";
 import { usePathname } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
+import { MotionDiv } from "~/ui/motion-components/MotionComponents";
 
 const links: { name: string; href: string }[] = [
   { name: "Home", href: "/" },
@@ -14,18 +13,24 @@ const links: { name: string; href: string }[] = [
 
 export default function NavLinks({ toggleNav }: { toggleNav?: () => void }) {
   const pathname = usePathname();
-  const linksContent = links.map(({ name, href }, i) => (
-    <motion.div variants={fadeInAnimationVariants} key={i}>
+  const { isSignedIn } = useUser();
+
+  const currentLinks = isSignedIn
+    ? [...links, { name: "Dashboard", href: "/dashboard" }]
+    : links;
+
+  const linksContent = currentLinks.map(({ name, href }, i) => (
+    <MotionDiv variants={fadeInAnimationVariants} key={i}>
       <Link
         href={href}
         onClick={toggleNav}
-        className={`hover:text-main-600 font-normal ${
+        className={`font-normal hover:text-main-600 ${
           pathname === href && "text-main-600"
         }`}
       >
         {name}
       </Link>
-    </motion.div>
+    </MotionDiv>
   ));
 
   return linksContent;

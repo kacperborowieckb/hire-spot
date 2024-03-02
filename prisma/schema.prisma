@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -11,12 +11,53 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model User {
+  id           String        @id @unique @default(cuid())
+  username     String   
+  email        String        @unique
+  imgUrl       String
+  joined       DateTime
+  recruitments Recruitment[]
+}
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model Recruitment {
+  id          String      @id @unique @default(cuid())
+  creator     User        @relation(fields: [creatorId], references: [id])
+  creatorId   String
+  position    String
+  description String
+  createdAt   DateTime
+  candidates  Candidate[]
 
-    @@index([name])
+  @@index([creatorId])
+}
+
+model Candidate {
+  id             String         @id @unique @default(cuid())
+  recruitment    Recruitment    @relation(fields: [recruitmentId], references: [id])
+  recruitmentId  String
+  cvUrl          String         @unique
+  rating         Rating         @default(UNCHECKED)
+  forInterview   Boolean        @default(false)
+  interviewStage InterviewStage?
+  email          String         @unique
+  name           String
+  description    String?       
+  scheduledFor   DateTime?  
+  summary        String?   
+  appliedDate    DateTime    
+
+  @@index([recruitmentId])
+}
+
+enum Rating {
+  NO
+  UNCHECKED
+  YES
+  STRONG_YES
+}
+
+enum InterviewStage {
+  SCHEDULED
+  COMPLETED
 }

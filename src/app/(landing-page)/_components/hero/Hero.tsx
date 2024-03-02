@@ -1,11 +1,13 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Button from "~/app/ui/button/Button";
-import { motion } from "framer-motion";
-import { fadeInAnimationVariants } from "~/app/utils/variants";
+import Button from "~/ui/button/Button";
+import { fadeInAnimationVariants } from "~/utils/variants";
+import {
+  MotionDiv,
+  MotionH1,
+  MotionP,
+} from "~/ui/motion-components/MotionComponents";
 
 export default function Hero() {
   return (
@@ -13,13 +15,13 @@ export default function Hero() {
       data-testid="hero"
       className="mx-4 flex h-[calc(100dvh-52px-32px)] flex-col items-center justify-center gap-8  lg:flex-row lg:gap-16"
     >
-      <motion.div
+      <MotionDiv
         initial="initial"
         animate="animate"
         transition={{ staggerChildren: 0.15 }}
         className="flex max-w-full flex-col text-center lg:max-w-md lg:text-left"
       >
-        <motion.h1
+        <MotionH1
           className="mb-4 mt-8 text-4xl font-bold sm:mt-0 sm:text-5xl"
           variants={fadeInAnimationVariants}
         >
@@ -32,15 +34,18 @@ export default function Hero() {
               alt=""
               width={260}
               height={30}
-              className="absolute left-1/2 top-full w-auto  max-w-[260px] -translate-x-1/2 transform lg:left-0 lg:translate-x-0"
+              className="absolute left-1/2 top-full w-auto max-w-[260px] -translate-x-1/2 transform p-1 lg:left-0 lg:translate-x-0"
             />
           </span>
-        </motion.h1>
-        <motion.p className="mb-4 text-lg" variants={fadeInAnimationVariants}>
+        </MotionH1>
+        <MotionP
+          className="text-text-600 mb-4 text-lg"
+          variants={fadeInAnimationVariants}
+        >
           Discover a Smarter Way to Recruit, Streamline Your Hiring, and Build
           Your Dream Team.
-        </motion.p>
-        <motion.div
+        </MotionP>
+        <MotionDiv
           className="flex justify-center gap-4 lg:justify-normal"
           variants={fadeInAnimationVariants}
         >
@@ -50,9 +55,9 @@ export default function Hero() {
           <Link href={"/#benefits"}>
             <Button variant="outline">See more</Button>
           </Link>
-        </motion.div>
-      </motion.div>
-      <motion.div
+        </MotionDiv>
+      </MotionDiv>
+      <MotionDiv
         variants={fadeInAnimationVariants}
         initial="initial"
         animate="animate"
@@ -66,7 +71,7 @@ export default function Hero() {
           width={448}
           height={300}
         />
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 }

@@ -2,8 +2,14 @@ import { render, screen } from "@testing-library/react";
 import Nav from "./Nav";
 import "intersection-observer";
 import userEvent from "@testing-library/user-event";
+import { useUser } from "@clerk/nextjs";
 
-// add test for sign in / sign out when done
+jest.mock("@clerk/nextjs", () => ({
+  useUser: jest.fn().mockReturnValue({ isSignedIn: false, isLoaded: true }),
+  UserButton: () => {
+    return <button data-testid="user-button" />;
+  },
+}));
 
 describe("Nav", () => {
   describe("Render", () => {
@@ -45,6 +51,28 @@ describe("Nav", () => {
       const openNavButton = screen.getByTestId("open-nav-button");
 
       expect(openNavButton).toBeInTheDocument();
+    });
+
+    it("Should not display user button when not logged in", () => {
+      render(<Nav />);
+
+      const userButton = screen.queryByTestId("user-button");
+
+      expect(userButton).not.toBeInTheDocument();
+    });
+
+    it("Should display user button when logged in", () => {
+      (useUser as jest.Mock).mockImplementation(() => ({
+        isSignedIn: true,
+        isLoaded: true,
+      }));
+      render(<Nav />);
+
+      const userButton = screen.queryByTestId("user-button");
+      const signInButton = screen.queryByRole("button", { name: "Sign in" });
+
+      expect(userButton).toBeInTheDocument();
+      expect(signInButton).not.toBeInTheDocument();
     });
   });
 

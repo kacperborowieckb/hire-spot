@@ -3,10 +3,13 @@ import NavLinks from "./NavLinks";
 import { userEvent } from "@testing-library/user-event";
 
 const toggleNavMock = jest.fn();
+jest.mock("@clerk/nextjs", () => ({
+  useUser: jest.fn().mockReturnValue({ isSignedIn: false }),
+}));
 
 describe("NavLinks", () => {
   describe("Render", () => {
-    it("Should render correct links", async () => {
+    it("Should render correct links", () => {
       render(<NavLinks />);
 
       const homeLink = screen.getByText("Home");
