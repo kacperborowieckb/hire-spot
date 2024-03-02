@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       data: {
         id,
         username: first_name,
-        email: email_addresses[0]!.email_address as string,
+        email: email_addresses[0]!.email_address,
         joined: new Date(created_at),
         imgUrl: image_url,
       },

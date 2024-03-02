@@ -79,6 +79,7 @@ export default function ScheduleCandidate({
     setSelectedDate(
       selectedDate.hour(selectedTime.hour).minute(selectedTime.minute),
     );
+    // eslint-disable-next-line
   }, [selectedTime]);
 
   return (

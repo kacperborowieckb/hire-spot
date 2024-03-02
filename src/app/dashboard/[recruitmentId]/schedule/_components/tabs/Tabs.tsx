@@ -14,6 +14,7 @@ export default function Tabs({ tab, setTab }: TabsProps) {
     if (!width) return;
     if (width <= 1050 && tab === "both") setTab("yes");
     if (width > 1050 && tab !== "both") setTab("both");
+    // eslint-disable-next-line
   }, [width]);
 
   return (

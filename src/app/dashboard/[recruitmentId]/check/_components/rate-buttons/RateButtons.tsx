@@ -65,6 +65,7 @@ export default function RateButtons({
 
   useEffect(() => {
     setCandidateIdSearchParams(candidateId);
+    // eslint-disable-next-line
   }, []);
 
   return (

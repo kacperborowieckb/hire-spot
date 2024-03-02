@@ -12,6 +12,7 @@ import { getAuth } from "@clerk/nextjs/server";
 import { NextRequest } from "next/server";
 import { observable } from "@trpc/server/observable";
 import { callProcedure } from "@trpc/server";
+// eslint-disable-next-line
 import { TRPCErrorResponse } from "@trpc/server/rpc";
 
 const createContext = cache(() => {

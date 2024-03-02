@@ -6,7 +6,7 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-
+// eslint-disable-next-line
 import { getAuth } from "@clerk/nextjs/server";
 import { TRPCError, initTRPC } from "@trpc/server";
 import superjson from "superjson";
@@ -53,13 +53,13 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-// eslint-disable-next-line
 export const createTRPCContext = async ({
   headers,
   auth,
 }: {
   headers: Headers;
   auth: AuthObject;
+  // eslint-disable-next-line
 }) => {
   // Fetch stuff that depends on the request
 

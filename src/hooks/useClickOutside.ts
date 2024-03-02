@@ -16,5 +16,6 @@ export default function useClickOutside<T extends HTMLElement>(
     window.addEventListener("mousedown", handleClick);
 
     return () => window.removeEventListener("mousedown", handleClick);
+    // eslint-disable-next-line
   }, []);
 }

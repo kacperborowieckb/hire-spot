@@ -20,6 +20,7 @@ export const applySchema = z.object({
     .refine((file) => file?.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
     // eslint-disable-next-line
     .refine(
+      // eslint-disable-next-line
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       "Only .pdf files are accepted.",
     ),
