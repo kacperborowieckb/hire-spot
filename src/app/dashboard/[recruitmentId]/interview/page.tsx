@@ -24,8 +24,6 @@ export default function Interview({
     (candidate) => candidate.forInterview,
   );
 
-  //TODO loading state for candidate card
-
   const handleDateChange = (date: Dayjs) => setSelectedDate(date);
 
   const candidatesForToday = candidatesForInterview.filter((candidate) =>

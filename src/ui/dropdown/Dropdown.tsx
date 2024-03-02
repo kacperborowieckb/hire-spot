@@ -46,6 +46,8 @@ function DropdownTrigger({ children }: { children: React.ReactNode }) {
       className="cursor-pointer hover:scale-105 disabled:pointer-events-none"
       onClick={(e) => toggleDropdown(e)}
       disabled={isOpen}
+      aria-haspopup="true"
+      aria-expanded={isOpen}
     >
       {children}
     </button>
@@ -55,13 +57,18 @@ function DropdownTrigger({ children }: { children: React.ReactNode }) {
 function DropdownContainer({ children }: { children: React.ReactNode }) {
   // this additional component reduce amount of listeners => from all of closed dropdowns to only one open
   const { setIsOpen } = useContext(DropDownContext);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLUListElement>(null);
 
   useClickOutside(ref, () => setIsOpen(false));
 
+  const closeDropdown = (e: React.FocusEvent<HTMLUListElement, Element>) => {
+    if (!ref.current?.contains(e.relatedTarget)) {
+      setIsOpen(false);
+    }
+  };
+
   return (
     <MotionDiv
-      ref={ref}
       variants={dropdownVariants}
       initial="initial"
       animate="show"
@@ -69,8 +76,11 @@ function DropdownContainer({ children }: { children: React.ReactNode }) {
       className="relative"
     >
       <ul
+        ref={ref}
         onClick={(e) => e.stopPropagation()}
+        onBlur={(e) => closeDropdown(e)}
         className="absolute right-0 top-2 flex min-w-40 flex-col gap-1 rounded-md border border-border bg-main-50 p-[6px] shadow-md"
+        aria-labelledby="dropdown-trigger"
       >
         {children}
       </ul>
@@ -107,8 +117,10 @@ function DropdownItem({ children, onClick, ...otherProps }: DropdownItemProps) {
 
   return (
     <li
-      className="flex min-w-max gap-2 rounded-md px-2 py-[2px] text-black-600 hover:bg-main-100"
+      className="flex min-w-max gap-2 rounded-md px-2 py-[2px] text-black-600 hover:bg-main-100 focus:bg-main-100"
       onClick={(e) => handleClick(e)}
+      role="menuitem"
+      tabIndex={0}
       {...otherProps}
     >
       {children}

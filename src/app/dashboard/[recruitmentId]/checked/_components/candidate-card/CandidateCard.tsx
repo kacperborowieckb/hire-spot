@@ -113,7 +113,6 @@ export default function CandidateCard({
         </section>
         <p className="line-clamp-2 flex-1 text-black-600">{description}</p>
         <section className="mt-1 flex">
-          {/* TODO add appliedDate */}
           <p className="flex-grow text-sm text-black-900">
             Applied:{" "}
             <span className="whitespace-nowrap text-sm text-black-600">
