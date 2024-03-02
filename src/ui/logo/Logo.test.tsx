@@ -5,7 +5,7 @@ describe("Logo", () => {
   it("Should render correctly", () => {
     render(<Logo />);
 
-    const logoImg = screen.getByRole("img") as HTMLImageElement;
+    const logoImg: HTMLImageElement = screen.getByRole("img");
 
     expect(logoImg).toBeInTheDocument();
     expect(logoImg.src).toContain("logo.svg");

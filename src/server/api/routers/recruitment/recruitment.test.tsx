@@ -1,12 +1,12 @@
-import { PrismaClient, Rating, Recruitment } from "@prisma/client";
+import type { PrismaClient, Rating, Recruitment } from "@prisma/client";
 import { mockDeep } from "jest-mock-extended";
-import { AppRouter, appRouter } from "../../root";
-import { inferProcedureInput } from "@trpc/server";
+import { type AppRouter, appRouter } from "../../root";
+import type { inferProcedureInput } from "@trpc/server";
 
 jest.mock("uploadthing/server");
 
 describe("Recruitment router", () => {
-  it("Get recruitment should not work without auth", () => {
+  it("Get recruitment should not work without auth", async () => {
     const prismaMock = mockDeep<PrismaClient>();
     const caller = appRouter.createCaller({
       currentUser: null,
@@ -14,7 +14,7 @@ describe("Recruitment router", () => {
       headers: new Headers(),
     });
 
-    expect(
+    await expect(
       async () => await caller.recruitment.getAllRecruitmentData(undefined),
     ).rejects.toThrow("UNAUTHORIZED");
   });
@@ -92,7 +92,7 @@ describe("Recruitment router", () => {
     });
   });
 
-  it("Get recruitment by id should not work without auth", () => {
+  it("Get recruitment by id should not work without auth", async () => {
     const prismaMock = mockDeep<PrismaClient>();
     const caller = appRouter.createCaller({
       currentUser: null,
@@ -104,7 +104,7 @@ describe("Recruitment router", () => {
       AppRouter["recruitment"]["getRecruitmentById"]
     > = { id: "mockInputId" };
 
-    expect(
+    await expect(
       async () => await caller.recruitment.getRecruitmentById(input),
     ).rejects.toThrow("UNAUTHORIZED");
   });
@@ -147,7 +147,7 @@ describe("Recruitment router", () => {
       AppRouter["recruitment"]["addRecruitment"]
     > = { description: "mockDescription", positionTitle: "mockPositionTitle" };
 
-    expect(
+    await expect(
       async () => await caller.recruitment.addRecruitment(input),
     ).rejects.toThrow("UNAUTHORIZED");
   });

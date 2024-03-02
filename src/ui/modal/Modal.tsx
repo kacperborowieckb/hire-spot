@@ -5,7 +5,7 @@ import useClickOutside from "~/hooks/useClickOutside";
 import { cn } from "~/utils/cn";
 import { MotionDiv } from "../motion-components/MotionComponents";
 import { bgVariants, modalVariants } from "~/utils/variants";
-import { MotionProps } from "framer-motion";
+import { type MotionProps } from "framer-motion";
 
 type ModalProps = React.HTMLAttributes<HTMLDivElement> &
   MotionProps & {

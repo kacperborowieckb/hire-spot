@@ -53,6 +53,7 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
+// eslint-disable-next-line
 export const createTRPCContext = async ({
   headers,
   auth,

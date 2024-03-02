@@ -41,7 +41,7 @@ export const candidateRouter = createTRPCRouter({
         });
       } catch (err) {
         if (err instanceof Error) {
-          utapi.deleteFiles(input.imgKey);
+          void utapi.deleteFiles(input.imgKey);
           throw new TRPCError({ code: "CONFLICT", message: err.message });
         }
       }

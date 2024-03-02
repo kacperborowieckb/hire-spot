@@ -60,6 +60,7 @@ export default function ApplyForm() {
 
   const onSubmit = async ({ email, name, cv, description }: TApplySchema) => {
     const fileData = await startUpload([cv as File]);
+    // eslint-disable-next-line
     if (fileData && fileData[0]) {
       addCandidate({
         email,

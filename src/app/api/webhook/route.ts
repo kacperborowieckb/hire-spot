@@ -22,8 +22,8 @@ export async function POST(req: Request) {
       status: 400,
     });
   }
-
-  const payload: Promise<any> = await req.json();
+  // eslint-disable-next-line
+  const payload = await req.json();
   const body = JSON.stringify(payload);
 
   const wh = new Webhook(WEBHOOK_SECRET);
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       data: {
         id,
         username: first_name,
-        email: email_addresses[0]?.email_address! as string,
+        email: email_addresses[0]!.email_address as string,
         joined: new Date(created_at),
         imgUrl: image_url,
       },

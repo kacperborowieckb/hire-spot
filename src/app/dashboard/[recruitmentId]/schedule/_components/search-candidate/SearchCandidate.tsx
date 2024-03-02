@@ -8,7 +8,7 @@ import ClearInput from "~/ui/clear-input/ClearInput";
 export default function SearchCandidate() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const router = useRouter();
 
   const handleSearch = (search: string) => {
     const params = new URLSearchParams(searchParams);
@@ -17,7 +17,7 @@ export default function SearchCandidate() {
     } else {
       params.delete("search");
     }
-    replace(`${pathname}?${params.toString()}`);
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   return (

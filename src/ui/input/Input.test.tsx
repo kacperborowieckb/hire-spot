@@ -87,7 +87,7 @@ describe("Input", () => {
     it("Should have correct value in input", async () => {
       render(<InputForTests />);
 
-      const input = screen.getByLabelText(/username/i) as HTMLInputElement;
+      const input: HTMLInputElement = screen.getByLabelText(/username/i);
 
       expect(input.value).toBe("");
 
@@ -99,9 +99,7 @@ describe("Input", () => {
     it("Should have correct value in textarea", async () => {
       render(<InputForTests as="textarea" />);
 
-      const textarea = screen.getByLabelText(
-        /username/i,
-      ) as HTMLTextAreaElement;
+      const textarea: HTMLTextAreaElement = screen.getByLabelText(/username/i);
 
       expect(textarea.value).toBe("");
 

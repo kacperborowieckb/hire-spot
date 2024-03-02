@@ -1,6 +1,10 @@
-import React, { InputHTMLAttributes, type LabelHTMLAttributes } from "react";
-import { FieldValues, UseControllerProps } from "react-hook-form";
+import React, {
+  type InputHTMLAttributes,
+  type LabelHTMLAttributes,
+} from "react";
+import type { FieldValues, UseControllerProps } from "react-hook-form";
 import { ControlledInput } from "../input/Input";
+import { cn } from "~/utils/cn";
 
 type InputBaseProps = {
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
@@ -64,11 +68,12 @@ export default function FileInput<T extends FieldValues>({
               id={controllerProps.name}
               type="file"
               aria-invalid={errorMessage !== undefined}
-              className={`mb-3 flex w-full rounded-lg border-2 border-dashed border-main-200 bg-main-100 p-4 text-[0] text-transparent shadow-md outline-main-600 file:mx-auto file:my-4 file:flex file:cursor-pointer file:rounded-lg file:border-2 file:border-dashed file:border-main-200 file:bg-transparent file:px-4 file:py-2 file:text-base file:font-medium file:hover:border-main-400 file:active:border-main-300 ${
-                errorMessage
-                  ? "border-error-border-dark outline-error-border-dark"
-                  : ""
-              }`}
+              className={cn(
+                "`mb-3 flex w-full rounded-lg border-2 border-dashed border-main-200 bg-main-100 p-4 text-[0] text-transparent shadow-md outline-main-600 file:mx-auto file:my-4 file:flex file:cursor-pointer file:rounded-lg file:border-2 file:border-dashed file:border-main-200 file:bg-transparent file:px-4 file:py-2 file:text-base file:font-medium file:hover:border-main-400 file:active:border-main-300",
+                errorMessage &&
+                  "border-error-border-dark outline-error-border-dark",
+                inputClass,
+              )}
               onChange={(e) => {
                 const files = e.target.files;
                 if (files?.length) {

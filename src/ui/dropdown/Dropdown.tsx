@@ -2,8 +2,8 @@
 
 import { AnimatePresence } from "framer-motion";
 import React, {
-  Dispatch,
-  SetStateAction,
+  type Dispatch,
+  type SetStateAction,
   createContext,
   useContext,
   useRef,

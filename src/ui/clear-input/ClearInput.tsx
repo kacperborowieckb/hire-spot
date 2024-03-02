@@ -1,5 +1,5 @@
-import React, { InputHTMLAttributes } from "react";
-import { IconType } from "react-icons";
+import React, { type InputHTMLAttributes } from "react";
+import { type IconType } from "react-icons";
 import { cn } from "~/utils/cn";
 
 type ClearInputProps = InputHTMLAttributes<HTMLInputElement> & {

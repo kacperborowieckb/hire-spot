@@ -14,8 +14,11 @@ export const applySchema = z.object({
   ),
   cv: z
     .any()
+    // eslint-disable-next-line
     .refine((file) => Boolean(file?.name), "Cv is required.")
+    // eslint-disable-next-line
     .refine((file) => file?.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
+    // eslint-disable-next-line
     .refine(
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       "Only .pdf files are accepted.",

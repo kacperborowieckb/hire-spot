@@ -25,6 +25,7 @@ jest.mock("../../../../../../src/trpc/server", () => {
 mockGetRecruitmentById.mockReturnValue({ position: "mockPositionTitle" });
 
 const renderHeader = async () =>
+  // eslint-disable-next-line
   await act(async () => render(await Header({ recruitmentId: "mockId" })));
 
 describe("Header", () => {

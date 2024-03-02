@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { useUploadThing } from "~/utils/uploadthing";
 
 const { mutate } = api.candidate.addCandidate.useMutation();
+// eslint-disable-next-line
 const { startUpload } = useUploadThing("imageUploader");
 
 const startUploadMock = startUpload as jest.Mock;

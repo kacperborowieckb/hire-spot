@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import FileInput from "./FileInput";
 import { useForm } from "react-hook-form";
-import { TApplySchema, applySchema } from "~/schemas/applySchema";
+import { type TApplySchema, applySchema } from "~/schemas/applySchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import userEvent from "@testing-library/user-event";
 
@@ -43,7 +43,7 @@ describe("File input", () => {
     it("Should contain file on upload", async () => {
       render(<FileInputForTests />);
 
-      const input = screen.getByLabelText(/CV/i) as HTMLInputElement;
+      const input: HTMLInputElement = screen.getByLabelText(/CV/i);
 
       await userEvent.upload(input, testFile);
       const fileName = screen.getByText(/testCv.pdf/i);
