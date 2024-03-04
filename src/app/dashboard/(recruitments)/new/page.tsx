@@ -33,7 +33,6 @@ export default function NewRecruitment() {
   const { mutate: addRecruitment, isLoading } =
     api.recruitment.addRecruitment.useMutation({
       onError() {
-        reset();
         toast.error("Failed to create new recruitment");
       },
       onSuccess(data) {
