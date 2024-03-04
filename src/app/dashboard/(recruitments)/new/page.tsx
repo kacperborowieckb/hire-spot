@@ -37,6 +37,7 @@ export default function NewRecruitment() {
       },
       onSuccess(data) {
         void utils.recruitment.getAllRecruitmentData.invalidate();
+        router.refresh();
         router.push(`/dashboard/new/${data}`);
         toast.success("New recruitment created");
         reset();

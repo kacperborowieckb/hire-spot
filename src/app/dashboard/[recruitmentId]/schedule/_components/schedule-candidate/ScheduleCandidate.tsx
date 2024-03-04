@@ -43,6 +43,7 @@ export default function ScheduleCandidate({
         void utils.candidate.getCandidatesByRecruitmentId.invalidate({
           recruitmentId,
         });
+        router.refresh();
       },
     });
 

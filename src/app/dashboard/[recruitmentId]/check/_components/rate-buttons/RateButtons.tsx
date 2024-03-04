@@ -1,6 +1,7 @@
 "use client";
 
 import type { Rating } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import React, { type Dispatch, type SetStateAction, useEffect } from "react";
 import { api } from "~/trpc/react";
 import Button from "~/ui/button/Button";
@@ -21,6 +22,7 @@ export default function RateButtons({
   setCandidateIdSearchParams,
 }: RateButtonsProps) {
   const utils = api.useUtils();
+  const router = useRouter();
 
   const { mutate, isLoading } = api.candidate.rateCandidate.useMutation({
     async onMutate(ratedCandidate) {
@@ -58,6 +60,9 @@ export default function RateButtons({
         { recruitmentId },
         ctx?.prevData,
       );
+    },
+    onSettled() {
+      router.refresh();
     },
   });
 

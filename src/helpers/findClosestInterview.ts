@@ -4,7 +4,8 @@ import dayjs from "dayjs";
 export const findClosestInterview = (
   candidates: Candidate[],
 ): Candidate | undefined => {
-  let candidate;
+  if (!candidates.length) return;
+  let candidate = candidates[0];
   const now = dayjs();
 
   for (const currentCandidate of candidates) {
