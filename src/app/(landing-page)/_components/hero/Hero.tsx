@@ -8,8 +8,12 @@ import {
   MotionH1,
   MotionP,
 } from "~/ui/motion-components/MotionComponents";
+import { auth } from "@clerk/nextjs";
 
 export default function Hero() {
+  const user = auth();
+
+  const tryItOutHref = user.userId ? "/dashboard" : "/sign-in";
   return (
     <div
       data-testid="hero"
@@ -49,7 +53,7 @@ export default function Hero() {
           className="flex justify-center gap-4 lg:justify-normal"
           variants={fadeInAnimationVariants}
         >
-          <Link href={"/"}>
+          <Link href={tryItOutHref}>
             <Button variant="default">Try it out!</Button>
           </Link>
           <Link href={"/#benefits"}>

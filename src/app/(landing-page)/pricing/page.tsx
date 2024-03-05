@@ -8,8 +8,12 @@ import {
   MotionMain,
   MotionP,
 } from "~/ui/motion-components/MotionComponents";
+import { auth } from "@clerk/nextjs";
 
 export default function Pricing() {
+  const user = auth();
+
+  const tryItOutHref = user.userId ? "/dashboard" : "/sign-in";
   return (
     <MotionMain
       initial="initial"
@@ -40,7 +44,7 @@ export default function Pricing() {
         Enjoy the full functionality of the app without any cost, it might
         change after some time.
       </MotionP>
-      <MotionLink href={"/"} variants={fadeInAnimationVariants}>
+      <MotionLink href={tryItOutHref} variants={fadeInAnimationVariants}>
         <Button variant="default">Try it out</Button>
       </MotionLink>
     </MotionMain>
