@@ -1,28 +1,36 @@
-# Create T3 App
+# HireSpot
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+[Live version with test account](https://www.example.com](https://hire-spot.vercel.app/))
 
-## What's next? How do I make an app with this?
+**Project is not finished!**
+It is only mvp version of application, many features and complete tests will be added.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+### Full-stack web application for recruiters to simplify a whole process of creating recruitments, applying, reviewing CVs, scheduling interviews and conduct them with necessery statistics that help them even more.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+**Build With:** T3, NextJS, TS, tRPC, Prisma, SupaBase, Jest, TailwindCSS
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- Design whole application including **figma** design, **database** schema, fully responsive **front-end**, **API** with protected sensitive data using **tRPC** and managed **file uploads.**
 
-## Learn More
+- Used NextJS **SSR** with correct **cache** usage for improved performance, **optimistic updates** for better user expierience and to limit **API calls.**
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- Develop numerous features like **displaying PDF** files, handling **time management,** using **search params** for **state management**, **rating** process, **scheduling** interviews, write **summaries** and many more.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- Used **tRPC** for **CRUD** API endpoints including **file uploads** and **middlewares** for checking **user access** to data and **protect** personal information from leaking to the wrong users.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- Write **unit** and **integration** tests using **Jest** for each component and API endpoint.
 
-## How do I deploy this?
+![Hire Spot](https://github.com/kacperborowieckb/hire-spot/assets/121901637/51c80fa2-5c9c-4384-a55d-70623f4bae3b)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Sccreenshot from an app
+#### Dashboard
+![dashboard](https://github.com/kacperborowieckb/hire-spot/assets/121901637/3bb19ae3-c930-460d-a21b-a90bdc5cc638)
+#### Checking process
+![check](https://github.com/kacperborowieckb/hire-spot/assets/121901637/dd96090a-6e36-4790-8ea6-adbf30d1c8e1)
+#### Checked candidates
+![checked](https://github.com/kacperborowieckb/hire-spot/assets/121901637/2410aa3d-a43e-43cb-9186-050b4c8e5b2f)
+#### Schedule candidate
+![schedule](https://github.com/kacperborowieckb/hire-spot/assets/121901637/4f416a54-672b-4e61-b6dc-8fe7f9ff0110)
+#### Interview candidates
+![interview](https://github.com/kacperborowieckb/hire-spot/assets/121901637/17b4b100-67a7-4654-b413-97c1eda91d06)
+
+**All of cvs are taken from canva example projects**
