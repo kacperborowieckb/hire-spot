@@ -3,6 +3,22 @@ import { SignIn } from "@clerk/nextjs";
 export default function SignInPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4">
+      <div className="mb-2 flex max-w-[350px] flex-col gap-2 text-center">
+        <h2 className="text-black-900">
+          You are welcome to use test account with created mock recruitment and
+          candidates
+        </h2>
+        <p className="text-black-600">
+          Email:{" "}
+          <span className="font-medium text-black-900">
+            hirespot.mock@gmail.com
+          </span>
+        </p>
+        <p className="text-black-600">
+          Password:{" "}
+          <span className="font-medium text-black-900">hirespot.mock24</span>
+        </p>
+      </div>
       <SignIn
         appearance={{
           variables: { colorPrimary: "#6446e6" },
@@ -14,7 +30,6 @@ export default function SignInPage() {
           layout: { logoImageUrl: "/logo.svg" },
         }}
       />
-      ;
     </main>
   );
 }

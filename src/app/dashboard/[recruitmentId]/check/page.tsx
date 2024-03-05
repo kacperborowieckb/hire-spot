@@ -85,7 +85,7 @@ export default function CheckPage({
             <p className="text-base text-black-600">
               {currentCandidate.description}
             </p>
-            {candidates.length > 1 && (
+            {candidates.length > 0 && (
               <Button
                 variant="outline"
                 className="mb-16 w-fit"

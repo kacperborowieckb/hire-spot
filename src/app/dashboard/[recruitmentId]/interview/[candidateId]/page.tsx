@@ -42,6 +42,7 @@ export default function CandidateInterview({
         toast.success("Interview completed");
         reset();
         router.replace(`/dashboard/${recruitmentId}/interview`);
+        router.refresh();
       },
     });
   const {

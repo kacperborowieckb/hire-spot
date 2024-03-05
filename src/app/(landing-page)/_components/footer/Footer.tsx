@@ -20,7 +20,10 @@ export default function Footer() {
           <Link href={"https://github.com/kacperborowieckb"} target="_blank">
             <RiGithubFill className="text-3xl transition-colors duration-300 hover:text-main-600 sm:text-5xl" />
           </Link>
-          <Link href={"/"}>
+          <Link
+            href={"https://www.linkedin.com/in/kacper-borowiec-a34769264/"}
+            target="_blank"
+          >
             <RiLinkedinFill className="text-3xl transition-colors duration-300 hover:text-main-600 sm:text-5xl" />
           </Link>
         </div>

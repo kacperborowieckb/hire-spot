@@ -23,8 +23,12 @@ export default function Contact() {
           content="For any interested recruiter."
           icon={RiLinkedinFill}
         >
-          <Link href={"/"} className="text-main-600 hover:underline">
-            www.linkedin.com/user
+          <Link
+            href={"https://www.linkedin.com/in/kacper-borowiec-a34769264/"}
+            className="text-main-600 hover:underline"
+            target="_blank"
+          >
+            LinkedIn
           </Link>
         </Card>
         <Card title="Mail" content="For anything." icon={RiMailFill}>

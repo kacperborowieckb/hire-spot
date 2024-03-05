@@ -28,7 +28,7 @@ export default function Modal({
       initial="initial"
       animate="show"
       exit="hide"
-      className="absolute left-0 top-0 z-50 h-full w-full overflow-hidden"
+      className="fixed left-0 top-0 z-50 h-full w-full overflow-hidden"
     >
       <MotionDiv
         variants={modalVariants}
@@ -37,7 +37,7 @@ export default function Modal({
         exit="hide"
         ref={modal}
         className={cn(
-          "absolute left-1/2 top-1/2 max-h-[calc(100%-32px)] overflow-auto rounded-lg border border-border bg-main-50 p-4 shadow-md",
+          "fixed left-1/2 top-1/2 max-h-[calc(100%-32px)] overflow-auto rounded-lg border border-border bg-main-50 p-4 shadow-md",
           className,
         )}
         {...otherProps}

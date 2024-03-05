@@ -54,6 +54,7 @@ export default function CandidateCard({
     useState<boolean>(false);
   const { recruitmentId } = useParams<{ recruitmentId: string }>();
 
+  const router = useRouter();
   const utils = api.useUtils();
 
   const { mutate: deleteCandidate, isLoading } =
@@ -67,6 +68,7 @@ export default function CandidateCard({
           recruitmentId,
         });
         void utils.recruitment.getAllRecruitmentData.invalidate();
+        router.refresh();
         toast.success("Candidate deleted");
         closeConfirmationModal();
       },
