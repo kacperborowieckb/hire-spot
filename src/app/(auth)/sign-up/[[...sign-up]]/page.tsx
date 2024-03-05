@@ -11,12 +11,12 @@ export default function SignUpPage() {
         <p className="text-black-600">
           Email:{" "}
           <span className="font-medium text-black-900">
-            hirespot-mock@gmail.com
+            hirespot.mock@gmail.com
           </span>
         </p>
         <p className="text-black-600">
           Password:{" "}
-          <span className="font-medium text-black-900">hirespot-mock</span>
+          <span className="font-medium text-black-900">hirespot.mock24</span>
         </p>
       </div>
       <SignUp
