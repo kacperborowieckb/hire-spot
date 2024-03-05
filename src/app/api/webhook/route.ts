@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     await db.user.create({
       data: {
         id,
-        username: first_name,
+        username: first_name ?? "",
         email: email_addresses[0]!.email_address,
         joined: new Date(created_at),
         imgUrl: image_url,
