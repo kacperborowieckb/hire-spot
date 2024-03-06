@@ -1,6 +1,6 @@
 # HireSpot
 
-[Live version with test account](https://www.example.com](https://hire-spot.vercel.app/))
+[Live version with test account](https://hire-spot.vercel.app/)
 
 **Project is not finished!**
 It is only mvp version of application, many features and complete tests will be added.
