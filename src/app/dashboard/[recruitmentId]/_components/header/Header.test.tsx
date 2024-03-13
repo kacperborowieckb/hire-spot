@@ -15,22 +15,6 @@ jest.mock("next/navigation", () => ({
   useParams: () => ({ recruitmentId: "mockRecruitmentId" }),
 }));
 
-jest.mock("uploadthing/server");
-jest.mock("@clerk/nextjs", () => {
-  return {
-    UserButton: jest.fn(),
-  };
-});
-jest.mock("../../../../../../src/trpc/server", () => {
-  return {
-    api: {
-      recruitment: {
-        getRecruitmentById: { query: jest.fn() },
-      },
-    },
-  };
-});
-
 mockGetRecruitmentById.mockReturnValue({ position: "mockPositionTitle" });
 
 const renderHeader = async () =>

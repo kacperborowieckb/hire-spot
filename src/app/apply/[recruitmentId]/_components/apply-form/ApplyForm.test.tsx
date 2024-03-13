@@ -20,12 +20,6 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("../../../../../utils/uploadthing", () => ({
-  useUploadThing: jest
-    .fn()
-    .mockReturnValue({ startUpload: jest.fn(), isUploading: false }),
-}));
-
 describe("Apply Form", () => {
   describe("Render", () => {
     it("Should render a form", () => {

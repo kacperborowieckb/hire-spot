@@ -7,16 +7,6 @@ import { inferProcedureOutput } from "@trpc/server";
 
 const mockQuery = api.recruitment.getAllRecruitmentData.query as jest.Mock;
 
-jest.mock("uploadthing/server");
-jest.mock("../src/trpc/server", () => {
-  return {
-    api: {
-      recruitment: {
-        getAllRecruitmentData: { query: jest.fn() },
-      },
-    },
-  };
-});
 describe("Dashboard", () => {
   it("Should not render any recruitment cards", async () => {
     mockQuery.mockReturnValue([]);

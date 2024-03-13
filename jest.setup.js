@@ -9,7 +9,31 @@ const useMutationMock = jest
   .fn()
   .mockReturnValue({ mutate: jest.fn(), isLoading: false });
 
-jest.mock("@clerk/nextjs", () => ({ auth: () => ({ userId: "mockUserId" }) }));
+jest.mock("@clerk/nextjs", () => ({
+  auth: () => ({ userId: "mockUserId" }),
+  useUser: jest.fn().mockReturnValue({ isSignedIn: false, isLoaded: true }),
+  UserButton: () => {
+    return <button data-testid="user-button" />;
+  },
+}));
+
+jest.mock("next/navigation", () => ({
+  notFound: jest.fn(),
+  useParams: jest.fn(),
+  useRouter: jest.fn(),
+  usePathname: jest.fn(),
+}));
+
+//@ts-ignore
+window.XMLHttpRequest = jest.fn();
+
+jest.mock("uploadthing/server");
+
+jest.mock("./src/utils/uploadthing", () => ({
+  useUploadThing: jest
+    .fn()
+    .mockReturnValue({ startUpload: jest.fn(), isUploading: false }),
+}));
 
 jest.mock("./src/trpc/server", () => {
   return {

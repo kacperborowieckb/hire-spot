@@ -6,17 +6,7 @@ import { api } from "../src/trpc/server";
 import { act } from "react-dom/test-utils";
 import { notFound } from "next/navigation";
 
-//@ts-ignore
-window.XMLHttpRequest = jest.fn();
-
 const mockQuery = api.recruitment.getRecruitmentById.query as jest.Mock;
-
-jest.mock("next/navigation", () => ({
-  notFound: jest.fn(),
-  useParams: jest.fn(),
-  useRouter: jest.fn(),
-}));
-jest.mock("uploadthing/server");
 
 const mockOutput: inferProcedureOutput<
   AppRouter["recruitment"]["getRecruitmentById"]

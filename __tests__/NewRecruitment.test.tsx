@@ -7,10 +7,6 @@ const { mutate } = api.recruitment.addRecruitment.useMutation();
 
 const mutateMock = mutate as jest.Mock;
 
-jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
-}));
-
 beforeEach(() => {
   jest.clearAllMocks();
 });

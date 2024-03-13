@@ -4,13 +4,6 @@ import "intersection-observer";
 import userEvent from "@testing-library/user-event";
 import { useUser } from "@clerk/nextjs";
 
-jest.mock("@clerk/nextjs", () => ({
-  useUser: jest.fn().mockReturnValue({ isSignedIn: false, isLoaded: true }),
-  UserButton: () => {
-    return <button data-testid="user-button" />;
-  },
-}));
-
 describe("Nav", () => {
   describe("Render", () => {
     it("Should render", () => {
