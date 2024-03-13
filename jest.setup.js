@@ -4,3 +4,54 @@ import "whatwg-fetch";
 window.scrollTo = (x, y) => {
   document.documentElement.scrollTop = y;
 };
+
+const useMutationMock = jest
+  .fn()
+  .mockReturnValue({ mutate: jest.fn(), isLoading: false });
+
+jest.mock("@clerk/nextjs", () => ({ auth: () => ({ userId: "mockUserId" }) }));
+
+jest.mock("./src/trpc/server", () => {
+  return {
+    api: {
+      recruitment: {
+        getAllRecruitmentData: { query: jest.fn() },
+        getRecruitmentById: { query: jest.fn() },
+        addRecruitment: { mutation: jest.fn() },
+      },
+      candidate: {
+        getCandidateById: { query: jest.fn() },
+        addCandidate: { mutation: jest.fn() },
+        getCandidatesByRecruitmentId: { query: jest.fn() },
+        getUncheckedCandidatesByRecruitmentId: { query: jest.fn() },
+        rateCandidate: { mutation: jest.fn() },
+        deleteCandidate: { mutation: jest.fn() },
+        scheduleCandidate: { mutation: jest.fn() },
+        completeInterview: { mutation: jest.fn() },
+      },
+    },
+  };
+});
+
+jest.mock("./src/trpc/react", () => {
+  return {
+    api: {
+      useUtils: jest.fn(),
+      recruitment: {
+        getAllRecruitmentData: { query: jest.fn() },
+        getRecruitmentById: { query: jest.fn() },
+        addRecruitment: { useMutation: useMutationMock },
+      },
+      candidate: {
+        getCandidateById: { useQuery: jest.fn() },
+        addCandidate: { useMutation: useMutationMock },
+        getCandidatesByRecruitmentId: { useQuery: jest.fn() },
+        getUncheckedCandidatesByRecruitmentId: { query: jest.fn() },
+        rateCandidate: { useMutation: useMutationMock },
+        deleteCandidate: { useMutation: useMutationMock },
+        scheduleCandidate: { useMutation: useMutationMock },
+        completeInterview: { useMutation: useMutationMock },
+      },
+    },
+  };
+});

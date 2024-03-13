@@ -2,9 +2,18 @@ import { render, screen } from "@testing-library/react";
 import Header from "./Header";
 import { act } from "react-dom/test-utils";
 import { api } from "~/trpc/server";
+import { api as clientApi } from "~/trpc/react";
 
 const mockGetRecruitmentById = api.recruitment.getRecruitmentById
   .query as jest.Mock;
+
+(
+  clientApi.candidate.getCandidatesByRecruitmentId.useQuery as jest.Mock
+).mockReturnValue([]);
+
+jest.mock("next/navigation", () => ({
+  useParams: () => ({ recruitmentId: "mockRecruitmentId" }),
+}));
 
 jest.mock("uploadthing/server");
 jest.mock("@clerk/nextjs", () => {

@@ -11,16 +11,6 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("../src/trpc/react", () => ({
-  api: {
-    recruitment: {
-      addRecruitment: {
-        useMutation: jest.fn().mockReturnValue({ mutate: jest.fn() }),
-      },
-    },
-  },
-}));
-
 beforeEach(() => {
   jest.clearAllMocks();
 });

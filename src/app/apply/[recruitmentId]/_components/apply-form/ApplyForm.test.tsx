@@ -8,13 +8,15 @@ const { mutate } = api.candidate.addCandidate.useMutation();
 // eslint-disable-next-line
 const { startUpload } = useUploadThing("imageUploader");
 
-const startUploadMock = startUpload as jest.Mock;
+const startUploadMock = (startUpload as jest.Mock).mockReturnValue([
+  "mockImgId",
+]);
 const mutateMock = mutate as jest.Mock;
 
 const testFile = new File(["foo"], "testCv.pdf", { type: "application/pdf" });
 
 jest.mock("next/navigation", () => ({
-  useParams: jest.fn(),
+  useParams: jest.fn().mockReturnValue({ recruitmentId: "mockRecruitmentId" }),
   useRouter: jest.fn(),
 }));
 
@@ -23,20 +25,6 @@ jest.mock("../../../../../utils/uploadthing", () => ({
     .fn()
     .mockReturnValue({ startUpload: jest.fn(), isUploading: false }),
 }));
-
-jest.mock("../../../../../trpc/react", () => ({
-  api: {
-    candidate: {
-      addCandidate: {
-        useMutation: jest.fn().mockReturnValue({ mutate: jest.fn() }),
-      },
-    },
-  },
-}));
-
-beforeEach(() => {
-  jest.clearAllMocks();
-});
 
 describe("Apply Form", () => {
   describe("Render", () => {

@@ -19,6 +19,6 @@ describe("SideBar", () => {
 
     const links = screen.getAllByTestId("sidebar-link");
 
-    expect(links).toHaveLength(4);
+    expect(links).toHaveLength(6);
   });
 });

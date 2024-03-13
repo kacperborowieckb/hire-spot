@@ -17,28 +17,6 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 jest.mock("uploadthing/server");
-jest.mock("../src/trpc/server", () => {
-  return {
-    api: {
-      recruitment: {
-        getRecruitmentById: { query: jest.fn() },
-      },
-    },
-  };
-});
-jest.mock("../src/trpc/react", () => {
-  return {
-    api: {
-      candidate: {
-        addCandidate: {
-          useMutation: jest
-            .fn()
-            .mockReturnValue({ mutate: jest.fn(), isLoading: false }),
-        },
-      },
-    },
-  };
-});
 
 const mockOutput: inferProcedureOutput<
   AppRouter["recruitment"]["getRecruitmentById"]
